@@ -1,0 +1,20 @@
+{
+  "type": "Group",
+  "elements": [
+    {
+      "type": "Control",
+      "scope": "#/properties/linkedProforma"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/visitDecision"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/visitDecisionReason",
+      "options": {
+        "multi": true
+      }
+    }
+  ]
+}

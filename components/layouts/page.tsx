@@ -5,7 +5,7 @@ interface DefaultLayoutProps {
   children: React.ReactNode,
 }
 
-export default function DefaultLayout({ children }: DefaultLayoutProps) {
+export default function PageLayout({ children }: DefaultLayoutProps) {
   return (
     <>
       <Page beforeChildren={

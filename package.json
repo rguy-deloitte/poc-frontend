@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@jsonforms/core": "^3.0.0",
+    "@jsonforms/material-renderers": "^3.0.0",
+    "@jsonforms/react": "^3.0.0",
     "govuk-react": "^0.10.3",
     "next": "12.3.1",
     "react": "18.2.0",

@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "linkedProforma": {
+      "type": "string"
+    },
+    "visitDecision": {
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "visit not required",
+          "title": "Visit not required"
+        },
+        {
+          "const": "visit required",
+          "title": "Visit required"
+        },
+        {
+          "const": "visit with concerns",
+          "title": "Visit with concerns"
+        }
+      ]
+    },
+    "visitDecisionReason": {
+      "type": "string"
+    }
+  }
+}
