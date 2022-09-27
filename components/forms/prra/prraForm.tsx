@@ -3,6 +3,8 @@ import { JsonForms } from '@jsonforms/react';
 import schema from './schema.json';
 import uischema from './uischema.json';
 
+import GdsCheckboxControl from '../../inputs/checkbox/gdsCheckboxControl';
+import gdsCheckboxTester from '../../inputs/checkbox/gdsCheckboxTester';
 import GdsRadioControl from '../../inputs/radio/gdsRadioControl';
 import gdsRadioTester from '../../inputs/radio/gdsRadioTester';
 import GdsSelectControl from '../../inputs/select/gdsSelectControl';
@@ -16,6 +18,7 @@ import FormGroupRenderer, { formGroupTester } from '../../layouts/form';
 
 const renderers = [
   // inputs
+  { tester: gdsCheckboxTester, renderer: GdsCheckboxControl },
   { tester: gdsRadioTester, renderer: GdsRadioControl },
   { tester: gdsSelectTester, renderer: GdsSelectControl },
   { tester: gdsTextareaTester, renderer: GdsTextareaControl },

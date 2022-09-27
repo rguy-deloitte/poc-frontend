@@ -23,6 +23,137 @@
     },
     "visitDecisionReason": {
       "type": "string"
+    },
+    "register": {
+      "type": "string",
+      "anyOf": [
+        {
+          "const": "EYR",
+          "title": "EYR"
+        },
+        {
+          "const": "CCR",
+          "title": "CCR"
+        },
+        {
+          "const": "VCR",
+          "title": "VCR"
+        }
+      ]
+    },
+    "typeOfCare": {
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "Childcare on domestic premises",
+          "title": "Childcare on domestic premises"
+        },
+        {
+          "const": "Childcare on non-domestic premises",
+          "title": "Childcare on non-domestic premises"
+        },
+        {
+          "const": "Childminder",
+          "title": "Childminder"
+        },
+        {
+          "const": "Home childcarer",
+          "title": "Home childcarer"
+        }
+      ]
+    },
+    "known": {
+      "type": "boolean",
+      "oneOf": [
+        {
+          "const": true,
+          "title": "Know"
+        },
+        {
+          "const": false,
+          "title": "Not-known"
+        }
+      ]
+    },
+    "organisation": {
+      "type": "boolean",
+      "oneOf": [
+        {
+          "const": true,
+          "title": "Yes"
+        },
+        {
+          "const": false,
+          "title": "No"
+        }
+      ]
+    },
+    "natureOfBusiness": {
+      "type": "string"
+    },
+    "companyStatus": {
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "Know",
+          "title": "Know"
+        },
+        {
+          "const": "Not-known",
+          "title": "Not-known"
+        }
+      ]
+    },
+    "backgroundInformation": {
+      "type": "string"
+    },
+    "applicationFormDetails": {
+      "type": "string"
+    },
+    "unregisteredCasesLinked": {
+      "type": "boolean",
+      "oneOf": [
+        {
+          "const": true,
+          "title": "Yes"
+        },
+        {
+          "const": false,
+          "title": "No"
+        }
+      ]
+    },
+    "linkedSetting": {
+      "type": "boolean",
+      "oneOf": [
+        {
+          "const": true,
+          "title": "Yes"
+        },
+        {
+          "const": false,
+          "title": "No"
+        }
+      ]
+    },
+    "settingReregisteredOrMerging": {
+      "type": "boolean",
+      "oneOf": [
+        {
+          "const": true,
+          "title": "Yes"
+        },
+        {
+          "const": false,
+          "title": "No"
+        }
+      ]
+    },
+    "identifiedRequirementsOrRegulations": {
+      "type": "string"
+    },
+    "concersIdentified": {
+      "type": "string"
     }
   }
 }

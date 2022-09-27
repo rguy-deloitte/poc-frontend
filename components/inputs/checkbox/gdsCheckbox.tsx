@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Fieldset, FormGroup, HintText, Radio } from 'govuk-react';
+import { Checkbox, Fieldset, FormGroup, HintText } from 'govuk-react';
 
-interface GdsRadioProps {
+interface GdsCheckboxProps {
   id?: string;
   value: string;
   updateValue: (newValue: string) => void;
@@ -12,7 +12,7 @@ interface GdsRadioProps {
   schema: any;
 }
 
-export const GdsRadio: React.FC<GdsRadioProps> = ({
+export const GdsCheckbox: React.FC<GdsCheckboxProps> = ({
   value,
   updateValue,
   label,
@@ -29,19 +29,19 @@ export const GdsRadio: React.FC<GdsRadioProps> = ({
     setData({ touched: true });
   };
   
-  const radios = schema.oneOf.map((item: {const: string, title: string}, index: number) =>
-    <Radio {...(uischema.options.inline && {inline: true})} key={index} name={path} value={item.const}>{item.title}</Radio>
+  const checkboxes = schema.anyOf.map((item: {const: string, title: string}, index: number) =>
+    <Checkbox key={index} name={path} value={item.const}>{item.title}</Checkbox>
   );  
 
   return (
-    <div id='#/properties/gdsRadio' className='gdsRadio'>
+    <div id='#/properties/gdsCheckbox' className='gdsCheckbox'>
       <FormGroup>
         <Fieldset>
           <Fieldset.Legend>
             {label}
           </Fieldset.Legend>
           <HintText>{uischema.hint ? uischema.hint : ''}</HintText>
-          {radios}
+          {checkboxes}
         </Fieldset>
       </FormGroup>
     </div>
