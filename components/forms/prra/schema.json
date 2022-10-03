@@ -24,22 +24,14 @@
     "visitDecisionReason": {
       "type": "string"
     },
-    "register": {
-      "type": "string",
-      "anyOf": [
-        {
-          "const": "EYR",
-          "title": "EYR"
-        },
-        {
-          "const": "CCR",
-          "title": "CCR"
-        },
-        {
-          "const": "VCR",
-          "title": "VCR"
-        }
-      ]
+    "register-eyr": {
+      "type": "boolean"
+    },
+    "register-ccr": {
+      "type": "boolean"
+    },
+    "register-vcr": {
+      "type": "boolean"
     },
     "typeOfCare": {
       "type": "string",

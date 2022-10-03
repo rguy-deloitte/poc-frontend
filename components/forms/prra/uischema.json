@@ -2,125 +2,198 @@
   "type": "Group",
   "elements": [
     {
-      "type": "Control",
-      "scope": "#/properties/linkedProforma"
+      "type": "Group",
+      "label": "Linked Proforma",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/linkedProforma"
+        }
+      ]
     },
     {
-      "type": "Control",
-      "scope": "#/properties/visitDecision",
-      "options": {
-        "format": "radio"
-      }
+      "type": "Group",
+      "label": "Visit decision",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/visitDecision",
+          "options": {
+            "format": "radio"
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/visitDecisionReason",
+          "label": "Reason for decision",
+          "options": {
+            "multi": true
+          }
+        }
+      ]
     },
     {
-      "type": "Control",
-      "scope": "#/properties/visitDecisionReason",
-      "label": "Reason for decision",
-      "options": {
-        "multi": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/register"
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/typeOfCare",
-      "options": {
-        "format": "radio"
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/known",
-      "label": "Are they known or not known?",
-      "options": {
-        "format": "radio",
-        "inline": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/organisation",
-      "label": "Is the responsible body an organisation?",
-      "options": {
-        "format": "radio",
-        "inline": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/natureOfBusiness",
-      "label": "What is their nature of business on Comapnies House?"
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/companyStatus",
-      "label": "What is their company status",
-      "options": {
-        "format": "radio",
-        "inline": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/backgroundInformation",
-      "options": {
-        "multi": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/applicationFormDetails",
-      "options": {
-        "multi": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/unregisteredCasesLinked",
-      "label": "Are there any possible unregistered cases linked to the providers postcode?",
-      "options": {
-        "format": "radio",
-        "inline": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/linkedSetting",
-      "label": "Is there any linked setting etc?",
-      "options": {
-        "format": "radio",
-        "inline": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/settingReregisteredOrMerging",
-      "label": "Is the setting reregistering or merging?",
-      "hint": "You will need to email IST to check if there’s any scheduled inspection coming up.",
-      "options": {
-        "format": "radio",
-        "inline": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/identifiedRequirementsOrRegulations",
-      "label": "What are the identified requirements or regulations?",
-      "options": {
-        "multi": true
-      }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/concersIdentified",
-      "label": "What are the concerns identified?",
-      "hint": "Record the name of the individual(s), their association, the source of information and the dates.",
-      "options": {
-        "multi": true
-      }
+      "type": "Group",
+      "label": "Action plan",
+      "elements": [
+        {
+          "type": "SubGroup",
+          "label": "Background information",
+          "elements": [
+            {
+              "type": "InputGroup",
+              "label": "Register",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/register-eyr",
+                  "label": "EYR"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/register-ccr",
+                  "label": "CCR"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/register-vcr",
+                  "label": "VCR"
+                }
+              ]
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/typeOfCare",
+              "options": {
+                "format": "radio"
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/known",
+              "label": "Are they known or not known?",
+              "options": {
+                "format": "radio",
+                "inline": true
+              }
+            }
+          ]
+        },
+        {
+          "type": "SubGroup",
+          "label": "Charity/Organisation details",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/organisation",
+              "label": "Is the responsible body an organisation?",
+              "options": {
+                "format": "radio",
+                "inline": true
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/natureOfBusiness",
+              "label": "What is their nature of business on Comapnies House?",
+              "rule": {
+                "effect": "SHOW",
+                "condition": {
+                  "scope": "#/properties/organisation",
+                  "schema": { "enum": ["true"] }
+                }
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/companyStatus",
+              "label": "What is their company status",
+              "options": {
+                "format": "radio",
+                "inline": true
+              },
+              "rule": {
+                "effect": "SHOW",
+                "condition": {
+                  "scope": "#/properties/organisation",
+                  "schema": { "enum": ["true"] }
+                }
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/backgroundInformation",
+              "options": {
+                "multi": true
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/applicationFormDetails",
+              "options": {
+                "multi": true
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/unregisteredCasesLinked",
+              "label": "Are there any possible unregistered cases linked to the providers postcode?",
+              "options": {
+                "format": "radio",
+                "inline": true
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/linkedSetting",
+              "label": "Is there any linked setting etc?",
+              "options": {
+                "format": "radio",
+                "inline": true
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/settingReregisteredOrMerging",
+              "label": "Is the setting reregistering or merging?",
+              "hint": "You will need to email IST to check if there’s any scheduled inspection coming up.",
+              "options": {
+                "format": "radio",
+                "inline": true
+              }
+            }
+          ]
+        },
+        {
+          "type": "SubGroup",
+          "label": "Lines of enquiry",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/identifiedRequirementsOrRegulations",
+              "label": "What are the identified requirements or regulations?",
+              "options": {
+                "multi": true
+              }
+            }
+          ]
+        },
+        {
+          "type": "SubGroup",
+          "label": "CFC details",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/concersIdentified",
+              "label": "What are the concerns identified?",
+              "hint": "Record the name of the individual(s), their association, the source of information and the dates.",
+              "options": {
+                "multi": true
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

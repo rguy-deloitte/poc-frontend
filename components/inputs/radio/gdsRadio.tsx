@@ -1,28 +1,31 @@
 import React, { useState } from 'react';
 import { Fieldset, FormGroup, HintText, Radio } from 'govuk-react';
+import { Hidden } from '@mui/material';
 
 interface GdsRadioProps {
-  id?: string;
-  value: string;
-  updateValue: (newValue: string) => void;
-  label: string;
-  uischema: any;
   errors: any;
+  id?: string;
+  label: string;
   path: any;
   schema: any;
+  uischema: any;
+  updateValue: (newValue: string) => void;
+  value: string;
+  visible: boolean;
 }
 
 export const GdsRadio: React.FC<GdsRadioProps> = ({
-  value,
-  updateValue,
-  label,
-  uischema,
   errors,
+  label,
   path,
   schema,
+  uischema,
+  updateValue,
+  value,
+  visible,
 }) => {
   const [data, setData] = useState<any>({ touched: false });
-  const inputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateValue(e.target.value);
   };
   const inputTouch = () => {
@@ -30,20 +33,22 @@ export const GdsRadio: React.FC<GdsRadioProps> = ({
   };
   
   const radios = schema.oneOf.map((item: {const: string, title: string}, index: number) =>
-    <Radio {...(uischema.options.inline && {inline: true})} key={index} name={path} value={item.const}>{item.title}</Radio>
-  );  
+    <Radio onChange={inputChange} {...(uischema.options.inline && {inline: true})} key={index} name={path} value={item.const}>{item.title}</Radio>
+  );
 
   return (
-    <div id='#/properties/gdsRadio' className='gdsRadio'>
+    <Hidden xsUp={!visible}>
       <FormGroup>
         <Fieldset>
           <Fieldset.Legend>
             {label}
           </Fieldset.Legend>
-          <HintText>{uischema.hint ? uischema.hint : ''}</HintText>
+          {uischema.hint &&
+            <HintText>{uischema.hint}</HintText>
+          }
           {radios}
         </Fieldset>
       </FormGroup>
-    </div>
+    </Hidden>
   );
 };

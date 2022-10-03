@@ -1,49 +1,43 @@
 import React, { useState } from 'react';
 import { Checkbox, Fieldset, FormGroup, HintText } from 'govuk-react';
+import { Hidden } from '@mui/material';
 
 interface GdsCheckboxProps {
-  id?: string;
-  value: string;
-  updateValue: (newValue: string) => void;
-  label: string;
-  uischema: any;
   errors: any;
+  id?: string;
+  label: string;
   path: any;
   schema: any;
+  uischema: any;
+  updateValue: (newValue: boolean) => void;
+  value: boolean;
+  visible: boolean;
 }
 
 export const GdsCheckbox: React.FC<GdsCheckboxProps> = ({
-  value,
-  updateValue,
-  label,
-  uischema,
   errors,
+  label,
   path,
   schema,
+  uischema,
+  updateValue,
+  value,
+  visible,
 }) => {
   const [data, setData] = useState<any>({ touched: false });
-  const inputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    updateValue(e.target.value);
+  const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateValue(e.target.checked);
   };
   const inputTouch = () => {
     setData({ touched: true });
   };
   
-  const checkboxes = schema.anyOf.map((item: {const: string, title: string}, index: number) =>
-    <Checkbox key={index} name={path} value={item.const}>{item.title}</Checkbox>
-  );  
-
   return (
-    <div id='#/properties/gdsCheckbox' className='gdsCheckbox'>
-      <FormGroup>
-        <Fieldset>
-          <Fieldset.Legend>
-            {label}
-          </Fieldset.Legend>
-          <HintText>{uischema.hint ? uischema.hint : ''}</HintText>
-          {checkboxes}
-        </Fieldset>
-      </FormGroup>
-    </div>
+    <Hidden xsUp={false}>
+      {uischema.hint &&
+        <HintText>{uischema.hint}</HintText>
+      }
+      <Checkbox name={path} onChange={inputChange}>{label}</Checkbox>
+    </Hidden>
   );
 };

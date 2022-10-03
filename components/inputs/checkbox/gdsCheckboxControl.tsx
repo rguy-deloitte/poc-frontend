@@ -3,12 +3,13 @@ import { GdsCheckbox } from './gdsCheckbox';
 
 interface GdsCheckboxControlProps {
   data: any;
-  handleChange(path: string, value: string): void;
+  handleChange(path: string, value: boolean): void;
   path: string;
   label: string;
   uischema: any;
   errors: any;
   schema: any;
+  visible: boolean;
 }
 
 const GdsCheckboxControl = ({
@@ -19,15 +20,17 @@ const GdsCheckboxControl = ({
   uischema,
   errors,
   schema,
+  visible,
 }: GdsCheckboxControlProps) => (
   <GdsCheckbox
     value={data}
-    updateValue={(newValue: string) => handleChange(path, newValue)}
+    updateValue={(newValue: boolean) => handleChange(path, newValue)}
     label={label}
     uischema={uischema}
     errors={errors}
     path={path}
     schema={schema}
+    visible={visible}
   />
 );
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useMemo } from 'react';
 import { JsonForms } from '@jsonforms/react';
 import schema from './schema.json';
 import uischema from './uischema.json';
@@ -14,7 +14,8 @@ import gdsTextareaTester from '../../inputs/textarea/gdsTextareaTester';
 import GdsTextControl from '../../inputs/text/gdsTextControl';
 import gdsTextTester from '../../inputs/text/gdsTextTester';
 
-import FormGroupRenderer, { formGroupTester } from '../../layouts/form';
+import FormGroupRenderer, { formGroupTester } from '../../layouts/formGroup';
+import InputGroupRenderer, { inputGroupTester } from '../../layouts/inputGroup';
 
 const renderers = [
   // inputs
@@ -24,20 +25,32 @@ const renderers = [
   { tester: gdsTextareaTester, renderer: GdsTextareaControl },
   { tester: gdsTextTester, renderer: GdsTextControl },
 
-  //layouts
+  // layouts
   { tester: formGroupTester, renderer: FormGroupRenderer },
+  { tester: inputGroupTester, renderer: InputGroupRenderer },
 ];
 
-export default class PrraForm extends React.Component<{}> {
-  render(): React.ReactNode {
+const initialData = {};
+
+const PrraForm = () => {
+    const [data, setData] = useState<any>(initialData);
+    const stringifiedData = useMemo(() => JSON.stringify(data, null, 2), [data]);
+
     return (
+      <>
       <JsonForms
+        data={data}
+        onChange={({ errors, data }) => {
+          setData(data);
+        }}
+        renderers={renderers}
         schema={schema}
         uischema={uischema}
-        data={{}}
-        renderers={renderers}
         validationMode='ValidateAndShow'
       />
+      <pre id='boundData'>{stringifiedData}</pre>
+      </>
     )
-  }
-};
+  };
+
+  export default PrraForm;

@@ -8,6 +8,7 @@ interface GdsTextControlProps {
   label: string;
   uischema: any;
   errors: any;
+  visible: boolean;
 }
 
 const GdsTextControl = ({
@@ -17,6 +18,7 @@ const GdsTextControl = ({
   label,
   uischema,
   errors,
+  visible,
 }: GdsTextControlProps) => (
   <GdsText
     value={data}
@@ -24,6 +26,7 @@ const GdsTextControl = ({
     label={label}
     uischema={uischema}
     errors={errors}
+    visible={visible}
   />
 );
 

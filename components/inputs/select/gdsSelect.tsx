@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FormGroup, Select } from 'govuk-react';
+import { Hidden } from '@mui/material';
 
 interface GdsSelectProps {
   id?: string;
@@ -10,6 +11,7 @@ interface GdsSelectProps {
   errors: any;
   path: any;
   schema: any;
+  visible: boolean;
 }
 
 export const GdsSelect: React.FC<GdsSelectProps> = ({
@@ -20,6 +22,7 @@ export const GdsSelect: React.FC<GdsSelectProps> = ({
   errors,
   path,
   schema,
+  visible,
 }) => {
   const [data, setData] = useState<any>({ touched: false });
   const inputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -29,12 +32,12 @@ export const GdsSelect: React.FC<GdsSelectProps> = ({
     setData({ touched: true });
   };
   
-  const options = schema.oneOf.map((item, index) => 
+  const options = schema.oneOf.map((item: {const: string, title: string}, index: number) => 
     <option key={index} value={item.const}>{item.title}</option>
   );  
 
   return (
-    <div id='#/properties/gdsSelect' className='gdsSelect'>
+    <Hidden xsUp={!visible}>
       <FormGroup>
         <Select
           hint={uischema.hint ? uischema.hint : ''}
@@ -55,6 +58,6 @@ export const GdsSelect: React.FC<GdsSelectProps> = ({
           
         </Select>
       </FormGroup>
-    </div>
+    </Hidden>
   );
 };

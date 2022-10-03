@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FormGroup, InputField } from 'govuk-react';
+import { Hidden } from '@mui/material';
 
 interface GdsTextProps {
   id?: string;
@@ -8,6 +9,7 @@ interface GdsTextProps {
   label: string;
   uischema: any;
   errors: any;
+  visible: boolean;
 }
 
 export const GdsText: React.FC<GdsTextProps> = ({
@@ -16,6 +18,7 @@ export const GdsText: React.FC<GdsTextProps> = ({
   label,
   uischema,
   errors,
+  visible,
 }) => {
   const [data, setData] = useState<any>({ touched: false });
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +29,7 @@ export const GdsText: React.FC<GdsTextProps> = ({
   };
 
   return (
-    <div id='#/properties/gdsText' className='gdsText'>
+    <Hidden xsUp={!visible}>
       <FormGroup>
         <InputField
           hint={uischema.hint ? uischema.hint : ''}
@@ -49,6 +52,6 @@ export const GdsText: React.FC<GdsTextProps> = ({
           {label}
         </InputField>
       </FormGroup>
-    </div>
+    </Hidden>
   );
 };

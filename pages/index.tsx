@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Button, Caption, GridCol, GridRow, Heading, LeadParagraph, Link, Paragraph, Table, Tag } from 'govuk-react'
+import { Button, Caption, GridCol, GridRow, H2, Heading, LeadParagraph, Link, Paragraph, Table, Tag } from 'govuk-react'
 import PrraForm from '../components/forms/prra/prraForm';
 
 const Home: NextPage = () => {
@@ -21,9 +21,9 @@ const Home: NextPage = () => {
       </LeadParagraph>
       <GridRow>
         <GridCol setWidth="two-thirds">
-          <Heading as="h2" size="MEDIUM">
+          <H2>
             Application details
-          </Heading>
+          </H2>
           <Table>
             <Table.Row>
               <Table.CellHeader>
@@ -90,9 +90,9 @@ const Home: NextPage = () => {
               </Table.Cell>
             </Table.Row>
           </Table>
-          <Heading as="h2" size="MEDIUM">
+          <H2>
             Before you start
-          </Heading>
+          </H2>
           <Paragraph>
             Please complete the sections below to detail the outcome of your investigation into the application to register. Once all relevant parts are completed, please click 'Save' at the bottom.
           </Paragraph>
@@ -102,9 +102,9 @@ const Home: NextPage = () => {
           </Button>
         </GridCol>
         <GridCol setWidth="one-third">
-          <Heading as="h2" size="MEDIUM">
+          <H2>
             Links
-          </Heading>
+          </H2>
           <Paragraph supportingText>
             [Provider summary](#)
           </Paragraph>

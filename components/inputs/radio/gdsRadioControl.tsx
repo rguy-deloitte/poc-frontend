@@ -3,31 +3,34 @@ import { GdsRadio } from './gdsRadio';
 
 interface GdsRadioControlProps {
   data: any;
-  handleChange(path: string, value: string): void;
-  path: string;
-  label: string;
-  uischema: any;
   errors: any;
+  handleChange(path: string, value: string): void;
+  label: string;
+  path: string;
   schema: any;
+  uischema: any;
+  visible: boolean;
 }
 
 const GdsRadioControl = ({
   data,
-  handleChange,
-  path,
-  label,
-  uischema,
   errors,
+  handleChange,
+  label,
+  path,
   schema,
+  uischema,
+  visible,
 }: GdsRadioControlProps) => (
   <GdsRadio
-    value={data}
-    updateValue={(newValue: string) => handleChange(path, newValue)}
-    label={label}
-    uischema={uischema}
     errors={errors}
+    label={label}
     path={path}
     schema={schema}
+    uischema={uischema}
+    updateValue={(newValue: string) => handleChange(path, newValue)}
+    value={data}
+    visible={visible}
   />
 );
 

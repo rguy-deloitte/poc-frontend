@@ -9,6 +9,7 @@ interface GdsSelectControlProps {
   uischema: any;
   errors: any;
   schema: any;
+  visible: boolean;
 }
 
 const GdsSelectControl = ({
@@ -19,6 +20,7 @@ const GdsSelectControl = ({
   uischema,
   errors,
   schema,
+  visible,
 }: GdsSelectControlProps) => (
   <GdsSelect
     value={data}
@@ -28,6 +30,7 @@ const GdsSelectControl = ({
     errors={errors}
     path={path}
     schema={schema}
+    visible={visible}
   />
 );
 
