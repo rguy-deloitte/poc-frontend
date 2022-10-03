@@ -16,6 +16,7 @@ import gdsTextTester from '../../inputs/text/gdsTextTester';
 
 import FormGroupRenderer, { formGroupTester } from '../../layouts/formGroup';
 import InputGroupRenderer, { inputGroupTester } from '../../layouts/inputGroup';
+import InsetGroupRenderer, { insetGroupTester } from '../../layouts/insetGroup';
 
 const renderers = [
   // inputs
@@ -28,6 +29,7 @@ const renderers = [
   // layouts
   { tester: formGroupTester, renderer: FormGroupRenderer },
   { tester: inputGroupTester, renderer: InputGroupRenderer },
+  { tester: insetGroupTester, renderer: InsetGroupRenderer },
 ];
 
 const initialData = {};

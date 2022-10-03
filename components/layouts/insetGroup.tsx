@@ -2,9 +2,10 @@ import React from 'react';
 import { rankWith, uiTypeIs } from '@jsonforms/core';
 import { withJsonFormsLayoutProps } from '@jsonforms/react';
 import { MaterialLayoutRenderer } from '@jsonforms/material-renderers';
-import { Fieldset, FormGroup } from 'govuk-react';
+import { InsetText, SectionBreak } from 'govuk-react';
+import { Hidden } from '@mui/material';
 
-const InputGroupRenderer = (props:any) => {
+const InsetGroupRenderer = (props:any) => {
   const { uischema, schema, path, visible, renderers } = props;
 
   const layoutProps = {
@@ -18,19 +19,15 @@ const InputGroupRenderer = (props:any) => {
   };
 
   return (
-    <FormGroup>
-      <Fieldset>
-        {uischema.label &&
-          <Fieldset.Legend>
-            {uischema.label}
-          </Fieldset.Legend>
-        }
+    <Hidden xsUp={!visible}>
+      <InsetText>
         <MaterialLayoutRenderer {...layoutProps} />
-      </Fieldset>
-    </FormGroup>
+      </InsetText>
+      <SectionBreak level="MEDIUM"></SectionBreak>
+    </Hidden>
   );
 };
 
-export default withJsonFormsLayoutProps(InputGroupRenderer);
+export default withJsonFormsLayoutProps(InsetGroupRenderer);
 
-export const inputGroupTester = rankWith(1000, uiTypeIs('InputGroup'));
+export const insetGroupTester = rankWith(1000, uiTypeIs('InsetGroup'));

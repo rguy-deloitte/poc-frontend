@@ -37,7 +37,7 @@ export const GdsCheckbox: React.FC<GdsCheckboxProps> = ({
       {uischema.hint &&
         <HintText>{uischema.hint}</HintText>
       }
-      <Checkbox name={path} onChange={inputChange}>{label}</Checkbox>
+      <Checkbox checked={value === true} onChange={inputChange}>{label}</Checkbox>
     </Hidden>
   );
 };

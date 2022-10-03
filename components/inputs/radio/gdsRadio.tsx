@@ -33,7 +33,7 @@ export const GdsRadio: React.FC<GdsRadioProps> = ({
   };
   
   const radios = schema.oneOf.map((item: {const: string, title: string}, index: number) =>
-    <Radio onChange={inputChange} {...(uischema.options.inline && {inline: true})} key={index} name={path} value={item.const}>{item.title}</Radio>
+    <Radio checked={item.const.toString() === value} onChange={inputChange} {...(uischema.options.inline && {inline: true})} key={index} name={path} value={item.const}>{item.title}</Radio>
   );
 
   return (

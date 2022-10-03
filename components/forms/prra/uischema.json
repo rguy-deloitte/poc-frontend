@@ -93,25 +93,23 @@
               }
             },
             {
-              "type": "Control",
-              "scope": "#/properties/natureOfBusiness",
-              "label": "What is their nature of business on Comapnies House?",
-              "rule": {
-                "effect": "SHOW",
-                "condition": {
-                  "scope": "#/properties/organisation",
-                  "schema": { "enum": ["true"] }
+              "type": "InsetGroup",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/natureOfBusiness",
+                  "label": "What is their nature of business on Comapnies House?"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/companyStatus",
+                  "label": "What is their company status",
+                  "options": {
+                    "format": "radio",
+                    "inline": true
+                  }
                 }
-              }
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/companyStatus",
-              "label": "What is their company status",
-              "options": {
-                "format": "radio",
-                "inline": true
-              },
+              ],
               "rule": {
                 "effect": "SHOW",
                 "condition": {
