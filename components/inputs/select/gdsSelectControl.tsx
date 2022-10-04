@@ -3,33 +3,32 @@ import { GdsSelect } from './gdsSelect';
 
 interface GdsSelectControlProps {
   data: any;
-  handleChange(path: string, value: string): void;
-  path: string;
-  label: string;
-  uischema: any;
   errors: any;
+  handleChange(path: string, value: any): void;
+  label: string;
+  path: string;
   schema: any;
+  uischema: any;
   visible: boolean;
 }
 
 const GdsSelectControl = ({
   data,
-  handleChange,
-  path,
-  label,
-  uischema,
   errors,
+  handleChange,
+  label,
+  path,
   schema,
+  uischema,
   visible,
 }: GdsSelectControlProps) => (
   <GdsSelect
-    value={data}
-    updateValue={(newValue: string) => handleChange(path, newValue)}
-    label={label}
-    uischema={uischema}
     errors={errors}
-    path={path}
+    label={label}
     schema={schema}
+    uischema={uischema}
+    updateValue={(newValue: string) => handleChange(path, newValue !== '' ? newValue : undefined)}
+    value={data}
     visible={visible}
   />
 );

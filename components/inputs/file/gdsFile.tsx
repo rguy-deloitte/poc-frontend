@@ -1,22 +1,18 @@
 import React from 'react';
-import { FormGroup, InputField } from 'govuk-react';
+import { FormGroup, FileUpload } from 'govuk-react';
 import { Hidden } from '@mui/material';
 
-interface GdsTextProps {
+interface GdsFileProps {
   errors: any;
-  label: string;
   uischema: any;
   updateValue: (newValue: string) => void;
-  value: string;
   visible: boolean;
 }
 
-export const GdsText: React.FC<GdsTextProps> = ({
+export const GdsFile: React.FC<GdsFileProps> = ({
   errors,
-  label,
   uischema,
   updateValue,
-  value,
   visible,
 }) => {
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,25 +22,15 @@ export const GdsText: React.FC<GdsTextProps> = ({
   return (
     <Hidden xsUp={!visible}>
       <FormGroup>
-        <InputField
+        <FileUpload
           hint={uischema.hint ? uischema.hint : ''}
-          input={{
-            onChange: inputChange,
-            placeholder: uischema.placeholder ? uischema.placeholder : '',
-            type: uischema.options
-              ? uischema.options.inputType
-                ? uischema.options.inputType
-                : 'text'
-              : 'text',
-            value: value ? value : '',
-          }}
           meta={{
             error: errors ? `This field ${errors}` : undefined,
             touched: true,
           }}
+          onChange={inputChange}
         >
-          {label}
-        </InputField>
+        </FileUpload>
       </FormGroup>
     </Hidden>
   );

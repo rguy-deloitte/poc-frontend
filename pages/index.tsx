@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Button, Caption, GridCol, GridRow, H2, Heading, LeadParagraph, Link, Paragraph, Table, Tag } from 'govuk-react'
+import { Caption, GridCol, GridRow, H2, Heading, LeadParagraph, Link, Paragraph, Table, Tag } from 'govuk-react'
 import PrraForm from '../components/forms/prra/prraForm';
 
 const Home: NextPage = () => {
@@ -97,9 +97,6 @@ const Home: NextPage = () => {
             Please complete the sections below to detail the outcome of your investigation into the application to register. Once all relevant parts are completed, please click 'Save' at the bottom.
           </Paragraph>
           <PrraForm />
-          <Button>
-            Save
-          </Button>
         </GridCol>
         <GridCol setWidth="one-third">
           <H2>

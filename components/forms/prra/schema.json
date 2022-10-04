@@ -147,5 +147,6 @@
     "concersIdentified": {
       "type": "string"
     }
-  }
+  },
+  "required": []
 }

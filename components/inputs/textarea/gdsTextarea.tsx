@@ -1,49 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormGroup, TextArea } from 'govuk-react';
+import { Hidden } from '@mui/material';
 
 interface GdsTextareaProps {
-  id?: string;
-  value: string;
-  updateValue: (newValue: string) => void;
+  errors: any;
   label: string;
   uischema: any;
-  errors: any;
+  updateValue: (newValue: string) => void;
+  value: string;
+  visible: boolean;
 }
 
 export const GdsTextarea: React.FC<GdsTextareaProps> = ({
-  value,
-  updateValue,
+  errors,
   label,
   uischema,
-  errors,
+  updateValue,
+  value,
+  visible,
 }) => {
-  const [data, setData] = useState<any>({ touched: false });
   const inputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     updateValue(e.target.value);
   };
-  const inputTouch = () => {
-    setData({ touched: true });
-  };
 
   return (
-    <div id='#/properties/gdsTextarea' className='gdsTextarea'>
+    <Hidden xsUp={!visible}>
       <FormGroup>
         <TextArea
           hint={uischema.hint ? uischema.hint : ''}
           input={{
+            onChange: inputChange,
             placeholder: uischema.placeholder ? uischema.placeholder : '',
             value: value ? value : '',
-            onChange: inputChange,
-            onBlur: inputTouch,
           }}
           meta={{
-            error: errors,
-            touched: data.touched,
+            error: errors ? `This field ${errors}` : undefined,
+            touched: true,
           }}
         >
           {label}
         </TextArea>
       </FormGroup>
-    </div>
+    </Hidden>
   );
 };

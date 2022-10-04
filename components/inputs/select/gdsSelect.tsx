@@ -3,33 +3,26 @@ import { FormGroup, Select } from 'govuk-react';
 import { Hidden } from '@mui/material';
 
 interface GdsSelectProps {
-  id?: string;
-  value: string;
-  updateValue: (newValue: string) => void;
-  label: string;
-  uischema: any;
   errors: any;
-  path: any;
+  label: string;
   schema: any;
+  uischema: any;
+  updateValue: (newValue: string) => void;
+  value: string;
   visible: boolean;
 }
 
 export const GdsSelect: React.FC<GdsSelectProps> = ({
-  value,
-  updateValue,
-  label,
-  uischema,
   errors,
-  path,
+  label,
   schema,
+  uischema,
+  updateValue,
+  value,
   visible,
 }) => {
-  const [data, setData] = useState<any>({ touched: false });
   const inputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     updateValue(e.target.value);
-  };
-  const inputTouch = () => {
-    setData({ touched: true });
   };
   
   const options = schema.oneOf.map((item: {const: string, title: string}, index: number) => 
@@ -42,20 +35,17 @@ export const GdsSelect: React.FC<GdsSelectProps> = ({
         <Select
           hint={uischema.hint ? uischema.hint : ''}
           input={{
-            value: value ? value : '',
             onChange: inputChange,
-            onBlur: inputTouch,
-          }}
-          meta={{
-            error: errors,
-            touched: data.touched,
+            value: value ? value : '',
           }}
           label={label}
-          
+          meta={{
+            error: errors ? `This field ${errors}` : undefined,
+            touched: true,
+          }}
         >
-          <option>Please select</option>
+          <option value="">Please select</option>
           {options}
-          
         </Select>
       </FormGroup>
     </Hidden>

@@ -4,7 +4,7 @@ import { GdsRadio } from './gdsRadio';
 interface GdsRadioControlProps {
   data: any;
   errors: any;
-  handleChange(path: string, value: string): void;
+  handleChange(path: string, value: any): void;
   label: string;
   path: string;
   schema: any;
@@ -28,8 +28,8 @@ const GdsRadioControl = ({
     path={path}
     schema={schema}
     uischema={uischema}
-    updateValue={(newValue: string) => handleChange(path, newValue)}
-    value={data}
+    updateValue={(newValue: string) => handleChange(path, ['true', 'false'].includes(newValue) ? newValue === 'true' : newValue)}
+    value={[true, false].includes(data) ? data.toString() : data}
     visible={visible}
   />
 );

@@ -1,33 +1,27 @@
 import { withJsonFormsControlProps } from '@jsonforms/react';
-import { GdsTextarea } from './gdsTextarea';
+import { GdsFile } from './gdsFile';
 
-interface GdsTextareaControlProps {
-  data: any;
+interface GdsFileControlProps {
   errors: any;
   handleChange(path: string, value: any): void;
-  label: string;
   path: string;
   uischema: any;
   visible: boolean;
 }
 
-const GdsTextareaControl = ({
-  data,
+const GdsFileControl = ({
   errors,
   handleChange,
-  label,
   path,
   uischema,
   visible,
-}: GdsTextareaControlProps) => (
-  <GdsTextarea
+}: GdsFileControlProps) => (
+  <GdsFile
     errors={errors}
-    label={label}
     uischema={uischema}
     updateValue={(newValue: string) => handleChange(path, newValue !== '' ? newValue : undefined)}
-    value={data}
     visible={visible}
   />
 );
 
-export default withJsonFormsControlProps(GdsTextareaControl);
+export default withJsonFormsControlProps(GdsFileControl);

@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import { Checkbox, Fieldset, FormGroup, HintText } from 'govuk-react';
+import React from 'react';
+import { Checkbox, ErrorText, FormGroup, HintText } from 'govuk-react';
 import { Hidden } from '@mui/material';
 
 interface GdsCheckboxProps {
   errors: any;
-  id?: string;
   label: string;
-  path: any;
-  schema: any;
   uischema: any;
   updateValue: (newValue: boolean) => void;
   value: boolean;
@@ -17,27 +14,26 @@ interface GdsCheckboxProps {
 export const GdsCheckbox: React.FC<GdsCheckboxProps> = ({
   errors,
   label,
-  path,
-  schema,
   uischema,
   updateValue,
   value,
   visible,
 }) => {
-  const [data, setData] = useState<any>({ touched: false });
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateValue(e.target.checked);
   };
-  const inputTouch = () => {
-    setData({ touched: true });
-  };
   
   return (
-    <Hidden xsUp={false}>
-      {uischema.hint &&
-        <HintText>{uischema.hint}</HintText>
-      }
-      <Checkbox checked={value === true} onChange={inputChange}>{label}</Checkbox>
+    <Hidden xsUp={!visible}>
+      <FormGroup error={errors}>
+        {uischema.hint &&
+          <HintText>{uischema.hint}</HintText>
+        }
+        {errors &&
+          <ErrorText>This field {errors}</ErrorText>
+        }
+        <Checkbox checked={value === true} onChange={inputChange}>{label}</Checkbox>
+      </FormGroup>
     </Hidden>
   );
 };
