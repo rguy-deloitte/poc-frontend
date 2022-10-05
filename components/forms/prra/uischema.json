@@ -21,6 +21,7 @@
         {
           "type": "Control",
           "scope": "#/properties/visitDecision",
+          "label": "Visit decision",
           "options": {
             "format": "radio"
           }
@@ -40,55 +41,39 @@
       "label": "Action plan",
       "elements": [
         {
-          "type": "SubGroup",
+          "type": "Control",
+          "scope": "#/properties/backgroundInformation",
           "label": "Background information",
-          "elements": [
-            {
-              "type": "InputGroup",
-              "label": "Register",
-              "elements": [
-                {
-                  "type": "Control",
-                  "scope": "#/properties/register-eyr",
-                  "label": "EYR"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/register-ccr",
-                  "label": "CCR"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/register-vcr",
-                  "label": "VCR"
-                }
-              ]
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/typeOfCare",
-              "options": {
-                "format": "radio"
-              }
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/known",
-              "label": "Are they known or not known?",
-              "options": {
-                "format": "radio",
-                "inline": true
-              }
-            }
-          ]
+          "help": "Have you reviewed the following information that are applicable?<ul><li>Register</li><li>Provider type</li><li>Statement of purpose</li><li>Known information</li><li>Cases</li></ul>",
+          "options": {
+            "multi": true
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/linesOfEnquiry",
+          "label": "Lines of enquiry",
+          "hint": "List the identified requirements or regulations",
+          "options": {
+            "multi": true
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/cfcDetails",
+          "label": "CFC details",
+          "help": "Have you included the following information where applicable?<ul><li>Individual name</li><li>Individual association</li><li>Summary of concern(s) received</li></ul>",
+          "options": {
+            "multi": true
+          }
         },
         {
           "type": "SubGroup",
-          "label": "Charity/Organisation details",
+          "label": "Organisation details",
           "elements": [
             {
               "type": "Control",
-              "scope": "#/properties/organisation",
+              "scope": "#/properties/isOrganisation",
               "label": "Is the responsible body an organisation?",
               "options": {
                 "format": "radio",
@@ -101,95 +86,20 @@
                 {
                   "type": "Control",
                   "scope": "#/properties/natureOfBusiness",
-                  "label": "What is their nature of business on Comapnies House?"
+                  "label": "What is their nature of business on Companies House?"
                 },
                 {
                   "type": "Control",
                   "scope": "#/properties/companyStatus",
-                  "label": "What is their company status",
-                  "options": {
-                    "format": "radio",
-                    "inline": true
-                  }
+                  "label": "What is their company status?"
                 }
               ],
               "rule": {
                 "effect": "SHOW",
                 "condition": {
-                  "scope": "#/properties/organisation",
-                  "schema": { "enum": ["true"] }
+                  "scope": "#/properties/isOrganisation",
+                  "schema": { "enum": [true] }
                 }
-              }
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/backgroundInformation",
-              "options": {
-                "multi": true
-              }
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/applicationFormDetails",
-              "options": {
-                "multi": true
-              }
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/unregisteredCasesLinked",
-              "label": "Are there any possible unregistered cases linked to the providers postcode?",
-              "options": {
-                "format": "radio",
-                "inline": true
-              }
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/linkedSetting",
-              "label": "Is there any linked setting etc?",
-              "options": {
-                "format": "radio",
-                "inline": true
-              }
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/settingReregisteredOrMerging",
-              "label": "Is the setting reregistering or merging?",
-              "hint": "You will need to email IST to check if there’s any scheduled inspection coming up.",
-              "options": {
-                "format": "radio",
-                "inline": true
-              }
-            }
-          ]
-        },
-        {
-          "type": "SubGroup",
-          "label": "Lines of enquiry",
-          "elements": [
-            {
-              "type": "Control",
-              "scope": "#/properties/identifiedRequirementsOrRegulations",
-              "label": "What are the identified requirements or regulations?",
-              "options": {
-                "multi": true
-              }
-            }
-          ]
-        },
-        {
-          "type": "SubGroup",
-          "label": "CFC details",
-          "elements": [
-            {
-              "type": "Control",
-              "scope": "#/properties/concersIdentified",
-              "label": "What are the concerns identified?",
-              "hint": "Record the name of the individual(s), their association, the source of information and the dates.",
-              "options": {
-                "multi": true
               }
             }
           ]

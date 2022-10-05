@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, InputField } from 'govuk-react';
+import { Details, FormGroup, InputField } from 'govuk-react';
 import { Hidden } from '@mui/material';
 
 interface GdsTextProps {
@@ -46,6 +46,9 @@ export const GdsText: React.FC<GdsTextProps> = ({
           {label}
         </InputField>
       </FormGroup>
+      {uischema.help &&
+        <Details summary={`${label} guidance`}><span dangerouslySetInnerHTML={{__html: uischema.help}}></span></Details>
+      }
     </Hidden>
   );
 };

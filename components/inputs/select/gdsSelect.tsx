@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FormGroup, Select } from 'govuk-react';
+import React from 'react';
+import { Details, FormGroup, Select } from 'govuk-react';
 import { Hidden } from '@mui/material';
 
 interface GdsSelectProps {
@@ -48,6 +48,9 @@ export const GdsSelect: React.FC<GdsSelectProps> = ({
           {options}
         </Select>
       </FormGroup>
+      {uischema.help &&
+        <Details summary={`${label} guidance`}><span dangerouslySetInnerHTML={{__html: uischema.help}}></span></Details>
+      }
     </Hidden>
   );
 };

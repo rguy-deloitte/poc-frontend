@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { JsonForms } from '@jsonforms/react';
 import schema from './schema.json';
 import uischema from './uischema.json';
-import { Button } from 'govuk-react';
+import { Button, ErrorSummary } from 'govuk-react';
 
 import GdsCheckboxControl from '../../inputs/checkbox/gdsCheckboxControl';
 import gdsCheckboxTester from '../../inputs/checkbox/gdsCheckboxTester';
@@ -65,10 +65,21 @@ const PrraForm = () => {
           uischema={uischema}
           validationMode={touched ? 'ValidateAndShow' : 'ValidateAndHide'}
         />
-        <pre id='boundData'>{stringifiedData}</pre>
+        {errors.length > 0 && touched &&
+          <ErrorSummary
+            description='Please resolve all form errors before saving.'
+            heading="There are errors on this form"
+          />
+        }
         <Button onClick={save}>
           Save
         </Button>
+        <Button
+          buttonColour="#f3f2f1"
+          buttonTextColour="#0b0c0c">
+          Cancel
+        </Button>
+        <pre id='boundData'>{stringifiedData}</pre>
       </>
     )
   };

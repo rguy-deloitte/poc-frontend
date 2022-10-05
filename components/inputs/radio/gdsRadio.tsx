@@ -1,5 +1,5 @@
 import React from 'react';
-import { ErrorText, Fieldset, FormGroup, HintText, Radio } from 'govuk-react';
+import { Details, ErrorText, Fieldset, FormGroup, HintText, Radio } from 'govuk-react';
 import { Hidden } from '@mui/material';
 
 interface GdsRadioProps {
@@ -47,6 +47,9 @@ export const GdsRadio: React.FC<GdsRadioProps> = ({
           {radios}
         </Fieldset>
       </FormGroup>
+      {uischema.help &&
+        <Details summary={`${label} guidance`}><span dangerouslySetInnerHTML={{__html: uischema.help}}></span></Details>
+      }
     </Hidden>
   );
 };

@@ -8,15 +8,15 @@
       "type": "string",
       "oneOf": [
         {
-          "const": "visit not required",
+          "const": "Visit not required",
           "title": "Visit not required"
         },
         {
-          "const": "visit required",
+          "const": "Visit required",
           "title": "Visit required"
         },
         {
-          "const": "visit with concerns",
+          "const": "Visit with concerns",
           "title": "Visit with concerns"
         }
       ]
@@ -24,55 +24,21 @@
     "visitDecisionReason": {
       "type": "string"
     },
-    "register-eyr": {
-      "type": "boolean"
+    "backgroundInformation": {
+      "type": "string"
     },
-    "register-ccr": {
-      "type": "boolean"
+    "linesOfEnquiry": {
+      "type": "string"
     },
-    "register-vcr": {
-      "type": "boolean"
+    "cfcDetails": {
+      "type": "string"
     },
-    "typeOfCare": {
-      "type": "string",
-      "oneOf": [
-        {
-          "const": "Childcare on domestic premises",
-          "title": "Childcare on domestic premises"
-        },
-        {
-          "const": "Childcare on non-domestic premises",
-          "title": "Childcare on non-domestic premises"
-        },
-        {
-          "const": "Childminder",
-          "title": "Childminder"
-        },
-        {
-          "const": "Home childcarer",
-          "title": "Home childcarer"
-        }
-      ]
-    },
-    "known": {
+    "isOrganisation": {
       "type": "boolean",
       "oneOf": [
         {
           "const": true,
-          "title": "Know"
-        },
-        {
-          "const": false,
-          "title": "Not-known"
-        }
-      ]
-    },
-    "organisation": {
-      "type": "boolean",
-      "oneOf": [
-        {
-          "const": true,
-          "title": "Yes"
+          "title": ""
         },
         {
           "const": false,
@@ -84,69 +50,8 @@
       "type": "string"
     },
     "companyStatus": {
-      "type": "string",
-      "oneOf": [
-        {
-          "const": "Know",
-          "title": "Know"
-        },
-        {
-          "const": "Not-known",
-          "title": "Not-known"
-        }
-      ]
-    },
-    "backgroundInformation": {
-      "type": "string"
-    },
-    "applicationFormDetails": {
-      "type": "string"
-    },
-    "unregisteredCasesLinked": {
-      "type": "boolean",
-      "oneOf": [
-        {
-          "const": true,
-          "title": "Yes"
-        },
-        {
-          "const": false,
-          "title": "No"
-        }
-      ]
-    },
-    "linkedSetting": {
-      "type": "boolean",
-      "oneOf": [
-        {
-          "const": true,
-          "title": "Yes"
-        },
-        {
-          "const": false,
-          "title": "No"
-        }
-      ]
-    },
-    "settingReregisteredOrMerging": {
-      "type": "boolean",
-      "oneOf": [
-        {
-          "const": true,
-          "title": "Yes"
-        },
-        {
-          "const": false,
-          "title": "No"
-        }
-      ]
-    },
-    "identifiedRequirementsOrRegulations": {
-      "type": "string"
-    },
-    "concersIdentified": {
       "type": "string"
     }
   },
-  "required": []
+  "required": ["linkedProforma", "visitDecision", "visitDecisionReason", "backgroundInformation", "linesOfEnquiry", "cfcDetails", "isOrganisation"]
 }

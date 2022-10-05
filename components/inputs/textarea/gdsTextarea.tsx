@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, TextArea } from 'govuk-react';
+import { Details, FormGroup, TextArea } from 'govuk-react';
 import { Hidden } from '@mui/material';
 
 interface GdsTextareaProps {
@@ -41,6 +41,9 @@ export const GdsTextarea: React.FC<GdsTextareaProps> = ({
           {label}
         </TextArea>
       </FormGroup>
+      {uischema.help &&
+        <Details summary={`${label} guidance`}><span dangerouslySetInnerHTML={{__html: uischema.help}}></span></Details>
+      }
     </Hidden>
   );
 };
