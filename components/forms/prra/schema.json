@@ -38,7 +38,7 @@
       "oneOf": [
         {
           "const": true,
-          "title": ""
+          "title": "Yes"
         },
         {
           "const": false,

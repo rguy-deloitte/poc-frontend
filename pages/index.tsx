@@ -8,7 +8,15 @@ const Home: NextPage = () => {
       <Heading>
         POC Frontend
       </Heading>
-      <Link href="/team-tasks/prra-asa-decision-task-list/prra">PRRA</Link>
+      <p>
+        <Link href="/team-tasks">Team tasks</Link>
+      </p>
+      <p>
+        <Link href="/team-tasks/prra-asa-decision-task-list">Task list</Link>
+      </p>
+      <p>
+        <Link href="/team-tasks/prra-asa-decision-task-list/prra">PRRA</Link>
+      </p>
     </>
   )
 }
