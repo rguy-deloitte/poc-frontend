@@ -18,7 +18,7 @@ const TeamTasks: NextPage = () => {
   });
 
   const tableRows = teamTasks.map((task: TeamTask, index: number) => {
-    const data = new Date(task.taskOldestDate);
+    const oldestDate: Date = new Date(task.taskOldestDate);
 
     return (
       <Table.Row key={index}>
@@ -29,14 +29,14 @@ const TeamTasks: NextPage = () => {
           {task.total}
         </Table.Cell>
         <Table.Cell>
-          {data.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'})}
+          {oldestDate.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'})}
         </Table.Cell>
         <Table.Cell>
           <Link href={task.taskUrl}>{`View ${task.taskType}`}</Link>
         </Table.Cell>
       </Table.Row>
     )
-});
+  });
 
   return (
     <>

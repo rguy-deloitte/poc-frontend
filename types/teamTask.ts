@@ -1,7 +1,7 @@
 export type TeamTask = {
   taskName: string;
   total: number;
-  taskOldestDate: Date;
+  taskOldestDate: string;
   taskType: string;
   taskUrl: string;
 }
