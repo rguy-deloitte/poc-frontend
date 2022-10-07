@@ -48,7 +48,7 @@ const data: TeamTask[] = [
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<TeamTask[]>
+  res: NextApiResponse<TeamTask[]>,
 ) {
-  res.status(200).json(data)
+  res.status(200).json(data);
 }

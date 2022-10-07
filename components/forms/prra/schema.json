@@ -53,5 +53,5 @@
       "type": "string"
     }
   },
-  "required": ["linkedProforma", "visitDecision", "visitDecisionReason", "backgroundInformation", "linesOfEnquiry", "cfcDetails", "isOrganisation"]
+  "required": ["cfcDetails"]
 }

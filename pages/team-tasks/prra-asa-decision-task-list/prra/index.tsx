@@ -1,12 +1,35 @@
+import { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
 import { Caption, GridCol, GridRow, H2, Heading, LeadParagraph, Link as LinkGds, Paragraph, Table, Tag } from 'govuk-react'
 import PrraForm from '../../../../components/forms/prra/prraForm';
 import Link from 'next/link';
+import type { PrraTask } from '../../../../types/prraTask';
 
 const Prra: NextPage = () => {
+  const [formData, setFormData] = useState<PrraTask>({});
+  const [readonly, setReadonly] = useState<boolean>(false);
+
+  const saveData = (dataToSave: PrraTask) => {
+    // fetch('/api/prra-form', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(dataToSave),
+    // })
+    // .then((response: any) => {
+    //   if (response.status === 200) {
+    //     setReadonly(true);
+    //   }
+    // })
+    setReadonly(true);
+    setFormData(dataToSave);
+
+  }
+
   return (
     <>
-      <Caption>
+      <Caption>{readonly.toString()}
         Provider: Sunshine Nursery<br />
         URN: 1234237
        </Caption>
@@ -93,13 +116,20 @@ const Prra: NextPage = () => {
               </Table.Cell>
             </Table.Row>
           </Table>
-          <H2>
-            Before you start
-          </H2>
-          <Paragraph>
-            Please complete the sections below to detail the outcome of your investigation into the application to register. Once all relevant parts are completed, please click 'Save' at the bottom.
-          </Paragraph>
-          <PrraForm />
+          {!readonly &&
+            <>
+              <H2>
+                Before you start
+              </H2>
+              <Paragraph>
+                Please complete the sections below to detail the outcome of your investigation into the application to register. Once all relevant parts are completed, please click 'Save' at the bottom.
+              </Paragraph>
+              <PrraForm initialData={formData} saveForm={saveData} />
+            </>
+          }
+          {readonly &&
+            <div>Read only</div>
+          }
         </GridCol>
         <GridCol setWidth="one-third">
           <H2>

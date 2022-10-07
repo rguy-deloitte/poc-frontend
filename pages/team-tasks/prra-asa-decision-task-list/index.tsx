@@ -16,7 +16,7 @@ const TaskList: NextPage = () => {
       .then((data: DecisionTask[]) => {
         setDecisionTasks(data);
         setLoading(false);
-      })
+      });
   }, []);
 
   const tableRows = decisionTasks.sort((a: any, b: any) => {

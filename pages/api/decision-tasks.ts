@@ -42,7 +42,7 @@ const data: DecisionTask[] = [
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<DecisionTask[]>
+  res: NextApiResponse<DecisionTask[]>,
 ) {
-  res.status(200).json(data)
+  res.status(200).json(data);
 }

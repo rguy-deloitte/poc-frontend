@@ -14,7 +14,7 @@ const TeamTasks: NextPage = () => {
       .then((data: TeamTask[]) => {
         setTeamTasks(data);
         setLoading(false);
-      })
+      });
   }, []);
 
   const tableRows = teamTasks.map((task: TeamTask, index: number) => {

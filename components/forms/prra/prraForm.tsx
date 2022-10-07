@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { JsonForms } from '@jsonforms/react';
 import schema from './schema.json';
 import uischema from './uischema.json';
 import { Button, ErrorSummary } from 'govuk-react';
+import type { PrraTask } from '../../../types/prraTask';
 
 import GdsCheckboxControl from '../../inputs/checkbox/gdsCheckboxControl';
 import gdsCheckboxTester from '../../inputs/checkbox/gdsCheckboxTester';
@@ -36,19 +37,16 @@ const renderers = [
   { tester: insetGroupTester, renderer: InsetGroupRenderer },
 ];
 
-const initialData = {};
-
-const PrraForm = () => {
-    const [data, setData] = useState<any>(initialData);
+const PrraForm = (props: any) => {
+    const [data, setData] = useState<PrraTask>(props.initialData);
     const [errors, setErrors] = useState<any>([]);
     const [touched, setTouched] = useState<boolean>(false);
-    const stringifiedData = useMemo(() => JSON.stringify(data, null, 2), [data]);
 
     const save = () => {
       if (errors.length > 0) {
         setTouched(true);
       } else {
-        alert('Save form');
+        props.saveForm(data);
       }
     }
 
@@ -79,7 +77,6 @@ const PrraForm = () => {
           buttonTextColour="#0b0c0c">
           Cancel
         </Button>
-        <pre id='boundData'>{stringifiedData}</pre>
       </>
     )
   };
