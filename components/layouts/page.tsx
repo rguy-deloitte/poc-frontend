@@ -18,31 +18,31 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
           </PhaseBanner>
           {router.route === '/team-tasks' &&
             <Breadcrumbs>
-              <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
+              <Link href="/">Home</Link>
               Team tasks
             </Breadcrumbs>
           }
           {router.route === '/team-tasks/prra-asa-decision-task-list' &&
             <Breadcrumbs>
-              <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
-              <Breadcrumbs.Link href="/team-tasks">Team tasks</Breadcrumbs.Link>
+              <Link href="/">Home</Link>
+              <Link href="/team-tasks">Team tasks</Link>
               PRRA/ASA decision task list
             </Breadcrumbs>
           }
           {router.route === '/team-tasks/prra-asa-decision-task-list/prra' &&
             <Breadcrumbs>
-              <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
-              <Breadcrumbs.Link href="/team-tasks">Team tasks</Breadcrumbs.Link>
-              <Breadcrumbs.Link href="/team-tasks/prra-asa-decision-task-list">PRRA/ASA decision task list</Breadcrumbs.Link>
+              <Link href="/">Home</Link>
+              <Link href="/team-tasks">Team tasks</Link>
+              <Link href="/team-tasks/prra-asa-decision-task-list">PRRA/ASA decision task list</Link>
               PRRA
             </Breadcrumbs>
           }
           {router.route === '/team-tasks/prra-asa-decision-task-list/prra/application-summary' &&
             <Breadcrumbs>
-              <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
-              <Breadcrumbs.Link href="/team-tasks">Team tasks</Breadcrumbs.Link>
-              <Breadcrumbs.Link href="/team-tasks/prra-asa-decision-task-list">PRRA/ASA decision task list</Breadcrumbs.Link>
-              <Breadcrumbs.Link href="/team-tasks/prra-asa-decision-task-list/prra">PRRA</Breadcrumbs.Link>
+              <Link href="/">Home</Link>
+              <Link href="/team-tasks">Team tasks</Link>
+              <Link href="/team-tasks/prra-asa-decision-task-list">PRRA/ASA decision task list</Link>
+              <Link href="/team-tasks/prra-asa-decision-task-list/prra">PRRA</Link>
               Application summary
             </Breadcrumbs>
           }

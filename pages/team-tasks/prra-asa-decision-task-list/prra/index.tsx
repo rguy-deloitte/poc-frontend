@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
-import { Caption, GridCol, GridRow, H2, Heading, LeadParagraph, Link, Paragraph, Table, Tag } from 'govuk-react'
+import { Caption, GridCol, GridRow, H2, Heading, LeadParagraph, Link as LinkGds, Paragraph, Table, Tag } from 'govuk-react'
 import PrraForm from '../../../../components/forms/prra/prraForm';
+import Link from 'next/link';
 
 const Prra: NextPage = () => {
   return (
@@ -56,9 +57,9 @@ const Prra: NextPage = () => {
                 Registration form
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EYO
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -66,9 +67,9 @@ const Prra: NextPage = () => {
                 Setting registration form
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EYS
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -76,9 +77,9 @@ const Prra: NextPage = () => {
                 Registered individual
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EY2_Jane Thomas
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -86,9 +87,9 @@ const Prra: NextPage = () => {
                 Nominated individual
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EY2_Patrick Carlson
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
           </Table>
@@ -110,9 +111,9 @@ const Prra: NextPage = () => {
           <Paragraph supportingText>
             [Organisation summary](#)
           </Paragraph>
-          <Paragraph supportingText>
-            [Application summary](#)
-          </Paragraph>
+          <p>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary">Application summary</Link>
+          </p>
           <Paragraph supportingText>
             [Inspection history](#)
           </Paragraph>
