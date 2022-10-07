@@ -11,28 +11,32 @@ const TeamTasks: NextPage = () => {
   useEffect(() => {
     fetch('/api/team-tasks')
       .then((response: any) => response.json())
-      .then((data) => {
+      .then((data: TeamTask[]) => {
         setTeamTasks(data);
         setLoading(false);
       })
   });
 
-  const tableRows = teamTasks.map((task: TeamTask, index: number) => (
-    <Table.Row key={index}>
-      <Table.CellHeader>
-        {task.taskName}
-      </Table.CellHeader>
-      <Table.Cell>
-        {task.total}
-      </Table.Cell>
-      <Table.Cell>
-        {task.taskOldestDate.toString()}
-      </Table.Cell>
-      <Table.Cell>
-        <Link href="/team-tasks/prra-asa-decision-task-list">View PRRA/ASA</Link>
-      </Table.Cell>
-    </Table.Row>
-  ));
+  const tableRows = teamTasks.map((task: TeamTask, index: number) => {
+    const data = new Date(task.taskOldestDate);
+
+    return (
+      <Table.Row key={index}>
+        <Table.CellHeader>
+          {task.taskName}
+        </Table.CellHeader>
+        <Table.Cell>
+          {task.total}
+        </Table.Cell>
+        <Table.Cell>
+          {data.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'})}
+        </Table.Cell>
+        <Table.Cell>
+          <Link href={task.taskUrl}>{`View ${task.taskType}`}</Link>
+        </Table.Cell>
+      </Table.Row>
+    )
+});
 
   return (
     <>
