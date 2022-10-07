@@ -15,7 +15,7 @@ const TeamTasks: NextPage = () => {
         setTeamTasks(data);
         setLoading(false);
       })
-  });
+  }, []);
 
   const tableRows = teamTasks.map((task: TeamTask, index: number) => {
     const oldestDate: Date = new Date(task.taskOldestDate);
