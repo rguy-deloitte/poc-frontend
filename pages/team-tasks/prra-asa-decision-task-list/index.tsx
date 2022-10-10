@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { Button, Checkbox, Fieldset, H3, Heading, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Table, Tag } from 'govuk-react'
+import { Button, Checkbox, Fieldset, FormGroup, H3, Heading, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Select, Table, Tag } from 'govuk-react'
 import Link from 'next/link'
 import type { DecisionTask } from '../../../types/decisionTask';
 
@@ -133,9 +133,11 @@ const TaskList: NextPage = () => {
             <Tag tint="RED">Overdue</Tag>
           )}
         </Table.Cell>
-        <Table.Cell>
-          <Link href="/team-tasks/prra-asa-decision-task-list/prra">Start task</Link>
-        </Table.Cell>
+        {!selectTask &&
+          <Table.Cell>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra">Start task</Link>
+          </Table.Cell>
+        }
       </Table.Row>
     )
   });
@@ -199,7 +201,9 @@ const TaskList: NextPage = () => {
             <Table.CellHeader>
               <button className={`sortable ${sortField === 'dueDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dueDate')}}>Due date</button>
             </Table.CellHeader>
-            <Table.CellHeader></Table.CellHeader>
+            {!selectTask &&
+              <Table.CellHeader></Table.CellHeader>
+            }
           </Table.Row>
         }>
           {tableRows}
@@ -208,11 +212,29 @@ const TaskList: NextPage = () => {
       {!selectTask &&
         <Button onClick={() => setSelectTask(true)}>Select task</Button>
       }
+      {selectTask && selectedTasks.length > 0 &&
+      <>
+        <FormGroup>
+          <Select label={`Allocate PRRA/ASA task${selectedTasks.length > 1 ? 's' : ''} to`}>
+            <option value="Me">
+              Me
+            </option>
+            <option value="Person 1">
+              Person 1
+            </option>
+            <option value="Person 2">
+              Person 2
+            </option>
+            <option value="Person 3">
+              Person 3
+            </option>
+          </Select>
+        </FormGroup>
+        <Button onClick={() => setSelectTask(true)}>Allocate task{selectedTasks.length > 1 && 's'}</Button>
+      </>
+      }
       {selectTask &&
-        <>
-          <Button onClick={() => setSelectTask(true)}>Allocate task</Button>
-          <Button className='govuk-button--secondary' onClick={() => setSelectTask(false)}>Cancel</Button>
-        </>
+        <Button className='govuk-button--secondary' onClick={() => {setSelectTask(false); setSelectedTasks([]);}}>Cancel</Button>
       }
     </>
   )
