@@ -63,6 +63,36 @@ textarea {
   content: '';
 }
 
+.filter {
+  background-color: #d9d9d9;
+  border: 1px solid black;
+  margin-bottom: 32px;
+  max-width: 500px;
+  padding: 16px;
+}
+
+.filter input[type="checkbox"] + span::before {
+  background-color: white;
+}
+
+.govuk-button--secondary,
+.govuk-button--secondary:link,
+.govuk-button--secondary:visited,
+.govuk-button--secondary:active,
+.govuk-button--secondary:hover {
+  color: #0b0c0c !important;
+}
+
+.govuk-button--secondary:hover {
+  background-color: #dbdad9 !important;
+}
+
+.govuk-button--secondary {
+  background-color: #f3f2f1 !important;
+  -webkit-box-shadow: 0 2px 0 #929191 !important;
+  box-shadow: 0 2px 0 #929191 !important;
+}
+
 .govuk-notification-banner {
     font-family: "GDS Transport",arial,sans-serif;
     -webkit-font-smoothing: antialiased;

@@ -237,10 +237,7 @@ const Prra: NextPage = () => {
                 <Button onClick={submit}>
                   Submit
                 </Button>
-                <Button
-                  buttonColour="#f3f2f1"
-                  buttonTextColour="#0b0c0c"
-                  onClick={edit}>
+                <Button className='govuk-button--secondary' onClick={edit}>
                   Edit
                 </Button>
               </>

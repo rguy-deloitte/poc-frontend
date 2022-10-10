@@ -72,9 +72,7 @@ const PrraForm = (props: any) => {
         <Button onClick={save}>
           Save
         </Button>
-        <Button
-          buttonColour="#f3f2f1"
-          buttonTextColour="#0b0c0c">
+        <Button className='govuk-button--secondary'>
           Cancel
         </Button>
       </>

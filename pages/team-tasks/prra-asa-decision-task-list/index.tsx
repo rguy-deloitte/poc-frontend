@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { H3, Heading, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Table, Tag } from 'govuk-react'
+import { Button, Checkbox, Fieldset, H3, Heading, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Table, Tag } from 'govuk-react'
 import Link from 'next/link'
 import type { DecisionTask } from '../../../types/decisionTask';
 
@@ -9,6 +9,14 @@ const TaskList: NextPage = () => {
   const [decisionTasks, setDecisionTasks] = useState<DecisionTask[]>([]);
   const [sortField, setSortField] = useState<string>('dueDate');
   const [sortDirection, setSortDirection] = useState<string>('asc');
+  const [showFilter, setShowFilter] = useState<boolean>(false);
+  const [filterType, setFilterType] = useState<string[]>([]);
+  const decisionTaskTypes: string[] = [
+    'Childcare on domestic premises',
+    'Childcare on non-domestic premises',
+    'Childminder',
+    'Home childcarer',
+  ];
 
   useEffect(() => {
     fetch('/api/decision-tasks')
@@ -28,10 +36,25 @@ const TaskList: NextPage = () => {
     }
   }
 
+  const updateFilterType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setFilterType([...filterType, e.target.value]);
+    } else {
+      setFilterType(filterType.filter((item: string) => item !== e.target.value));
+    }
+  };
+
   const tableRows = decisionTasks.sort((a: any, b: any) => {
     if (a[sortField] < b[sortField]) return sortDirection === 'asc' ? -1 : 1;
     if (a[sortField] > b[sortField]) return sortDirection === 'asc' ? 1 : -1;
     return 0;
+  })
+  .filter((item: DecisionTask) => {
+    if (filterType.length === 0) {
+      return true;
+    }
+
+    return filterType.includes(item.type);
   })
   .map((task: DecisionTask, index: number) => {
     const startDate: Date = new Date(task.startDate);
@@ -75,6 +98,14 @@ const TaskList: NextPage = () => {
     )
   });
 
+  const filters = decisionTaskTypes.map((item: string) => {
+    const matchCount = decisionTasks.filter((decisionTask: DecisionTask) => decisionTask.type === item).length;
+
+    return (
+      <Checkbox disabled={matchCount === 0} onChange={updateFilterType} value={item}>{item} ({matchCount})</Checkbox>
+    );
+  });
+
   return (
     <>
       <Heading>
@@ -84,6 +115,16 @@ const TaskList: NextPage = () => {
         <b>Start task or select task to allocate</b>
       </LeadParagraph>
       <Paragraph>Start task or select task to allocate to team members to complete PRRA/ASA decision</Paragraph>
+      <Button className='govuk-button--secondary' onClick={() => {setShowFilter(!showFilter)}}>{showFilter ? 'Hide' : 'Show'} filter</Button>
+      {showFilter &&
+        <div className='filter'>
+          <H3>Filter</H3>
+          <Fieldset>
+            <Fieldset.Legend>Type</Fieldset.Legend>
+            {filters}
+          </Fieldset>
+        </div>
+      }
       <H3>
         Task list
       </H3>
