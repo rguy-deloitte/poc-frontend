@@ -23,6 +23,46 @@ textarea {
   margin-left: 10px;
 }
 
+.sortable {
+  background-color: white;
+  border: 0;
+  color: #005ea5;
+  font-size: 19px;
+  font-weight: 700;
+  padding-right: 15px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.sortable::before,
+.sortable::after {
+  font-size: 10px;
+  position: absolute;
+  right: 0;
+  top: 1px;
+}
+
+.sortable::before {
+  content: '▲';
+}
+
+.sortable::after {
+  content: '▼';
+  top: 10px;
+}
+
+.sortable--asc::before,
+.sortable--dsc::after {
+  font-size: 16px;
+  right: -2px;
+  top: 2px;
+}
+
+.sortable--dsc::before,
+.sortable--asc::after {
+  content: '';
+}
+
 .govuk-notification-banner {
     font-family: "GDS Transport",arial,sans-serif;
     -webkit-font-smoothing: antialiased;

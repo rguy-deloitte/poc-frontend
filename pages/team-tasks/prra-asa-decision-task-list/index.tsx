@@ -19,6 +19,15 @@ const TaskList: NextPage = () => {
       });
   }, []);
 
+  const changeSort = (fieldId: string) => {
+    if (sortField === fieldId) {
+      setSortDirection(sortDirection === 'asc' ? 'dsc' : 'asc');
+    } else {
+      setSortField(fieldId);
+      setSortDirection('asc');
+    }
+  }
+
   const tableRows = decisionTasks.sort((a: any, b: any) => {
     if (a[sortField] < b[sortField]) return sortDirection === 'asc' ? -1 : 1;
     if (a[sortField] > b[sortField]) return sortDirection === 'asc' ? 1 : -1;
@@ -82,37 +91,25 @@ const TaskList: NextPage = () => {
         <Table head={
           <Table.Row>
             <Table.CellHeader>
-              Application ID
-              <button onClick={() => {setSortField('applicationId'); setSortDirection('asc');}}>Asc</button>
-              <button onClick={() => {setSortField('applicationId'); setSortDirection('dsc');}}>Dsc</button>
+              <button className={`sortable ${sortField === 'applicationId' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('applicationId')}}>Application ID</button>
             </Table.CellHeader>
             <Table.CellHeader>
-              Provider
-              <button onClick={() => {setSortField('provider'); setSortDirection('asc');}}>Asc</button>
-              <button onClick={() => {setSortField('provider'); setSortDirection('dsc');}}>Dsc</button>
+              <button className={`sortable ${sortField === 'provider' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('provider')}}>Provider</button>
             </Table.CellHeader>
             <Table.CellHeader>
-              Type
-              <button onClick={() => {setSortField('type'); setSortDirection('asc');}}>Asc</button>
-              <button onClick={() => {setSortField('type'); setSortDirection('dsc');}}>Dsc</button>
+              <button className={`sortable ${sortField === 'type' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('type')}}>Type</button>
             </Table.CellHeader>
             <Table.CellHeader>
               Register
               </Table.CellHeader>
             <Table.CellHeader>
-              Task type
-              <button onClick={() => {setSortField('taskType'); setSortDirection('asc');}}>Asc</button>
-              <button onClick={() => {setSortField('taskType'); setSortDirection('dsc');}}>Dsc</button>
+              <button className={`sortable ${sortField === 'taskType' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('taskType')}}>Task type</button>
             </Table.CellHeader>
             <Table.CellHeader>
-              Start date
-              <button onClick={() => {setSortField('startDate'); setSortDirection('asc');}}>Asc</button>
-              <button onClick={() => {setSortField('startDate'); setSortDirection('dsc');}}>Dsc</button>
+              <button className={`sortable ${sortField === 'startDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('startDate')}}>Start date</button>
             </Table.CellHeader>
             <Table.CellHeader>
-              Due date
-              <button onClick={() => {setSortField('dueDate'); setSortDirection('asc');}}>Asc</button>
-              <button onClick={() => {setSortField('dueDate'); setSortDirection('dsc');}}>Dsc</button>
+              <button className={`sortable ${sortField === 'dueDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dueDate')}}>Due date</button>
             </Table.CellHeader>
             <Table.CellHeader></Table.CellHeader>
           </Table.Row>
