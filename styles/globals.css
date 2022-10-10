@@ -15,6 +15,10 @@ textarea {
   width: 100% !important;
 }
 
+.show-line-breaks {
+  white-space: pre-line;
+}
+
 .tag-wrapper {
   margin-left: 10px;
 }

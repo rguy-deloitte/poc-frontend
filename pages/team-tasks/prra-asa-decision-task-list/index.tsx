@@ -52,8 +52,11 @@ const TaskList: NextPage = () => {
         </Table.Cell>
         <Table.Cell>
           {dueDate.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'})}
-          {dateDifferene <= 14 && (
+          {dateDifferene <= 14 && dateDifferene >= 0 && (
             <Tag tint="YELLOW">Due soon</Tag>
+          )}
+          {dateDifferene < 0 && (
+            <Tag tint="RED">Overdue</Tag>
           )}
         </Table.Cell>
         <Table.Cell>

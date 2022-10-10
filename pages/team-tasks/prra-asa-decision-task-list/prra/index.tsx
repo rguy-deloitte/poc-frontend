@@ -1,30 +1,54 @@
 import { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { Caption, GridCol, GridRow, H2, Heading, LeadParagraph, Link as LinkGds, Paragraph, Table, Tag } from 'govuk-react'
+import { Button, Caption, GridCol, GridRow, H2, H3, Heading, LabelText, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Table, Tag } from 'govuk-react'
 import PrraForm from '../../../../components/forms/prra/prraForm';
 import Link from 'next/link';
 import type { PrraTask } from '../../../../types/prraTask';
+import Router from 'next/router';
 
 const Prra: NextPage = () => {
   const [formData, setFormData] = useState<PrraTask>({});
   const [readonly, setReadonly] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const saveData = (dataToSave: PrraTask) => {
-    // fetch('/api/prra-form', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(dataToSave),
-    // })
-    // .then((response: any) => {
-    //   if (response.status === 200) {
-    //     setReadonly(true);
-    //   }
-    // })
-    setReadonly(true);
-    setFormData(dataToSave);
+    setLoading(true);
 
+    fetch('/api/prra-form', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({...dataToSave, submitted: false}),
+    })
+    .then((response: any) => {
+      if (response.status === 200) {
+        setReadonly(true);
+        setFormData(dataToSave);
+        setLoading(false);
+      }
+    });
+  };
+
+  const submit = () => {
+    setLoading(true);
+
+    fetch('/api/prra-form', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({...formData, submitted: true}),
+    })
+    .then((response: any) => {
+      if (response.status === 200) {
+        Router.push('/team-tasks/prra-asa-decision-task-list');
+      }
+    });
+  }
+
+  const edit = () => {
+    setReadonly(false);
   }
 
   return (
@@ -116,20 +140,112 @@ const Prra: NextPage = () => {
               </Table.Cell>
             </Table.Row>
           </Table>
-          {!readonly &&
-            <>
-              <H2>
-                Before you start
-              </H2>
-              <Paragraph>
-                Please complete the sections below to detail the outcome of your investigation into the application to register. Once all relevant parts are completed, please click 'Save' at the bottom.
-              </Paragraph>
-              <PrraForm initialData={formData} saveForm={saveData} />
-            </>
-          }
-          {readonly &&
-            <div>Read only</div>
-          }
+          <LoadingBox loading={loading}>
+            {!readonly &&
+              <>
+                <H2>
+                  Before you start
+                </H2>
+                <Paragraph>
+                  Please complete the sections below to detail the outcome of your investigation into the application to register. Once all relevant parts are completed, please click 'Save' at the bottom.
+                </Paragraph>
+                <PrraForm initialData={formData} saveForm={saveData} />
+              </>
+            }
+            {readonly &&
+              <>
+                <H2>
+                  Linked proforma
+                </H2>
+                <Table>
+                  <Table.Row>
+                    <Table.CellHeader>
+                      Linked proforma document
+                    </Table.CellHeader>
+                    <Table.Cell>
+                      {formData.linkedProforma}
+                    </Table.Cell>
+                  </Table.Row>
+                </Table>
+                <H2>
+                  Visit decision
+                </H2>
+                <Table>
+                  <Table.Row>
+                    <Table.CellHeader>
+                      Visit decision
+                    </Table.CellHeader>
+                    <Table.Cell>
+                      {formData.visitDecision}
+                    </Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell className='show-line-breaks' colSpan={2}>
+                      <LabelText><b>Reason for decision</b></LabelText>
+                      {formData.visitDecisionReason}
+                    </Table.Cell>
+                  </Table.Row>
+                </Table>
+                <H2>
+                  Action plan
+                </H2>
+                <Table>
+                  <Table.Row>
+                    <Table.Cell className='show-line-breaks'>
+                      <LabelText><b>Background information</b></LabelText>
+                      {formData.backgroundInformation}
+                    </Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell className='show-line-breaks'>
+                      <LabelText><b>Lines of enquiry</b></LabelText>
+                      {formData.linesOfEnquiry}
+                    </Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell className='show-line-breaks'>
+                      <LabelText><b>CFC details</b></LabelText>
+                      {formData.cfcDetails}
+                    </Table.Cell>
+                  </Table.Row>
+                </Table>
+                {formData.isOrganisation &&
+                  <>
+                  <H3>
+                    Organisation details
+                  </H3>
+                    <Table>
+                      <Table.Row>
+                        <Table.CellHeader>
+                          Nature of business
+                        </Table.CellHeader>
+                        <Table.Cell>
+                          {formData.natureOfBusiness}
+                        </Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.CellHeader>
+                          Company status
+                        </Table.CellHeader>
+                        <Table.Cell>
+                          {formData.companyStatus}
+                        </Table.Cell>
+                      </Table.Row>
+                    </Table>
+                  </>
+                }
+                <Button onClick={submit}>
+                  Submit
+                </Button>
+                <Button
+                  buttonColour="#f3f2f1"
+                  buttonTextColour="#0b0c0c"
+                  onClick={edit}>
+                  Edit
+                </Button>
+              </>
+            }
+          </LoadingBox>
         </GridCol>
         <GridCol setWidth="one-third">
           <H2>

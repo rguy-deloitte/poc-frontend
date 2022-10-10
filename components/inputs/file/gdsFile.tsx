@@ -15,8 +15,8 @@ export const GdsFile: React.FC<GdsFileProps> = ({
   updateValue,
   visible,
 }) => {
-  const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateValue(e.target.value);
+  const inputChange = (e: React.ChangeEvent<any>) => {
+    updateValue((e.target).files[0].name);
   };
 
   return (
