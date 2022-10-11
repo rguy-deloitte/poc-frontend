@@ -468,9 +468,9 @@ const ApplicationSummary: NextPage = () => {
           <p>
             <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-tasks" passHref><a target="_blank">View application tasks</a></Link>
           </p>
-          <Paragraph supportingText>
-            [View timeline](#)
-          </Paragraph>
+          <p>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-timeline" passHref><a target="_blank">View timeline</a></Link>
+          </p>
         </GridCol>
       </GridRow>
     </>

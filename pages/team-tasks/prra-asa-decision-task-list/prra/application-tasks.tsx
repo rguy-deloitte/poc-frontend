@@ -23,84 +23,84 @@ const ApplicationTasks: NextPage = () => {
             Application tasks
           </H2>
           <ol className="app-task-list">
-        <li>
-          <h2 className="app-task-list__section">
-            <span className="app-task-list__section-number">1. </span> Stage 1
-          </h2>
-          <ul className="app-task-list__items">
-            <li className="app-task-list__item">
-              <span className="app-task-list__task-name">
-                <Link href='#'>[task]</Link>
-              </span>
-              <strong className="govuk-tag app-task-list__tag">Completed</strong>
+            <li>
+              <h2 className="app-task-list__section">
+                <span className="app-task-list__section-number">1. </span> Stage 1
+              </h2>
+              <ul className="app-task-list__items">
+                <li className="app-task-list__item">
+                  <span className="app-task-list__task-name">
+                    <Link href='#'>[task]</Link>
+                  </span>
+                  <strong className="govuk-tag app-task-list__tag">Completed</strong>
+                </li>
+                <li className="app-task-list__item">
+                  <span className="app-task-list__task-name">
+                    <Link href='#'>[task]</Link>
+                  </span>
+                  <strong className="govuk-tag app-task-list__tag">Completed</strong>
+                </li>
+                <li className="app-task-list__item">
+                  <span className="app-task-list__task-name">
+                    <Link href='#'>[task]</Link>
+                  </span>
+                  <strong className="govuk-tag app-task-list__tag">Completed</strong>
+                </li>
+              </ul>
             </li>
-            <li className="app-task-list__item">
-              <span className="app-task-list__task-name">
-                <Link href='#'>[task]</Link>
-              </span>
-              <strong className="govuk-tag app-task-list__tag">Completed</strong>
-            </li>
-            <li className="app-task-list__item">
-              <span className="app-task-list__task-name">
-                <Link href='#'>[task]</Link>
-              </span>
-              <strong className="govuk-tag app-task-list__tag">Completed</strong>
-            </li>
-          </ul>
-        </li>
 
-        <li>
-          <h2 className="app-task-list__section">
-            <span className="app-task-list__section-number">2. </span> Stage 2
-          </h2>
-          <ul className="app-task-list__items">
-            <li className="app-task-list__item">
-              <span className="app-task-list__task-name">
-                <Link href='#'>[task]</Link>
-              </span>
-              <strong className="govuk-tag app-task-list__tag">Completed</strong>
+            <li>
+              <h2 className="app-task-list__section">
+                <span className="app-task-list__section-number">2. </span> Stage 2
+              </h2>
+              <ul className="app-task-list__items">
+                <li className="app-task-list__item">
+                  <span className="app-task-list__task-name">
+                    <Link href='#'>[task]</Link>
+                  </span>
+                  <strong className="govuk-tag app-task-list__tag">Completed</strong>
+                </li>
+                <li className="app-task-list__item">
+                  <span className="app-task-list__task-name">
+                    <Link href='#'>[task]</Link>
+                  </span>
+                  <strong className="govuk-tag app-task-list__tag">Completed</strong>
+                </li>
+                <li className="app-task-list__item">
+                  <span className="app-task-list__task-name">
+                    <Link href='#'>[task]</Link>
+                  </span>
+                  <strong className="govuk-tag app-task-list__tag">Completed</strong>
+                </li>
+              </ul>
             </li>
-            <li className="app-task-list__item">
-              <span className="app-task-list__task-name">
-                <Link href='#'>[task]</Link>
-              </span>
-              <strong className="govuk-tag app-task-list__tag">Completed</strong>
-            </li>
-            <li className="app-task-list__item">
-              <span className="app-task-list__task-name">
-                <Link href='#'>[task]</Link>
-              </span>
-              <strong className="govuk-tag app-task-list__tag">Completed</strong>
-            </li>
-          </ul>
-        </li>
 
-        <li>
-          <h2 className="app-task-list__section">
-            <span className="app-task-list__section-number">3. </span> Stage 3
-          </h2>
-          <ul className="app-task-list__items">
-            <li className="app-task-list__item">
-              <span className="app-task-list__task-name">
-                <Link href='#'>PRRA/ASA Decision</Link>
-              </span>
-              <strong className="govuk-tag govuk-tag--blue app-task-list__tag">In progress</strong>
+            <li>
+              <h2 className="app-task-list__section">
+                <span className="app-task-list__section-number">3. </span> Stage 3
+              </h2>
+              <ul className="app-task-list__items">
+                <li className="app-task-list__item">
+                  <span className="app-task-list__task-name">
+                    <Link href='#'>PRRA/ASA Decision</Link>
+                  </span>
+                  <strong className="govuk-tag govuk-tag--blue app-task-list__tag">In progress</strong>
+                </li>
+                <li className="app-task-list__item">
+                  <span className="app-task-list__task-name">
+                    Registration Visit
+                  </span>
+                  <strong className="govuk-tag govuk-tag--grey app-task-list__tag">Not started</strong>
+                </li>
+                <li className="app-task-list__item">
+                  <span className="app-task-list__task-name">
+                    Decision
+                  </span>
+                  <strong className="govuk-tag govuk-tag--grey app-task-list__tag">Not started</strong>
+                </li>
+              </ul>
             </li>
-            <li className="app-task-list__item">
-              <span className="app-task-list__task-name">
-                Registration Visit
-              </span>
-              <strong className="govuk-tag govuk-tag--grey app-task-list__tag">Not started</strong>
-            </li>
-            <li className="app-task-list__item">
-              <span className="app-task-list__task-name">
-                Decision
-              </span>
-              <strong className="govuk-tag govuk-tag--grey app-task-list__tag">Not started</strong>
-            </li>
-          </ul>
-        </li>
-      </ol>
+          </ol>
         </GridCol>
         <GridCol setWidth="one-third">
           <H2>
