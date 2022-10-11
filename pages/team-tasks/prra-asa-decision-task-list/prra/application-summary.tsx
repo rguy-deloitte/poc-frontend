@@ -157,9 +157,9 @@ const ApplicationSummary: NextPage = () => {
           }>
             <Table.Row>
               <Table.Cell>
-                <LinkGds href="#">
-                  DBS
-                </LinkGds>
+                <Link href="/team-tasks/prra-asa-decision-task-list/prra/dbs" passHref>
+                  <a target="_blank">DBS</a>
+                </Link>
               </Table.Cell>
               <Table.Cell>
                 -
@@ -271,9 +271,9 @@ const ApplicationSummary: NextPage = () => {
           }>
             <Table.Row>
               <Table.Cell>
-                <LinkGds href="#">
-                  DBS
-                </LinkGds>
+                <Link href="/team-tasks/prra-asa-decision-task-list/prra/dbs" passHref>
+                  <a target="_blank">DBS</a>
+                </Link>
               </Table.Cell>
               <Table.Cell>
                 -
@@ -350,9 +350,9 @@ const ApplicationSummary: NextPage = () => {
           }>
             <Table.Row>
               <Table.Cell>
-                <LinkGds href="#">
-                  DBS
-                </LinkGds>
+                <Link href="/team-tasks/prra-asa-decision-task-list/prra/dbs" passHref>
+                  <a target="_blank">DBS</a>
+                </Link>
               </Table.Cell>
               <Table.Cell>
                 -
@@ -429,9 +429,9 @@ const ApplicationSummary: NextPage = () => {
           }>
             <Table.Row>
               <Table.Cell>
-                <LinkGds href="#">
-                  DBS
-                </LinkGds>
+                <Link href="/team-tasks/prra-asa-decision-task-list/prra/dbs" passHref>
+                  <a target="_blank">DBS</a>
+                </Link>
               </Table.Cell>
               <Table.Cell>
                 -

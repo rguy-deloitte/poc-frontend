@@ -53,10 +53,10 @@ const Prra: NextPage = () => {
 
   return (
     <>
-      <Caption>{readonly.toString()}
+      <Caption>
         Provider: Sunshine Nursery<br />
         URN: 1234237
-       </Caption>
+      </Caption>
       <Heading>
         PRRA
       </Heading>
