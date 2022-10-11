@@ -8,7 +8,7 @@ interface DefaultLayoutProps {
 
 export default function PageLayout({ children }: DefaultLayoutProps) {
   const router = useRouter();
-  
+
   return (
     <>
       <Page beforeChildren={
@@ -16,6 +16,12 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
           <PhaseBanner level="alpha">
             This is a new service – your <Link href="#">feedback</Link> will help us to improve it.
           </PhaseBanner>
+          {router.route === '/personal-tasks' &&
+            <Breadcrumbs>
+              <Link href="/">Home</Link>
+              Personal tasks
+            </Breadcrumbs>
+          }
           {router.route === '/team-tasks' &&
             <Breadcrumbs>
               <Link href="/">Home</Link>

@@ -15,6 +15,9 @@ const Home: NextPage = () => {
         <Link href="/team-tasks/prra-asa-decision-task-list">Task list</Link>
       </p>
       <p>
+        <Link href="/personal-tasks">Personal tasks</Link>
+      </p>
+      <p>
         <Link href="/team-tasks/prra-asa-decision-task-list/prra">PRRA</Link>
       </p>
     </>
