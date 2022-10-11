@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { Fieldset, H3, Heading, Link as LinkGds, LoadingBox, Table, Tag } from 'govuk-react'
+import { Button, Fieldset, FormGroup, H3, Heading, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Select, Table, Tag } from 'govuk-react'
 import Link from 'next/link'
 import type { DecisionTask } from '../types/decisionTask';
+import Router from 'next/router';
 
 const PersonalTaskList: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -110,7 +111,7 @@ const PersonalTaskList: NextPage = () => {
 
     return (
       <div className="govuk-checkboxes__item">
-        <input className="govuk-checkboxes__input" disabled={matchCount === 0} id={`filterTypeCheckbox${index}`} key={index} onChange={updateFilterType} type="checkbox" value={item} />
+        <input checked={filterType.includes(item)} className="govuk-checkboxes__input" disabled={matchCount === 0} id={`filterTypeCheckbox${index}`} key={index} onChange={updateFilterType} type="checkbox" value={item} />
         <label className="govuk-label govuk-checkboxes__label" htmlFor={`filterTypeCheckbox${index}`}>{item} ({matchCount})</label>
       </div>
     );
@@ -136,41 +137,43 @@ const PersonalTaskList: NextPage = () => {
       <H3>
         Task list
       </H3>
-      <LoadingBox loading={loading}>
-        <Table head={
-          <Table.Row>
-            <Table.CellHeader>
-              <button className={`sortable ${sortField === 'applicationId' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('applicationId')}}>Application ID</button>
-            </Table.CellHeader>
-            <Table.CellHeader>
-              <button className={`sortable ${sortField === 'provider' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('provider')}}>Provider</button>
-            </Table.CellHeader>
-            <Table.CellHeader>
-              <button className={`sortable ${sortField === 'type' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('type')}}>Type</button>
-            </Table.CellHeader>
-            <Table.CellHeader>
-              Register
-              </Table.CellHeader>
-            <Table.CellHeader>
-              <button className={`sortable ${sortField === 'taskType' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('taskType')}}>Task type</button>
-            </Table.CellHeader>
-            <Table.CellHeader>
-              <button className={`sortable ${sortField === 'startDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('startDate')}}>Start date</button>
-            </Table.CellHeader>
-            <Table.CellHeader>
-              <button className={`sortable ${sortField === 'dueDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dueDate')}}>Due date</button>
-            </Table.CellHeader>
-            <Table.CellHeader></Table.CellHeader>
-          </Table.Row>
-        }>
-          {tableRows.length > 0 && tableRows}
-          {tableRows.length === 0 &&
-            <Table.Row>
-              <Table.Cell colSpan={7}>There are no tasks to allocate</Table.Cell>
-            </Table.Row>
-          }
-        </Table>
-      </LoadingBox>
+      {!loading && tableRows.length === 0 &&
+        <Paragraph>There are no tasks to allocate</Paragraph>
+      }
+      {(loading || tableRows.length > 0) &&
+        <>
+          <LoadingBox loading={loading}>
+            <Table head={
+              <Table.Row>
+                <Table.CellHeader>
+                  <button className={`sortable ${sortField === 'applicationId' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('applicationId')}}>Application ID</button>
+                </Table.CellHeader>
+                <Table.CellHeader>
+                  <button className={`sortable ${sortField === 'provider' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('provider')}}>Provider</button>
+                </Table.CellHeader>
+                <Table.CellHeader>
+                  <button className={`sortable ${sortField === 'type' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('type')}}>Type</button>
+                </Table.CellHeader>
+                <Table.CellHeader>
+                  Register
+                  </Table.CellHeader>
+                <Table.CellHeader>
+                  <button className={`sortable ${sortField === 'taskType' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('taskType')}}>Task type</button>
+                </Table.CellHeader>
+                <Table.CellHeader>
+                  <button className={`sortable ${sortField === 'startDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('startDate')}}>Start date</button>
+                </Table.CellHeader>
+                <Table.CellHeader>
+                  <button className={`sortable ${sortField === 'dueDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dueDate')}}>Due date</button>
+                </Table.CellHeader>
+                <Table.CellHeader></Table.CellHeader>
+              </Table.Row>
+            }>
+              {tableRows}
+            </Table>
+          </LoadingBox>
+        </>
+      }
     </>
   )
 }

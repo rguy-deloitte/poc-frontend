@@ -1,4 +1,5 @@
 @import '../node_modules/govuk-frontend/govuk/all.scss';
+@import './taskList.scss';
 
 html,
 body {
@@ -17,8 +18,18 @@ textarea {
   width: 100% !important;
 }
 
-td {
+td,
+th {
   vertical-align: top;
+
+  a,
+  strong {
+    white-space: nowrap;
+  }
+
+  strong {
+    margin-top: 5px;
+  }
 }
 
 .show-line-breaks {
@@ -82,6 +93,6 @@ td {
 }
 
 .govuk-checkboxes--in-table-cell {
-  margin-top: -20px;
+  margin-top: -6px;
   position: relative;
 }

@@ -1,6 +1,6 @@
-import { H1, H3 } from 'govuk-react';
 import type { NextPage } from 'next'
-import { Caption, GridCol, GridRow, H2, Heading, LeadParagraph, Link, Paragraph, Table, Tag } from 'govuk-react'
+import Link from 'next/link';
+import { Caption, GridCol, GridRow, H1, H2, H3, LeadParagraph, Link as LinkGds, Paragraph, Table, Tag } from 'govuk-react'
 
 const ApplicationSummary: NextPage = () => {
   return (
@@ -52,9 +52,9 @@ const ApplicationSummary: NextPage = () => {
                 Responsible body
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Sunshine Ltd
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -62,9 +62,9 @@ const ApplicationSummary: NextPage = () => {
                 Provider URN
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   1234623
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -80,9 +80,9 @@ const ApplicationSummary: NextPage = () => {
                 Register
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EYR
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -90,9 +90,9 @@ const ApplicationSummary: NextPage = () => {
                 Register from
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EYO
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -100,9 +100,9 @@ const ApplicationSummary: NextPage = () => {
                 Setting registration form
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EYS
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
           </Table>
@@ -115,9 +115,9 @@ const ApplicationSummary: NextPage = () => {
                 Name
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Jane Smith
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -133,9 +133,9 @@ const ApplicationSummary: NextPage = () => {
                 Application form
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EY2
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -157,9 +157,9 @@ const ApplicationSummary: NextPage = () => {
           }>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   DBS
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 -
@@ -173,9 +173,9 @@ const ApplicationSummary: NextPage = () => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Social Services
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 Swindon Local Authority
@@ -189,9 +189,9 @@ const ApplicationSummary: NextPage = () => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Reference 1
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 Charlie Edwards
@@ -205,9 +205,9 @@ const ApplicationSummary: NextPage = () => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Reference 2
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 Mary Louis
@@ -229,9 +229,9 @@ const ApplicationSummary: NextPage = () => {
                 Name
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Julie Jane
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -247,9 +247,9 @@ const ApplicationSummary: NextPage = () => {
                 Application form
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EY2
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -271,9 +271,9 @@ const ApplicationSummary: NextPage = () => {
           }>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   DBS
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 -
@@ -287,9 +287,9 @@ const ApplicationSummary: NextPage = () => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Social Services
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 Swindon Local Authority
@@ -308,9 +308,9 @@ const ApplicationSummary: NextPage = () => {
                 Name
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Lilly Smith
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -326,9 +326,9 @@ const ApplicationSummary: NextPage = () => {
                 Application form
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EY2
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -350,9 +350,9 @@ const ApplicationSummary: NextPage = () => {
           }>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   DBS
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 -
@@ -366,9 +366,9 @@ const ApplicationSummary: NextPage = () => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Social Services
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 Swindon Local Authority
@@ -387,9 +387,9 @@ const ApplicationSummary: NextPage = () => {
                 Name
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Patrick Stuart
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -405,9 +405,9 @@ const ApplicationSummary: NextPage = () => {
                 Application form
               </Table.CellHeader>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   EY2
-                </Link>
+                </LinkGds>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -429,9 +429,9 @@ const ApplicationSummary: NextPage = () => {
           }>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   DBS
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 -
@@ -445,9 +445,9 @@ const ApplicationSummary: NextPage = () => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <Link href="#">
+                <LinkGds href="#">
                   Social Services
-                </Link>
+                </LinkGds>
               </Table.Cell>
               <Table.Cell>
                 Swindon Local Authority
@@ -465,9 +465,9 @@ const ApplicationSummary: NextPage = () => {
           <H2>
             Links
           </H2>
-          <Paragraph supportingText>
-            [View application tasks](#)
-          </Paragraph>
+          <p>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-tasks" passHref><a target="_blank">View application tasks</a></Link>
+          </p>
           <Paragraph supportingText>
             [View timeline](#)
           </Paragraph>
