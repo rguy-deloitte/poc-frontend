@@ -1,0 +1,83 @@
+@import '../node_modules/govuk-frontend/govuk/all.scss';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button + button {
+  margin-left: 10px !important;
+}
+
+textarea {
+  width: 100% !important;
+}
+
+.show-line-breaks {
+  white-space: pre-line;
+}
+
+.tag-wrapper {
+  margin-left: 10px;
+}
+
+.sortable {
+  background-color: white;
+  border: 0;
+  color: #005ea5;
+  font-size: 19px;
+  font-weight: 700;
+  padding-right: 15px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.sortable::before,
+.sortable::after {
+  font-size: 10px;
+  position: absolute;
+  right: 0;
+  top: 1px;
+}
+
+.sortable::before {
+  content: '▲';
+}
+
+.sortable::after {
+  content: '▼';
+  top: 10px;
+}
+
+.sortable--asc::before,
+.sortable--dsc::after {
+  font-size: 16px;
+  right: -2px;
+  top: 2px;
+}
+
+.sortable--dsc::before,
+.sortable--asc::after {
+  content: '';
+}
+
+.filter {
+  background-color: #d9d9d9;
+  border: 1px solid black;
+  margin-bottom: 32px;
+  max-width: 500px;
+  padding: 16px;
+}
+
+.filter .govuk-checkboxes--small .govuk-checkboxes__label:before {
+  background-color: white;
+}
+
+.govuk-checkboxes--in-table-cell {
+  margin-top: -20px;
+  position: relative;
+}

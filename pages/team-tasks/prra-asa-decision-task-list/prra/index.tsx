@@ -237,9 +237,9 @@ const Prra: NextPage = () => {
                 <Button onClick={submit}>
                   Submit
                 </Button>
-                <Button className='govuk-button--secondary' onClick={edit}>
+                <button className='govuk-button govuk-button--secondary' onClick={edit}>
                   Edit
-                </Button>
+                </button>
               </>
             }
           </LoadingBox>

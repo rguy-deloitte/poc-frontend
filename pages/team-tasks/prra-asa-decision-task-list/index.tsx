@@ -103,7 +103,10 @@ const TaskList: NextPage = () => {
       <Table.Row key={index}>
         {selectTask &&
           <Table.CellHeader>
-            <input checked={selectedTasks.includes(task.applicationId)} onChange={updateSelectedTasks} type="checkbox" value={task.applicationId}/>
+            <div className="govuk-checkboxes govuk-checkboxes--small govuk-checkboxes--in-table-cell">
+              <input className="govuk-checkboxes__input" checked={selectedTasks.includes(task.applicationId)} onChange={updateSelectedTasks} type="checkbox" value={task.applicationId} />
+              <label className="govuk-label govuk-checkboxes__label"></label>
+            </div>
           </Table.CellHeader>
         }
         <Table.Cell>
@@ -146,7 +149,10 @@ const TaskList: NextPage = () => {
     const matchCount = decisionTasks.filter((decisionTask: DecisionTask) => decisionTask.type === item).length;
 
     return (
-      <Checkbox disabled={matchCount === 0} key={index} onChange={updateFilterType} value={item}>{item} ({matchCount})</Checkbox>
+      <div className="govuk-checkboxes__item">
+        <input className="govuk-checkboxes__input" disabled={matchCount === 0} id={`filterTypeCheckbox${index}`} key={index} onChange={updateFilterType} type="checkbox" value={item} />
+        <label className="govuk-label govuk-checkboxes__label" htmlFor={`filterTypeCheckbox${index}`}>{item} ({matchCount})</label>
+      </div>
     );
   });
 
@@ -159,13 +165,15 @@ const TaskList: NextPage = () => {
         <b>Start task or select task to allocate</b>
       </LeadParagraph>
       <Paragraph>Start task or select task to allocate to team members to complete PRRA/ASA decision</Paragraph>
-      <Button className='govuk-button--secondary' onClick={() => {setShowFilter(!showFilter)}}>{showFilter ? 'Hide' : 'Show'} filter</Button>
+      <button className='govuk-button govuk-button--secondary' onClick={() => {setShowFilter(!showFilter)}}>{showFilter ? 'Hide' : 'Show'} filter</button>
       {showFilter &&
         <div className='filter'>
           <H3>Filter</H3>
           <Fieldset>
             <Fieldset.Legend>Type</Fieldset.Legend>
-            {filters}
+            <div className="govuk-checkboxes govuk-checkboxes--small">
+              {filters}
+            </div>
           </Fieldset>
         </div>
       }
@@ -177,7 +185,10 @@ const TaskList: NextPage = () => {
           <Table.Row>
             {selectTask &&
               <Table.CellHeader>
-                <input checked={selectedTasks.length === tableData.length} onChange={updateSelectedTasks} type="checkbox" value="all" />
+                <div className="govuk-checkboxes govuk-checkboxes--small govuk-checkboxes--in-table-cell">
+                  <input className="govuk-checkboxes__input" checked={selectedTasks.length === tableData.length} onChange={updateSelectedTasks} type="checkbox" value="all" />
+                  <label className="govuk-label govuk-checkboxes__label"></label>
+                </div>
               </Table.CellHeader>
             }
             <Table.CellHeader>
@@ -234,7 +245,7 @@ const TaskList: NextPage = () => {
       </>
       }
       {selectTask &&
-        <Button className='govuk-button--secondary' onClick={() => {setSelectTask(false); setSelectedTasks([]);}}>Cancel</Button>
+        <button className='govuk-button govuk-button--secondary' onClick={() => {setSelectTask(false); setSelectedTasks([]);}}>Cancel</button>
       }
     </>
   )

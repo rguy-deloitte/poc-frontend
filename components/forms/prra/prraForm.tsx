@@ -21,6 +21,7 @@ import gdsTextTester from '../../inputs/text/gdsTextTester';
 import FormGroupRenderer, { formGroupTester } from '../../layouts/formGroup';
 import InputGroupRenderer, { inputGroupTester } from '../../layouts/inputGroup';
 import InsetGroupRenderer, { insetGroupTester } from '../../layouts/insetGroup';
+import Router from 'next/router';
 
 const renderers = [
   // inputs
@@ -50,6 +51,10 @@ const PrraForm = (props: any) => {
       }
     }
 
+    const cancel = () => {
+      Router.push('/team-tasks/prra-asa-decision-task-list');
+    }
+
     return (
       <>
         <JsonForms
@@ -72,9 +77,9 @@ const PrraForm = (props: any) => {
         <Button onClick={save}>
           Save
         </Button>
-        <Button className='govuk-button--secondary'>
+        <button className='govuk-button govuk-button--secondary' onClick={cancel}>
           Cancel
-        </Button>
+        </button>
       </>
     )
   };
