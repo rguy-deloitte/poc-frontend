@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { Heading, Link as LinkGds, LoadingBox, Table } from 'govuk-react'
+import { Heading, LoadingBox, Table } from 'govuk-react'
 import Link from 'next/link'
 import type { TeamTask } from '../../types/teamTask';
 
@@ -32,7 +32,7 @@ const TeamTasks: NextPage = () => {
           {oldestDate.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'})}
         </Table.Cell>
         <Table.Cell>
-          <Link href={task.taskUrl}>{`View ${task.taskType}`}</Link>
+          <Link href={task.taskUrl} passHref><a className="govuk-link">View {task.taskType}</a></Link>
         </Table.Cell>
       </Table.Row>
     )

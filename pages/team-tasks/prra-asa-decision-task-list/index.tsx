@@ -149,7 +149,7 @@ const TaskList: NextPage = () => {
         </Table.Cell>
         {!selectTask &&
           <Table.Cell>
-            <Link href="/team-tasks/prra-asa-decision-task-list/prra">Start task</Link>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra" passHref><a className="govuk-link">Start task</a></Link>
           </Table.Cell>
         }
       </Table.Row>

@@ -18,37 +18,37 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
           </PhaseBanner>
           {router.route === '/personal-tasks' &&
             <Breadcrumbs>
-              <Link href="/">Home</Link>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
               Personal tasks
             </Breadcrumbs>
           }
           {router.route === '/team-tasks' &&
             <Breadcrumbs>
-              <Link href="/">Home</Link>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
               Team tasks
             </Breadcrumbs>
           }
           {router.route === '/team-tasks/prra-asa-decision-task-list' &&
             <Breadcrumbs>
-              <Link href="/">Home</Link>
-              <Link href="/team-tasks">Team tasks</Link>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              <Link href="/team-tasks" passHref><a className="govuk-link">Team tasks</a></Link>
               PRRA/ASA decision task list
             </Breadcrumbs>
           }
           {router.route === '/team-tasks/prra-asa-decision-task-list/prra' &&
             <Breadcrumbs>
-              <Link href="/">Home</Link>
-              <Link href="/team-tasks">Team tasks</Link>
-              <Link href="/team-tasks/prra-asa-decision-task-list">PRRA/ASA decision task list</Link>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              <Link href="/team-tasks" passHref><a className="govuk-link">Team tasks</a></Link>
+              <Link href="/team-tasks/prra-asa-decision-task-list" passHref><a className="govuk-link">PRRA/ASA decision task list</a></Link>
               PRRA
             </Breadcrumbs>
           }
           {router.route === '/team-tasks/prra-asa-decision-task-list/prra/application-summary' &&
             <Breadcrumbs>
-              <Link href="/">Home</Link>
-              <Link href="/team-tasks">Team tasks</Link>
-              <Link href="/team-tasks/prra-asa-decision-task-list">PRRA/ASA decision task list</Link>
-              <Link href="/team-tasks/prra-asa-decision-task-list/prra">PRRA</Link>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              <Link href="/team-tasks" passHref><a className="govuk-link">Team tasks</a></Link>
+              <Link href="/team-tasks/prra-asa-decision-task-list" passHref><a className="govuk-link">PRRA/ASA decision task list</a></Link>
+              <Link href="/team-tasks/prra-asa-decision-task-list/prra" passHref><a className="govuk-link">PRRA</a></Link>
               Application summary
             </Breadcrumbs>
           }

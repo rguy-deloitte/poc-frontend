@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { Button, Fieldset, FormGroup, H3, Heading, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Select, Table, Tag } from 'govuk-react'
+import { Fieldset, H3, Heading, Link as LinkGds, LoadingBox, Paragraph, Table, Tag } from 'govuk-react'
 import Link from 'next/link'
 import type { DecisionTask } from '../types/decisionTask';
-import Router from 'next/router';
 
 const PersonalTaskList: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -100,7 +99,7 @@ const PersonalTaskList: NextPage = () => {
           )}
         </Table.Cell>
         <Table.Cell>
-          <Link href="/team-tasks/prra-asa-decision-task-list/prra">Start task</Link>
+          <Link href="/team-tasks/prra-asa-decision-task-list/prra" passHref><a className="govuk-link">Start task</a></Link>
         </Table.Cell>
       </Table.Row>
     )

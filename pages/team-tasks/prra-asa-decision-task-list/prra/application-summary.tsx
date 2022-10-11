@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Link from 'next/link';
-import { Caption, GridCol, GridRow, H1, H2, H3, LeadParagraph, Link as LinkGds, Paragraph, Table, Tag } from 'govuk-react'
+import { GridCol, GridRow, H1, H2, H3, LeadParagraph, Link as LinkGds, Table, Tag } from 'govuk-react'
 
 const ApplicationSummary: NextPage = () => {
   return (
@@ -158,7 +158,7 @@ const ApplicationSummary: NextPage = () => {
             <Table.Row>
               <Table.Cell>
                 <Link href="/team-tasks/prra-asa-decision-task-list/prra/dbs" passHref>
-                  <a target="_blank">DBS</a>
+                  <a className="govuk-link" target="_blank">DBS</a>
                 </Link>
               </Table.Cell>
               <Table.Cell>
@@ -272,7 +272,7 @@ const ApplicationSummary: NextPage = () => {
             <Table.Row>
               <Table.Cell>
                 <Link href="/team-tasks/prra-asa-decision-task-list/prra/dbs" passHref>
-                  <a target="_blank">DBS</a>
+                  <a className="govuk-link" target="_blank">DBS</a>
                 </Link>
               </Table.Cell>
               <Table.Cell>
@@ -351,7 +351,7 @@ const ApplicationSummary: NextPage = () => {
             <Table.Row>
               <Table.Cell>
                 <Link href="/team-tasks/prra-asa-decision-task-list/prra/dbs" passHref>
-                  <a target="_blank">DBS</a>
+                  <a className="govuk-link" target="_blank">DBS</a>
                 </Link>
               </Table.Cell>
               <Table.Cell>
@@ -430,7 +430,7 @@ const ApplicationSummary: NextPage = () => {
             <Table.Row>
               <Table.Cell>
                 <Link href="/team-tasks/prra-asa-decision-task-list/prra/dbs" passHref>
-                  <a target="_blank">DBS</a>
+                  <a className="govuk-link" target="_blank">DBS</a>
                 </Link>
               </Table.Cell>
               <Table.Cell>
@@ -466,10 +466,10 @@ const ApplicationSummary: NextPage = () => {
             Links
           </H2>
           <p>
-            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-tasks" passHref><a target="_blank">View application tasks</a></Link>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-tasks" passHref><a className="govuk-link" target="_blank">View application tasks</a></Link>
           </p>
           <p>
-            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-timeline" passHref><a target="_blank">View timeline</a></Link>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-timeline" passHref><a className="govuk-link" target="_blank">View timeline</a></Link>
           </p>
         </GridCol>
       </GridRow>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { NextPage } from 'next'
 import { Button, Caption, GridCol, GridRow, H2, H3, Heading, LabelText, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Table, Tag } from 'govuk-react'
 import PrraForm from '../../../../components/forms/prra/prraForm';
@@ -255,7 +255,10 @@ const Prra: NextPage = () => {
             [Organisation summary](#)
           </Paragraph>
           <p>
-            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary">Application summary</Link>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary" passHref><a className="govuk-link">Application summary</a></Link>
+          </p>
+          <p>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary-2" passHref><a className="govuk-link">Application summary (option 2)</a></Link>
           </p>
           <Paragraph supportingText>
             [Inspection history](#)
