@@ -43,7 +43,7 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
               PRRA
             </Breadcrumbs>
           }
-          {router.route === '/team-tasks/prra-asa-decision-task-list/prra/application-summary' &&
+          {(router.route === '/team-tasks/prra-asa-decision-task-list/prra/application-summary' || router.route === '/team-tasks/prra-asa-decision-task-list/prra/application-summary-2') &&
             <Breadcrumbs>
               <Link href="/" passHref><a className="govuk-link">Home</a></Link>
               <Link href="/team-tasks" passHref><a className="govuk-link">Team tasks</a></Link>
