@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { NextPage } from 'next'
 import { Button, Caption, GridCol, GridRow, H2, H3, Heading, LabelText, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Table, Tag } from 'govuk-react'
 import PrraForm from '../../../../components/forms/prra/prraForm';
@@ -10,6 +10,8 @@ const Prra: NextPage = () => {
   const [formData, setFormData] = useState<PrraTask>({});
   const [readonly, setReadonly] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const scrollRef = useRef<null | HTMLDivElement>(null);
 
   const saveData = (dataToSave: PrraTask) => {
     setLoading(true);
@@ -26,6 +28,7 @@ const Prra: NextPage = () => {
         setReadonly(true);
         setFormData(dataToSave);
         setLoading(false);
+        window.scrollTo(0, 0);
       }
     });
   };
@@ -49,6 +52,7 @@ const Prra: NextPage = () => {
 
   const edit = () => {
     setReadonly(false);
+    scrollRef.current?.scrollIntoView();
   }
 
   return (
@@ -140,6 +144,7 @@ const Prra: NextPage = () => {
               </Table.Cell>
             </Table.Row>
           </Table>
+          <div ref={scrollRef} />
           <LoadingBox loading={loading}>
             {!readonly &&
               <>
