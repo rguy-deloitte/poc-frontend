@@ -32,6 +32,9 @@ const Home: NextPage = () => {
         <li>
           <Link href="/search" passHref><a className="govuk-link">Search</a></Link>
         </li>
+        <li>
+          <Link href="/calendar" passHref><a className="govuk-link">Calendar</a></Link>
+        </li>
       </ul>
     </>
   )

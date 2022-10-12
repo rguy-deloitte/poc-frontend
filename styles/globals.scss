@@ -2,6 +2,9 @@
 @import './taskList.scss';
 @import './timeline.scss';
 
+@import '../node_modules/react-big-calendar/lib/sass/styles.scss';
+@import '../node_modules/react-big-calendar/lib/addons/dragAndDrop/styles.scss';
+
 html,
 body {
   padding: 0;
@@ -96,4 +99,17 @@ th {
 .govuk-checkboxes--in-table-cell {
   margin-top: -6px;
   position: relative;
+}
+
+.calendar {
+  height: 100vh;
+  max-height: 800px;
+  min-height: 600px;
+
+  .rbc-toolbar-label {
+    font-size: 24px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.25;
+  }
 }
