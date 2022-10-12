@@ -16,7 +16,7 @@ export const GdsFile: React.FC<GdsFileProps> = ({
   visible,
 }) => {
   const inputChange = (e: React.ChangeEvent<any>) => {
-    updateValue((e.target).files[0].name);
+    updateValue((e.target).files[0] ? (e.target).files[0].name : undefined);
   };
 
   return (

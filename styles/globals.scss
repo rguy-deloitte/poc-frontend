@@ -113,3 +113,16 @@ th {
     line-height: 1.25;
   }
 }
+
+.govuk-details__summary-text--show-hide::after {
+  content: 'Show';
+
+  [open] & {
+    content: 'Hide';
+  }
+}
+
+.govuk-details__text--no-border {
+  border: 0 !important;
+  padding: 40px 0 !important;
+}

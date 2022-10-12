@@ -180,9 +180,16 @@ const Prra: NextPage = () => {
                     </Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell className='show-line-breaks' colSpan={2}>
+                    <Table.Cell colSpan={2}>
                       <LabelText><b>Reason for decision</b></LabelText>
-                      {formData.visitDecisionReason}
+                      <details className="govuk-details" data-module="govuk-details" open>
+                        <summary className="govuk-details__summary">
+                          <span className="govuk-details__summary-text govuk-details__summary-text--show-hide"></span>
+                        </summary>
+                        <div className="govuk-details__text govuk-details__text--no-border show-line-breaks">
+                          {formData.visitDecisionReason}
+                        </div>
+                      </details>
                     </Table.Cell>
                   </Table.Row>
                 </Table>
@@ -191,21 +198,42 @@ const Prra: NextPage = () => {
                 </H2>
                 <Table>
                   <Table.Row>
-                    <Table.Cell className='show-line-breaks'>
+                    <Table.Cell>
                       <LabelText><b>Background information</b></LabelText>
-                      {formData.backgroundInformation}
+                      <details className="govuk-details" data-module="govuk-details" open>
+                        <summary className="govuk-details__summary">
+                          <span className="govuk-details__summary-text govuk-details__summary-text--show-hide"></span>
+                        </summary>
+                        <div className="govuk-details__text govuk-details__text--no-border show-line-breaks">
+                          {formData.backgroundInformation}
+                        </div>
+                      </details>
                     </Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell className='show-line-breaks'>
+                    <Table.Cell>
                       <LabelText><b>Lines of enquiry</b></LabelText>
-                      {formData.linesOfEnquiry}
+                      <details className="govuk-details" data-module="govuk-details" open>
+                        <summary className="govuk-details__summary">
+                          <span className="govuk-details__summary-text govuk-details__summary-text--show-hide"></span>
+                        </summary>
+                        <div className="govuk-details__text govuk-details__text--no-border show-line-breaks">
+                          {formData.linesOfEnquiry}
+                        </div>
+                      </details>
                     </Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell className='show-line-breaks'>
+                    <Table.Cell>
                       <LabelText><b>CFC details</b></LabelText>
-                      {formData.cfcDetails}
+                      <details className="govuk-details" data-module="govuk-details" open>
+                        <summary className="govuk-details__summary">
+                          <span className="govuk-details__summary-text govuk-details__summary-text--show-hide"></span>
+                        </summary>
+                        <div className="govuk-details__text govuk-details__text--no-border show-line-breaks">
+                          {formData.cfcDetails}
+                        </div>
+                      </details>
                     </Table.Cell>
                   </Table.Row>
                 </Table>
