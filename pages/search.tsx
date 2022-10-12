@@ -56,16 +56,7 @@ const Search: NextPage = () => {
           {task.type}
         </Table.Cell>
         <Table.Cell>
-          {task.register.join(', ')}
-        </Table.Cell>
-        <Table.Cell>
           {task.taskType}
-        </Table.Cell>
-        <Table.Cell>
-          {startDate.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'})}
-        </Table.Cell>
-        <Table.Cell>
-          {dueDate.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'})}
         </Table.Cell>
       </Table.Row>
     )
@@ -104,16 +95,7 @@ const Search: NextPage = () => {
                   Type
                 </Table.CellHeader>
                 <Table.CellHeader>
-                  Register
-                  </Table.CellHeader>
-                <Table.CellHeader>
                   Task type
-                </Table.CellHeader>
-                <Table.CellHeader>
-                  Start date
-                </Table.CellHeader>
-                <Table.CellHeader>
-                  Due date
                 </Table.CellHeader>
               </Table.Row>
             }>
