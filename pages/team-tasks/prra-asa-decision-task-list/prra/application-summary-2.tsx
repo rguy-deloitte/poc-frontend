@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import type { NextPage } from 'next'
 import Link from 'next/link';
 import { GridCol, GridRow, H1, H2, H3, LeadParagraph, Link as LinkGds, Table, Tabs, Tag } from 'govuk-react'
 
 const ApplicationSummary2: NextPage = () => {
+  const [activeTab, setActiveTab] = useState<string>('Details');
+
   return (
     <>
       <GridRow>
@@ -42,11 +45,11 @@ const ApplicationSummary2: NextPage = () => {
         <GridCol setWidth="two-thirds">
           <Tabs>
             <Tabs.List>
-              <Tabs.Tab href="#Details" selected>Details</Tabs.Tab>
-              <Tabs.Tab href="#Tasks">Tasks</Tabs.Tab>
-              <Tabs.Tab href="#Timeline">Timeline</Tabs.Tab>
+              <Tabs.Tab href="#Details" onClick={(e) => {e.preventDefault(); setActiveTab('Details');}} selected={activeTab === 'Details'}>Details</Tabs.Tab>
+              <Tabs.Tab href="#Tasks" onClick={(e) => {e.preventDefault(); setActiveTab('Tasks');}} selected={activeTab === 'Tasks'}>Tasks</Tabs.Tab>
+              <Tabs.Tab href="#Timeline" onClick={(e) => {e.preventDefault(); setActiveTab('Timeline');}} selected={activeTab === 'Timeline'}>Timeline</Tabs.Tab>
             </Tabs.List>
-            <Tabs.Panel id="Details" selected>
+            <Tabs.Panel id="Details" selected={activeTab === 'Details'}>
               <H3>
                 Provider
               </H3>
@@ -465,7 +468,7 @@ const ApplicationSummary2: NextPage = () => {
                 </Table.Row>
               </Table>
             </Tabs.Panel>
-            <Tabs.Panel id="Tasks">
+            <Tabs.Panel id="Tasks" selected={activeTab === 'Tasks'}>
               <ol className="app-task-list">
                 <li>
                   <h2 className="app-task-list__section">
@@ -546,7 +549,7 @@ const ApplicationSummary2: NextPage = () => {
                 </li>
               </ol>
             </Tabs.Panel>
-            <Tabs.Panel id="Timeline">
+            <Tabs.Panel id="Timeline" selected={activeTab === 'Timeline'}>
               <ol className='timeline'>
                 <li className='timeline_item'>
                   <H3>Application received <span className="govuk-caption-m timeline_item_caption">by xxxxx</span></H3>

@@ -20,6 +20,12 @@ const Home: NextPage = () => {
       <p>
         <Link href="/team-tasks/prra-asa-decision-task-list/prra" passHref><a className="govuk-link">PRRA</a></Link>
       </p>
+      <p>
+        <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary" passHref><a className="govuk-link">Application Summary - Option 1</a></Link>
+      </p>
+      <p>
+        <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary-2" passHref><a className="govuk-link">Application Summary - Option 2</a></Link>
+      </p>
     </>
   )
 }
