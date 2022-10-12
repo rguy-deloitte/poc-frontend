@@ -53,5 +53,15 @@
       "type": "string"
     }
   },
-  "required": ["linkedProforma", "visitDecision", "visitDecisionReason", "backgroundInformation", "linesOfEnquiry", "cfcDetails", "isOrganisation"]
+  "required": ["linkedProforma", "visitDecision", "visitDecisionReason", "backgroundInformation", "linesOfEnquiry", "cfcDetails", "isOrganisation"],
+  "if": {
+    "properties": {
+       "isOrganisation": {
+        "const": true
+      }
+    }
+  },
+  "then": {
+    "required": ["natureOfBusiness", "companyStatus"]
+  }
 }
