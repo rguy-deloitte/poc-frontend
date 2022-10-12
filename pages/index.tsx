@@ -8,24 +8,31 @@ const Home: NextPage = () => {
       <Heading>
         POC Frontend
       </Heading>
-      <p>
-        <Link href="/team-tasks" passHref><a className="govuk-link">Team tasks</a></Link>
-      </p>
-      <p>
-        <Link href="/team-tasks/prra-asa-decision-task-list" passHref><a className="govuk-link">Task list</a></Link>
-      </p>
-      <p>
-        <Link href="/personal-tasks" passHref><a className="govuk-link">Personal tasks</a></Link>
-      </p>
-      <p>
-        <Link href="/team-tasks/prra-asa-decision-task-list/prra" passHref><a className="govuk-link">PRRA</a></Link>
-      </p>
-      <p>
-        <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary" passHref><a className="govuk-link">Application Summary - Option 1</a></Link>
-      </p>
-      <p>
-        <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary-2" passHref><a className="govuk-link">Application Summary - Option 2</a></Link>
-      </p>
+      <ul className="govuk-list">
+        <li>
+          <Link href="/team-tasks" passHref><a className="govuk-link">Team tasks</a></Link>
+          <ul className="govuk-list govuk-list--bullet">
+            <li>
+              <Link href="/team-tasks/prra-asa-decision-task-list" passHref><a className="govuk-link">Task list</a></Link>
+            </li>
+            <li>
+              <Link href="/team-tasks/prra-asa-decision-task-list/prra" passHref><a className="govuk-link">PRRA</a></Link>
+            </li>
+            <li>
+              <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary" passHref><a className="govuk-link">Application Summary - Option 1</a></Link>
+            </li>
+            <li>
+              <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-summary-2" passHref><a className="govuk-link">Application Summary - Option 2</a></Link>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <Link href="/personal-tasks" passHref><a className="govuk-link">Personal tasks</a></Link>
+        </li>
+        <li>
+          <Link href="/search" passHref><a className="govuk-link">Search</a></Link>
+        </li>
+      </ul>
     </>
   )
 }

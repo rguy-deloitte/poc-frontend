@@ -22,6 +22,12 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
               Personal tasks
             </Breadcrumbs>
           }
+          {router.route === '/search' &&
+            <Breadcrumbs>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              Search
+            </Breadcrumbs>
+          }
           {router.route === '/team-tasks' &&
             <Breadcrumbs>
               <Link href="/" passHref><a className="govuk-link">Home</a></Link>
