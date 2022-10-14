@@ -1,13 +1,13 @@
 import type { NextPage } from 'next'
-import { Heading } from 'govuk-react'
+import { H1 } from 'govuk-react'
 import Link from 'next/link'
 
 const Home: NextPage = () => {
   return (
     <>
-      <Heading>
+      <H1>
         POC Frontend
-      </Heading>
+      </H1>
       <ul className="govuk-list">
         <li>
           <Link href="/team-tasks" passHref><a className="govuk-link">Team tasks</a></Link>
@@ -34,6 +34,9 @@ const Home: NextPage = () => {
         </li>
         <li>
           <Link href="/calendar" passHref><a className="govuk-link">Calendar</a></Link>
+        </li>
+        <li>
+          <Link href="/dashboard" passHref><a className="govuk-link">Dashboard</a></Link>
         </li>
       </ul>
     </>

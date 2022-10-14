@@ -22,6 +22,12 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
               Calendar
             </Breadcrumbs>
           }
+          {router.route === '/dashboard' &&
+            <Breadcrumbs>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              Dashboard
+            </Breadcrumbs>
+          }
           {router.route === '/personal-tasks' &&
             <Breadcrumbs>
               <Link href="/" passHref><a className="govuk-link">Home</a></Link>
