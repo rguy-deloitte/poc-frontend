@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { Button, Fieldset, FormGroup, H3, Heading, LeadParagraph, Link as LinkGds, LoadingBox, Paragraph, Select, Table, Tag } from 'govuk-react'
+import { Button, Fieldset, FormGroup, H3, Heading, LeadParagraph, Link as LinkGds, Paragraph, Select, Table, Tag } from 'govuk-react'
 import Link from 'next/link'
 import type { DecisionTask } from '../../../types/decisionTask';
 import Router from 'next/router';
 
-const TaskList: NextPage = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [decisionTasks, setDecisionTasks] = useState<DecisionTask[]>([]);
-  const [tableData, setTableData] = useState<DecisionTask[]>([]);
+const TaskList: NextPage = (props: any) => {
+  const rawData = props.taskData.filter((item: DecisionTask) => !item.allocatedTo);
+  const [tableData, setTableData] = useState<DecisionTask[]>(rawData);
   const [sortField, setSortField] = useState<string>('dueDate');
   const [sortDirection, setSortDirection] = useState<string>('asc');
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -25,39 +24,28 @@ const TaskList: NextPage = () => {
   ];
 
   useEffect(() => {
-    fetch('/api/decision-tasks')
-      .then((response: any) => response.json())
-      .then((data: DecisionTask[]) => {
-        setDecisionTasks(data);
-        setLoading(false);
-      });
-  }, []);
+    const removedTaskIds: number[] = [];
 
-  useEffect(() => {
-    if (!loading) {
-      const removedTaskIds: number[] = [];
+    setTableData(rawData.sort((a: any, b: any) => {
+      if (a[sortField] < b[sortField]) return sortDirection === 'asc' ? -1 : 1;
+      if (a[sortField] > b[sortField]) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    })
+    .filter((item: DecisionTask) => {
+      if (filterType.length === 0) {
+        return true;
+      }
 
-      setTableData(decisionTasks.sort((a: any, b: any) => {
-        if (a[sortField] < b[sortField]) return sortDirection === 'asc' ? -1 : 1;
-        if (a[sortField] > b[sortField]) return sortDirection === 'asc' ? 1 : -1;
-        return 0;
-      })
-      .filter((item: DecisionTask) => {
-        if (filterType.length === 0) {
-          return true;
-        }
+      if (!filterType.includes(item.type)) {
+        removedTaskIds.push(item.applicationId);
+      }
 
-        if (!filterType.includes(item.type)) {
-          removedTaskIds.push(item.applicationId);
-        }
+      return filterType.includes(item.type);
+    }));
 
-        return filterType.includes(item.type);
-      }));
-
-      // remove any tasks that have been filtered out from selected taks
-      setSelectedTasks(selectedTasks.filter((task: number) => !removedTaskIds.includes(task)));
-    }
-  }, [decisionTasks, filterType, sortField, sortDirection]);
+    // remove any selected tasks that have been filtered
+    setSelectedTasks(selectedTasks.filter((task: number) => !removedTaskIds.includes(task)));
+  }, [filterType, sortField, sortDirection]);
 
   const changeSort = (fieldId: string) => {
     if (sortField === fieldId) {
@@ -80,13 +68,13 @@ const TaskList: NextPage = () => {
     const applicationId = parseInt(e.target.value);
 
     if (e.target.checked) {
-      if (isNaN(applicationId)) {
+      if (isNaN(applicationId)) { // select all
         setSelectedTasks(tableData.map((item: DecisionTask) => item.applicationId));
       } else {
         setSelectedTasks([...selectedTasks, applicationId]);
       }
     } else {
-      if (isNaN(applicationId)) {
+      if (isNaN(applicationId)) { // deselect all
         setSelectedTasks([]);
       } else {
         setSelectedTasks(selectedTasks.filter((item: number) => item !== applicationId));
@@ -95,7 +83,8 @@ const TaskList: NextPage = () => {
   };
 
   const allocateTasks = () => {
-    setDecisionTasks(decisionTasks.filter((item: DecisionTask) => !selectedTasks.includes(item.applicationId)));
+    setTableData(tableData.filter((item: DecisionTask) => !selectedTasks.includes(item.applicationId)));
+    props.allocateTasks(selectedTasks, allocateTo);
     setSelectedTasks([]);
     setSelectTask(false);
 
@@ -157,7 +146,7 @@ const TaskList: NextPage = () => {
   });
 
   const filters = decisionTaskTypes.map((item: string, index: number) => {
-    const matchCount = decisionTasks.filter((decisionTask: DecisionTask) => decisionTask.type === item).length;
+    const matchCount = rawData.filter((decisionTask: DecisionTask) => decisionTask.type === item).length;
 
     return (
       <div className="govuk-checkboxes__item">
@@ -191,82 +180,80 @@ const TaskList: NextPage = () => {
       <H3>
         Task list
       </H3>
-      {!loading && tableRows.length === 0 &&
+      {tableRows.length === 0 &&
         <Paragraph>There are no tasks to allocate</Paragraph>
       }
-      {(loading || tableRows.length > 0) &&
+      {tableRows.length > 0 &&
         <>
-          <LoadingBox loading={loading}>
-            <Table head={
-              <Table.Row>
-                {selectTask &&
-                  <Table.CellHeader>
-                    <div className="govuk-checkboxes govuk-checkboxes--small govuk-checkboxes--in-table-cell">
-                      <input className="govuk-checkboxes__input" checked={selectedTasks.length === tableData.length} onChange={updateSelectedTasks} type="checkbox" value="all" />
-                      <label className="govuk-label govuk-checkboxes__label"></label>
-                    </div>
-                  </Table.CellHeader>
-                }
+          <Table head={
+            <Table.Row>
+              {selectTask &&
                 <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'applicationId' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('applicationId')}}>Application ID</button>
+                  <div className="govuk-checkboxes govuk-checkboxes--small govuk-checkboxes--in-table-cell">
+                    <input className="govuk-checkboxes__input" checked={selectedTasks.length === tableData.length} onChange={updateSelectedTasks} type="checkbox" value="all" />
+                    <label className="govuk-label govuk-checkboxes__label"></label>
+                  </div>
                 </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'provider' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('provider')}}>Provider</button>
+              }
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'applicationId' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('applicationId')}}>Application ID</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'provider' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('provider')}}>Provider</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'type' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('type')}}>Type</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                Register
                 </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'type' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('type')}}>Type</button>
-                </Table.CellHeader>
-                <Table.CellHeader>
-                  Register
-                  </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'taskType' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('taskType')}}>Task type</button>
-                </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'startDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('startDate')}}>Start date</button>
-                </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'dueDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dueDate')}}>Due date</button>
-                </Table.CellHeader>
-                {!selectTask &&
-                  <Table.CellHeader></Table.CellHeader>
-                }
-              </Table.Row>
-            }>
-              {tableRows}
-            </Table>
-            {!selectTask &&
-              <Button onClick={() => setSelectTask(true)}>Select task</Button>
-            }
-            {selectTask && selectedTasks.length > 0 &&
-            <>
-              <FormGroup>
-                <Select
-                  input={{
-                    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {setAllocateTo(e.target.value)},
-                  }}
-                  label={`Allocate PRRA/ASA task${selectedTasks.length > 1 ? 's' : ''} to`}>
-                  <option value="Me">
-                    Me
-                  </option>
-                  <option value="Person 1">
-                    Person 1
-                  </option>
-                  <option value="Person 2">
-                    Person 2
-                  </option>
-                  <option value="Person 3">
-                    Person 3
-                  </option>
-                </Select>
-              </FormGroup>
-              <Button onClick={allocateTasks}>Allocate task{selectedTasks.length > 1 && 's'}</Button>
-            </>
-            }
-            {selectTask &&
-              <button className='govuk-button govuk-button--secondary' onClick={() => {setSelectTask(false); setSelectedTasks([]);}}>Cancel</button>
-            }
-          </LoadingBox>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'taskType' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('taskType')}}>Task type</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'startDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('startDate')}}>Start date</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'dueDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dueDate')}}>Due date</button>
+              </Table.CellHeader>
+              {!selectTask &&
+                <Table.CellHeader></Table.CellHeader>
+              }
+            </Table.Row>
+          }>
+            {tableRows}
+          </Table>
+          {!selectTask &&
+            <Button onClick={() => setSelectTask(true)}>Select task</Button>
+          }
+          {selectTask && selectedTasks.length > 0 &&
+          <>
+            <FormGroup>
+              <Select
+                input={{
+                  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {setAllocateTo(e.target.value)},
+                }}
+                label={`Allocate PRRA/ASA task${selectedTasks.length > 1 ? 's' : ''} to`}>
+                <option value="Me">
+                  Me
+                </option>
+                <option value="Person 1">
+                  Person 1
+                </option>
+                <option value="Person 2">
+                  Person 2
+                </option>
+                <option value="Person 3">
+                  Person 3
+                </option>
+              </Select>
+            </FormGroup>
+            <Button onClick={allocateTasks}>Allocate task{selectedTasks.length > 1 && 's'}</Button>
+          </>
+          }
+          {selectTask &&
+            <button className='govuk-button govuk-button--secondary' onClick={() => {setSelectTask(false); setSelectedTasks([]);}}>Cancel</button>
+          }
         </>
       }
     </>

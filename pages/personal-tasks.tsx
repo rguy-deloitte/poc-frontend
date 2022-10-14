@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { Fieldset, H3, Heading, Link as LinkGds, LoadingBox, Paragraph, Table, Tag } from 'govuk-react'
+import { Fieldset, H3, Heading, Link as LinkGds, Paragraph, Table, Tag } from 'govuk-react'
 import Link from 'next/link'
 import type { DecisionTask } from '../types/decisionTask';
 
-const PersonalTaskList: NextPage = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [decisionTasks, setDecisionTasks] = useState<DecisionTask[]>([]);
-  const [tableData, setTableData] = useState<DecisionTask[]>([]);
+const PersonalTaskList: NextPage = (props: any) => {
+  const rawData = props.taskData.filter((item: DecisionTask) => item.allocatedTo === 'Me');
+  const [tableData, setTableData] = useState<DecisionTask[]>(rawData);
   const [sortField, setSortField] = useState<string>('dueDate');
   const [sortDirection, setSortDirection] = useState<string>('asc');
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -21,30 +20,19 @@ const PersonalTaskList: NextPage = () => {
   ];
 
   useEffect(() => {
-    fetch('/api/decision-tasks')
-      .then((response: any) => response.json())
-      .then((data: DecisionTask[]) => {
-        setDecisionTasks(data);
-        setLoading(false);
-      });
-  }, []);
+    setTableData(rawData.sort((a: any, b: any) => {
+      if (a[sortField] < b[sortField]) return sortDirection === 'asc' ? -1 : 1;
+      if (a[sortField] > b[sortField]) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    })
+    .filter((item: DecisionTask) => {
+      if (filterType.length === 0) {
+        return true;
+      }
 
-  useEffect(() => {
-    if (!loading) {
-      setTableData(decisionTasks.sort((a: any, b: any) => {
-        if (a[sortField] < b[sortField]) return sortDirection === 'asc' ? -1 : 1;
-        if (a[sortField] > b[sortField]) return sortDirection === 'asc' ? 1 : -1;
-        return 0;
-      })
-      .filter((item: DecisionTask) => {
-        if (filterType.length === 0) {
-          return true;
-        }
-
-        return filterType.includes(item.type);
-      }));
-    }
-  }, [decisionTasks, filterType, sortField, sortDirection]);
+      return filterType.includes(item.type);
+    }));
+  }, [filterType, sortField, sortDirection]);
 
   const changeSort = (fieldId: string) => {
     if (sortField === fieldId) {
@@ -106,7 +94,7 @@ const PersonalTaskList: NextPage = () => {
   });
 
   const filters = decisionTaskTypes.map((item: string, index: number) => {
-    const matchCount = decisionTasks.filter((decisionTask: DecisionTask) => decisionTask.type === item).length;
+    const matchCount = rawData.filter((decisionTask: DecisionTask) => decisionTask.type === item).length;
 
     return (
       <div className="govuk-checkboxes__item">
@@ -121,56 +109,54 @@ const PersonalTaskList: NextPage = () => {
       <Heading>
         Personal tasks
       </Heading>
-      <button className='govuk-button govuk-button--secondary' onClick={() => {setShowFilter(!showFilter)}}>{showFilter ? 'Hide' : 'Show'} filter</button>
-      {showFilter &&
-        <div className='filter'>
-          <H3>Filter</H3>
-          <Fieldset>
-            <Fieldset.Legend>Type</Fieldset.Legend>
-            <div className="govuk-checkboxes govuk-checkboxes--small">
-              {filters}
-            </div>
-          </Fieldset>
-        </div>
+      {tableRows.length === 0 &&
+        <p className="govuk-body">There are no tasks allocated to you. Visit your <Link href="/team-tasks" className="govuk-link">Team Tasks</Link> to allocate tasks.</p>
       }
-      <H3>
-        Task list
-      </H3>
-      {!loading && tableRows.length === 0 &&
-        <Paragraph>There are no tasks to allocate</Paragraph>
-      }
-      {(loading || tableRows.length > 0) &&
+      {tableRows.length > 0 &&
         <>
-          <LoadingBox loading={loading}>
-            <Table head={
-              <Table.Row>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'applicationId' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('applicationId')}}>Application ID</button>
+          <button className='govuk-button govuk-button--secondary' onClick={() => {setShowFilter(!showFilter)}}>{showFilter ? 'Hide' : 'Show'} filter</button>
+          {showFilter &&
+            <div className='filter'>
+              <H3>Filter</H3>
+              <Fieldset>
+                <Fieldset.Legend>Type</Fieldset.Legend>
+                <div className="govuk-checkboxes govuk-checkboxes--small">
+                  {filters}
+                </div>
+              </Fieldset>
+            </div>
+          }
+          <H3>
+            Task list
+          </H3>
+          <Table head={
+            <Table.Row>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'applicationId' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('applicationId')}}>Application ID</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'provider' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('provider')}}>Provider</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'type' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('type')}}>Type</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                Register
                 </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'provider' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('provider')}}>Provider</button>
-                </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'type' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('type')}}>Type</button>
-                </Table.CellHeader>
-                <Table.CellHeader>
-                  Register
-                  </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'taskType' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('taskType')}}>Task type</button>
-                </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'startDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('startDate')}}>Start date</button>
-                </Table.CellHeader>
-                <Table.CellHeader>
-                  <button className={`sortable ${sortField === 'dueDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dueDate')}}>Due date</button>
-                </Table.CellHeader>
-                <Table.CellHeader></Table.CellHeader>
-              </Table.Row>
-            }>
-              {tableRows}
-            </Table>
-          </LoadingBox>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'taskType' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('taskType')}}>Task type</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'startDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('startDate')}}>Start date</button>
+              </Table.CellHeader>
+              <Table.CellHeader>
+                <button className={`sortable ${sortField === 'dueDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dueDate')}}>Due date</button>
+              </Table.CellHeader>
+              <Table.CellHeader></Table.CellHeader>
+            </Table.Row>
+          }>
+            {tableRows}
+          </Table>
         </>
       }
     </>
