@@ -1,0 +1,74 @@
+{
+  "providers": [
+    {
+      "id": "a1b1c123-c23f-4f1m-123g-10fbc36d9e46",
+      "providerName": "Holburne Primary School",
+      "providerType": "Community School",
+      "mainPhone": "012332323230",
+      "region": "East Midlands"
+    },
+    {
+      "id": "2k123d1b-4e22-2f22-122c-22de341f2247",
+      "providerName": "Tuney Tots Nursery",
+      "providerType": "Childcare on non-domestic premises",
+      "mainPhone": "012223 2323268",
+      "region": "London"
+    },
+    {
+      "id": "a2b3v123-c47w-ww1m-168r-26fb4dfd5e56",
+      "providerName": "Streatham Way School",
+      "providerType": "Special School",
+      "mainPhone": "0124444423230",
+      "region": "South West"
+    },
+    {
+      "id": "9e2debaf-f926-1f39-12b4-167c737eb4dc",
+      "providerName": "Fleetville Junior Infant",
+      "providerType": "Academy Converter",
+      "mainPhone": "1632960004",
+      "region": "East Midlands"
+    },
+    {
+      "id": "97281bd0-37c1-d67b-2ae5-26531d8c46d5",
+      "providerName": "Loreto College",
+      "providerType": "Foundation School",
+      "mainPhone": "1632960002",
+      "region": "North West"
+    },
+    {
+      "id": "3a2aad6b-1957-d0af-ce5c-3b93d9c3f481",
+      "providerName": "Devonshire Infant Academy",
+      "providerType": "Academy Converter",
+      "mainPhone": "1632960284",
+      "region": "North West"
+    },
+    {
+      "id": "efcee2db-64f0-9ea5-aef3-46a6e472a475",
+      "providerName": "Lightwoods Primary Academy",
+      "providerType": "Voluntary Controlled School",
+      "mainPhone": "1632960289",
+      "region": "North West"
+    },
+    {
+      "id": "4f8b22c2-766b-be03-d69d-4a6c78c9079c",
+      "providerName": "Perryfields Academy",
+      "providerType": "Academy Converter",
+      "mainPhone": "1632960285",
+      "region": "North West"
+    },
+    {
+      "id": "2ae9a91f-2b4f-df4c-d67b-7cd2f3d99c6e",
+      "providerName": "Alban City Academy Nursery",
+      "providerType": "Academy Converter",
+      "mainPhone": "1632960003",
+      "region": "North East, Yorkshire & Humber"
+    },
+    {
+      "id": "62708267-7c82-f273-4406-5967b0d194f4",
+      "providerName": "Oldbury Academy",
+      "providerType": "Community School",
+      "mainPhone": "1632960288",
+      "region": "North West"
+    }
+  ]
+}
