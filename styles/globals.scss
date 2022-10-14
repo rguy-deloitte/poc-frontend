@@ -126,3 +126,25 @@ th {
   border: 0 !important;
   padding: 40px 0 !important;
 }
+
+.govuk-link--new-tab {
+  margin-right: 18px;
+  position: relative;
+
+  &::before,
+  &::after {
+    background-color: white;
+    border: 1px solid black;
+    content: '';
+    height: 8px;
+    position: absolute;
+    right: -14px;
+    top: 2px;
+    width: 10px;
+  }
+
+  &::after {
+    right: -16px;
+    top: 0;
+  }
+}

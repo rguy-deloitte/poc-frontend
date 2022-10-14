@@ -466,10 +466,10 @@ const ApplicationSummary: NextPage = () => {
             Links
           </H2>
           <p>
-            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-tasks" passHref><a className="govuk-link" target="_blank">View application tasks</a></Link>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-tasks" passHref><a className="govuk-link govuk-link--new-tab" target="_blank">View application tasks</a></Link>
           </p>
           <p>
-            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-timeline" passHref><a className="govuk-link" target="_blank">View timeline</a></Link>
+            <Link href="/team-tasks/prra-asa-decision-task-list/prra/application-timeline" passHref><a className="govuk-link govuk-link--new-tab" target="_blank">View timeline</a></Link>
           </p>
         </GridCol>
       </GridRow>
