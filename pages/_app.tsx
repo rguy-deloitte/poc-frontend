@@ -25,13 +25,24 @@ function MyApp({ Component, pageProps }: AppProps) {
       }
       return decisionTask;
     }));
-  }
+  };
+
+  const startTask = (applicationId: number) => {
+    setTaskData(taskData.map((decisionTask: DecisionTask) => {
+      if (applicationId === decisionTask.applicationId) {
+        decisionTask.started = true;
+      }
+      return decisionTask;
+    }));
+    console.log('started', taskData);
+
+  };
 
   return (
     <PageLayout>
       <LoadingBox loading={loading}>
         {!loading &&
-          <Component {...pageProps} taskData={taskData} allocateTasks={allocateTasks} />
+          <Component {...pageProps} allocateTasks={allocateTasks} startTask={startTask} taskData={taskData} />
         }
       </LoadingBox>
     </PageLayout>

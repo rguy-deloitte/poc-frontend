@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { Fieldset, H3, Heading, Link as LinkGds, Paragraph, Table, Tag } from 'govuk-react'
+import { Fieldset, H3, Heading, Link as LinkGds, Table, Tag } from 'govuk-react'
 import Link from 'next/link'
 import type { DecisionTask } from '../types/decisionTask';
 
 const PersonalTaskList: NextPage = (props: any) => {
-  const rawData = props.taskData.filter((item: DecisionTask) => item.allocatedTo === 'Me');
+  const rawData = props.taskData.filter((item: DecisionTask) => (item.allocatedTo === 'Me' && !item.started));
   const [tableData, setTableData] = useState<DecisionTask[]>(rawData);
   const [sortField, setSortField] = useState<string>('dueDate');
   const [sortDirection, setSortDirection] = useState<string>('asc');
@@ -87,7 +87,7 @@ const PersonalTaskList: NextPage = (props: any) => {
           )}
         </Table.Cell>
         <Table.Cell>
-          <Link href="/team-tasks/prra-asa-decision-task-list/prra" passHref><a className="govuk-link">Start task</a></Link>
+          <Link href={{pathname: '/team-tasks/prra-asa-decision-task-list/prra', query: {applicationId: task.applicationId}}} passHref><a className="govuk-link">Start task</a></Link>
         </Table.Cell>
       </Table.Row>
     )
@@ -110,7 +110,7 @@ const PersonalTaskList: NextPage = (props: any) => {
         Personal tasks
       </Heading>
       {tableRows.length === 0 &&
-        <p className="govuk-body">There are no tasks allocated to you. Visit your <Link href="/team-tasks" className="govuk-link">Team Tasks</Link> to allocate tasks.</p>
+        <p className="govuk-body-l">There are no tasks allocated to you. Visit your <Link href="/team-tasks" className="govuk-link">Team Tasks</Link> to allocate tasks.</p>
       }
       {tableRows.length > 0 &&
         <>

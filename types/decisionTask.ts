@@ -6,5 +6,6 @@ export type DecisionTask = {
   taskType: string;
   startDate: string;
   dueDate: string;
+  started: boolean;
   allocatedTo?: string;
 }

@@ -4,14 +4,18 @@ import { Button, Caption, GridCol, GridRow, H2, H3, Heading, LabelText, LeadPara
 import PrraForm from '../../../../components/forms/prra/prraForm';
 import Link from 'next/link';
 import type { PrraTask } from '../../../../types/prraTask';
+import type { DecisionTask } from '../../../../types/decisionTask';
 import Router from 'next/router';
 
-const Prra: NextPage = () => {
+const Prra: NextPage = (props: any) => {
   const [formData, setFormData] = useState<PrraTask>({});
   const [readonly, setReadonly] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const scrollRef = useRef<null | HTMLDivElement>(null);
+
+  const applicationId: number = Router.query.applicationId ? parseInt(Router.query.applicationId.toString()) : props.taskData[0].applicationId;
+  const decisionTask: DecisionTask = props.taskData.find((task: DecisionTask) => task.applicationId === applicationId);
 
   const saveData = (dataToSave: PrraTask) => {
     setLoading(true);
@@ -45,6 +49,7 @@ const Prra: NextPage = () => {
     })
     .then((response: any) => {
       if (response.status === 200) {
+        props.startTask(applicationId);
         Router.push('/team-tasks/prra-asa-decision-task-list');
       }
     });
@@ -58,11 +63,11 @@ const Prra: NextPage = () => {
   return (
     <>
       <Caption>
-        Provider: Sunshine Nursery<br />
+        Provider: {decisionTask.provider}<br />
         URN: 1234237
       </Caption>
       <Heading>
-        PRRA
+        {decisionTask.taskType}
       </Heading>
       <LeadParagraph>
         <b>Task with: Jane Doe<br />
@@ -84,7 +89,7 @@ const Prra: NextPage = () => {
                 Application type
               </Table.CellHeader>
               <Table.Cell>
-                Childcare on domestic premises
+                {decisionTask.type}
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -92,7 +97,7 @@ const Prra: NextPage = () => {
                 Register
               </Table.CellHeader>
               <Table.Cell>
-                EYR
+                {decisionTask.register.join(', ')}
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -100,7 +105,7 @@ const Prra: NextPage = () => {
                 Responsible body
               </Table.CellHeader>
               <Table.Cell>
-                Sunshine Ltd
+                {decisionTask.provider}
               </Table.Cell>
             </Table.Row>
             <Table.Row>

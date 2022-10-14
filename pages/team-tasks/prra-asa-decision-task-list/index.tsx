@@ -6,7 +6,7 @@ import type { DecisionTask } from '../../../types/decisionTask';
 import Router from 'next/router';
 
 const TaskList: NextPage = (props: any) => {
-  const rawData = props.taskData.filter((item: DecisionTask) => !item.allocatedTo);
+  const rawData = props.taskData.filter((item: DecisionTask) => (!item.allocatedTo && !item.started));
   const [tableData, setTableData] = useState<DecisionTask[]>(rawData);
   const [sortField, setSortField] = useState<string>('dueDate');
   const [sortDirection, setSortDirection] = useState<string>('asc');
@@ -138,7 +138,7 @@ const TaskList: NextPage = (props: any) => {
         </Table.Cell>
         {!selectTask &&
           <Table.Cell>
-            <Link href="/team-tasks/prra-asa-decision-task-list/prra" passHref><a className="govuk-link">Start task</a></Link>
+            <Link href={{pathname: '/team-tasks/prra-asa-decision-task-list/prra', query: {applicationId: task.applicationId}}} passHref><a className="govuk-link">Start task</a></Link>
           </Table.Cell>
         }
       </Table.Row>
@@ -161,30 +161,30 @@ const TaskList: NextPage = (props: any) => {
       <Heading>
         PRRA/ASA Decision
       </Heading>
-      <LeadParagraph>
-        <b>Start task or select task to allocate</b>
-      </LeadParagraph>
-      <Paragraph>Start task or select task to allocate to team members to complete PRRA/ASA decision</Paragraph>
-      <button className='govuk-button govuk-button--secondary' onClick={() => {setShowFilter(!showFilter)}}>{showFilter ? 'Hide' : 'Show'} filter</button>
-      {showFilter &&
-        <div className='filter'>
-          <H3>Filter</H3>
-          <Fieldset>
-            <Fieldset.Legend>Type</Fieldset.Legend>
-            <div className="govuk-checkboxes govuk-checkboxes--small">
-              {filters}
-            </div>
-          </Fieldset>
-        </div>
-      }
-      <H3>
-        Task list
-      </H3>
       {tableRows.length === 0 &&
-        <Paragraph>There are no tasks to allocate</Paragraph>
+        <LeadParagraph>There are no tasks to allocate</LeadParagraph>
       }
       {tableRows.length > 0 &&
         <>
+          <LeadParagraph>
+            <b>Start task or select task to allocate</b>
+          </LeadParagraph>
+          <Paragraph>Start task or select task to allocate to team members to complete PRRA/ASA decision</Paragraph>
+          <button className='govuk-button govuk-button--secondary' onClick={() => {setShowFilter(!showFilter)}}>{showFilter ? 'Hide' : 'Show'} filter</button>
+          {showFilter &&
+            <div className='filter'>
+              <H3>Filter</H3>
+              <Fieldset>
+                <Fieldset.Legend>Type</Fieldset.Legend>
+                <div className="govuk-checkboxes govuk-checkboxes--small">
+                  {filters}
+                </div>
+              </Fieldset>
+            </div>
+          }
+          <H3>
+            Task list
+          </H3>
           <Table head={
             <Table.Row>
               {selectTask &&

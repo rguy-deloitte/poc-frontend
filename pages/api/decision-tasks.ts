@@ -10,6 +10,7 @@ const data: DecisionTask[] = [
     taskType: 'PRRA',
     startDate: '2022-08-02',
     dueDate: '2022-09-10',
+    started: false,
   },
   {
     applicationId: 700555,
@@ -19,6 +20,7 @@ const data: DecisionTask[] = [
     taskType: 'PRRA',
     startDate: '2022-08-24',
     dueDate: '2022-09-11',
+    started: false,
   },
   {
     applicationId: 309656,
@@ -28,6 +30,7 @@ const data: DecisionTask[] = [
     taskType: 'ASA',
     startDate: '2022-08-30',
     dueDate: '2022-10-22',
+    started: false,
   },
   {
     applicationId: 885187,
@@ -37,6 +40,7 @@ const data: DecisionTask[] = [
     taskType: 'ASA',
     startDate: '2022-08-30',
     dueDate: '2022-10-23',
+    started: false,
   },
 ];
 
