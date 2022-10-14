@@ -134,7 +134,8 @@ th {
   &::before,
   &::after {
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid #1d70b8;
+    border-radius: 2px;
     content: '';
     height: 8px;
     position: absolute;
@@ -146,5 +147,22 @@ th {
   &::after {
     right: -16px;
     top: 0;
+  }
+
+  &:visited::before,
+  &:visited::after {
+    border-color: #4c2c92;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    border-color: #003078;
+  }
+
+  &:active::before,
+  &:active::after,
+  &:focus::before,
+  &:focus::after {
+    border-color: #0b0c0c;
   }
 }
