@@ -83,8 +83,18 @@ const TaskList: NextPage = (props: any) => {
   };
 
   const allocateTasks = () => {
+    // update table and record updates
     setTableData(tableData.filter((item: DecisionTask) => !selectedTasks.includes(item.applicationId)));
     props.allocateTasks(selectedTasks, allocateTo);
+
+    // log activity
+    props.addLogs(selectedTasks.map((applicationId: number) => {return {
+      dateTime: new Date().toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
+      type: 'Task allocation',
+      description: `Application ID ${applicationId} allocated to ${allocateTo}`,
+    }}));
+
+    //reset selected
     setSelectedTasks([]);
     setSelectTask(false);
 
@@ -234,16 +244,16 @@ const TaskList: NextPage = (props: any) => {
                   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {setAllocateTo(e.target.value)},
                 }}
                 label={`Allocate PRRA/ASA task${selectedTasks.length > 1 ? 's' : ''} to`}>
-                <option value="Me">
+                <option value="Me" selected={allocateTo === 'Me'}>
                   Me
                 </option>
-                <option value="Person 1">
+                <option value="Person 1" selected={allocateTo === 'Person 1'}>
                   Person 1
                 </option>
-                <option value="Person 2">
+                <option value="Person 2" selected={allocateTo === 'Person 2'}>
                   Person 2
                 </option>
-                <option value="Person 3">
+                <option value="Person 3" selected={allocateTo === 'Person 3'}>
                   Person 3
                 </option>
               </Select>

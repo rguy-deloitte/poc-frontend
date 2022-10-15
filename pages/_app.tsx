@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import '../styles/globals.scss';
 import type { AppProps } from 'next/app';
 import PageLayout from '../components/layouts/page';
-import type { DecisionTask } from '../types/decisionTask';
 import { LoadingBox } from 'govuk-react';
+import type { DecisionTask } from '../types/decisionTask';
+import type { Log } from '../types/log';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [taskData, setTaskData] = useState<DecisionTask[]>([]);
+  const [logs, setLogs] = useState<Log[]>([]);
 
   useEffect(() => {
     fetch('/api/decision-tasks')
@@ -34,15 +36,23 @@ function MyApp({ Component, pageProps }: AppProps) {
       }
       return decisionTask;
     }));
-    console.log('started', taskData);
+  };
 
+  const addLogs = (newLogs: Log[]) => {
+    setLogs([...newLogs, ...logs]);
   };
 
   return (
     <PageLayout>
       <LoadingBox loading={loading}>
         {!loading &&
-          <Component {...pageProps} allocateTasks={allocateTasks} startTask={startTask} taskData={taskData} />
+          <Component
+            {...pageProps}
+            addLogs={addLogs}
+            allocateTasks={allocateTasks}
+            logs={logs}
+            startTask={startTask}
+            taskData={taskData} />
         }
       </LoadingBox>
     </PageLayout>

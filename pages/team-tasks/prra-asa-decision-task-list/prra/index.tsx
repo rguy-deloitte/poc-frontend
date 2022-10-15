@@ -50,6 +50,11 @@ const Prra: NextPage = (props: any) => {
     .then((response: any) => {
       if (response.status === 200) {
         props.startTask(applicationId);
+        props.addLogs([{
+          dateTime: new Date().toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
+          type: 'Task started',
+          description: `Application ID ${applicationId} started`,
+        }]);
         Router.push('/team-tasks/prra-asa-decision-task-list');
       }
     });
