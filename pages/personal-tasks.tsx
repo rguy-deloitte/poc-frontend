@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
-import { Fieldset, H3, Heading, Link as LinkGds, Table, Tag } from 'govuk-react'
+import { Button, Fieldset, FormGroup, H3, Heading, LeadParagraph, Link as LinkGds, Paragraph, Select, Table, Tag } from 'govuk-react'
 import Link from 'next/link'
 import type { DecisionTask } from '../types/decisionTask';
+import Router from 'next/router';
 
 const PersonalTaskList: NextPage = (props: any) => {
   const rawData = props.taskData.filter((item: DecisionTask) => (item.allocatedTo === 'Me' && !item.started));
@@ -11,6 +12,9 @@ const PersonalTaskList: NextPage = (props: any) => {
   const [sortDirection, setSortDirection] = useState<string>('asc');
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [filterType, setFilterType] = useState<string[]>([]);
+  const [selectTask, setSelectTask] = useState<boolean>(false);
+  const [selectedTasks, setSelectedTasks] = useState<number[]>([]);
+  const [allocateTo, setAllocateTo] = useState<string>('Unallocate');
 
   const decisionTaskTypes: string[] = [
     'Childcare on domestic premises',
@@ -20,6 +24,8 @@ const PersonalTaskList: NextPage = (props: any) => {
   ];
 
   useEffect(() => {
+    const removedTaskIds: number[] = [];
+
     setTableData(rawData.sort((a: any, b: any) => {
       if (a[sortField] < b[sortField]) return sortDirection === 'asc' ? -1 : 1;
       if (a[sortField] > b[sortField]) return sortDirection === 'asc' ? 1 : -1;
@@ -30,8 +36,15 @@ const PersonalTaskList: NextPage = (props: any) => {
         return true;
       }
 
+      if (!filterType.includes(item.type)) {
+        removedTaskIds.push(item.applicationId);
+      }
+
       return filterType.includes(item.type);
     }));
+
+    // remove any selected tasks that have been filtered
+    setSelectedTasks(selectedTasks.filter((task: number) => !removedTaskIds.includes(task)));
   }, [filterType, sortField, sortDirection]);
 
   const changeSort = (fieldId: string) => {
@@ -51,6 +64,41 @@ const PersonalTaskList: NextPage = (props: any) => {
     }
   };
 
+  const updateSelectedTasks = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const applicationId = parseInt(e.target.value);
+
+    if (e.target.checked) {
+      if (isNaN(applicationId)) { // select all
+        setSelectedTasks(tableData.map((item: DecisionTask) => item.applicationId));
+      } else {
+        setSelectedTasks([...selectedTasks, applicationId]);
+      }
+    } else {
+      if (isNaN(applicationId)) { // deselect all
+        setSelectedTasks([]);
+      } else {
+        setSelectedTasks(selectedTasks.filter((item: number) => item !== applicationId));
+      }
+    }
+  };
+
+  const allocateTasks = () => {
+    // update table and record updates
+    setTableData(tableData.filter((item: DecisionTask) => !selectedTasks.includes(item.applicationId)));
+    props.allocateTasks(selectedTasks, allocateTo);
+
+    // log activity
+    props.addLogs(selectedTasks.map((applicationId: number) => {return {
+      dateTime: new Date().toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
+      type: 'Task allocation',
+      description: allocateTo === 'Unallocate' ? `Application ID ${applicationId} unallocated` : `Application ID ${applicationId} allocated to '${allocateTo}'`,
+    }}));
+
+    //reset selected
+    setSelectedTasks([]);
+    setSelectTask(false);
+  };
+
   const tableRows = tableData.map((task: DecisionTask, index: number) => {
     const startDate: Date = new Date(task.startDate);
     const dueDate: Date = new Date(task.dueDate);
@@ -59,6 +107,14 @@ const PersonalTaskList: NextPage = (props: any) => {
 
     return (
       <Table.Row key={index}>
+        {selectTask &&
+          <Table.CellHeader>
+            <div className="govuk-checkboxes govuk-checkboxes--small govuk-checkboxes--in-table-cell">
+              <input className="govuk-checkboxes__input" checked={selectedTasks.includes(task.applicationId)} onChange={updateSelectedTasks} type="checkbox" value={task.applicationId} />
+              <label className="govuk-label govuk-checkboxes__label"></label>
+            </div>
+          </Table.CellHeader>
+        }
         <Table.Cell>
           <LinkGds href='#'>{task.applicationId}</LinkGds>
         </Table.Cell>
@@ -86,9 +142,11 @@ const PersonalTaskList: NextPage = (props: any) => {
             <Tag tint="RED">Overdue</Tag>
           )}
         </Table.Cell>
-        <Table.Cell>
-          <Link href={{pathname: '/team-tasks/prra-asa-decision-task-list/prra', query: {applicationId: task.applicationId}}} passHref><a className="govuk-link">Start task</a></Link>
-        </Table.Cell>
+        {!selectTask &&
+          <Table.Cell>
+            <Link href={{pathname: '/team-tasks/prra-asa-decision-task-list/prra', query: {applicationId: task.applicationId}}} passHref><a className="govuk-link">Start task</a></Link>
+          </Table.Cell>
+        }
       </Table.Row>
     )
   });
@@ -107,10 +165,10 @@ const PersonalTaskList: NextPage = (props: any) => {
   return (
     <>
       <Heading>
-        Personal tasks
+        My tasks
       </Heading>
       {tableRows.length === 0 &&
-        <p className="govuk-body-l">There are no tasks allocated to you. Visit your <Link href="/team-tasks" className="govuk-link">Team Tasks</Link> to allocate tasks.</p>
+        <LeadParagraph>No tasks have been allocated to you. Please select tasks from the <Link href="/team-tasks" className="govuk-link">Team tasks</Link> page.</LeadParagraph>
       }
       {tableRows.length > 0 &&
         <>
@@ -131,6 +189,14 @@ const PersonalTaskList: NextPage = (props: any) => {
           </H3>
           <Table head={
             <Table.Row>
+              {selectTask &&
+                <Table.CellHeader>
+                  <div className="govuk-checkboxes govuk-checkboxes--small govuk-checkboxes--in-table-cell">
+                    <input className="govuk-checkboxes__input" checked={selectedTasks.length === tableData.length} onChange={updateSelectedTasks} type="checkbox" value="all" />
+                    <label className="govuk-label govuk-checkboxes__label"></label>
+                  </div>
+                </Table.CellHeader>
+              }
               <Table.CellHeader>
                 <button className={`sortable ${sortField === 'applicationId' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('applicationId')}}>Application ID</button>
               </Table.CellHeader>
@@ -152,11 +218,44 @@ const PersonalTaskList: NextPage = (props: any) => {
               <Table.CellHeader>
                 <button className={`sortable ${sortField === 'dueDate' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dueDate')}}>Due date</button>
               </Table.CellHeader>
-              <Table.CellHeader></Table.CellHeader>
+              {!selectTask &&
+                <Table.CellHeader></Table.CellHeader>
+              }
             </Table.Row>
           }>
             {tableRows}
           </Table>
+          {!selectTask &&
+            <Button onClick={() => setSelectTask(true)}>Select task</Button>
+          }
+          {selectTask && selectedTasks.length > 0 &&
+          <>
+            <FormGroup>
+              <Select
+                input={{
+                  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {setAllocateTo(e.target.value)},
+                }}
+                label={`Allocate PRRA/ASA task${selectedTasks.length > 1 ? 's' : ''} to`}>
+                <option value="Unallocate" selected={allocateTo === 'Unallocate'}>
+                  Unallocate
+                </option>
+                <option value="Person 1" selected={allocateTo === 'Person 1'}>
+                  Person 1
+                </option>
+                <option value="Person 2" selected={allocateTo === 'Person 2'}>
+                  Person 2
+                </option>
+                <option value="Person 3" selected={allocateTo === 'Person 3'}>
+                  Person 3
+                </option>
+              </Select>
+            </FormGroup>
+            <Button onClick={allocateTasks}>Allocate task{selectedTasks.length > 1 && 's'}</Button>
+          </>
+          }
+          {selectTask &&
+            <button className='govuk-button govuk-button--secondary' onClick={() => {setSelectTask(false); setSelectedTasks([]);}}>Cancel</button>
+          }
         </>
       }
     </>

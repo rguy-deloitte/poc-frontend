@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const allocateTasks = (applicationIds: number[], allocateTo: string) => {
     setTaskData(taskData.map((decisionTask: DecisionTask) => {
       if (applicationIds.includes(decisionTask.applicationId)) {
-        decisionTask.allocatedTo = allocateTo;
+        decisionTask.allocatedTo = allocateTo === 'Unallocate' ? undefined : allocateTo;
       }
       return decisionTask;
     }));
