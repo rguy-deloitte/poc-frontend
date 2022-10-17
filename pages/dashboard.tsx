@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { H1 } from 'govuk-react'
+import { H1, H2 } from 'govuk-react'
 import {
   ArcElement,
   BarElement,
@@ -220,11 +220,46 @@ const Dashboard: NextPage = () => {
       <H1>
         Dashboard
       </H1>
+      <H2>
+        Filters
+      </H2>
+      <div className="govuk-grid-row govuk-!-padding-bottom-9">
+        <div className="govuk-grid-column-one-quarter">
+          <label className="govuk-label" htmlFor="ddl1">Filter one</label>
+          <select className="govuk-select" id="ddl1" name="ddl1">
+            <option value="published">Please select</option>
+          </select>
+        </div>
+        <div className="govuk-grid-column-one-quarter">
+          <label className="govuk-label" htmlFor="ddl2">Filter two</label>
+          <select className="govuk-select" id="ddl2" name="ddl2">
+          <option value="published">Please select</option>
+          </select>
+        </div>
+        <div className="govuk-grid-column-one-quarter">
+          <label className="govuk-label" htmlFor="ddl3">Filter three</label>
+          <select className="govuk-select" id="ddl3" name="ddl3">
+          <option value="published">Please select</option>
+          </select>
+        </div>
+        <div className="govuk-grid-column-one-quarter">
+          <label className="govuk-label" htmlFor="ddl4">Filter four</label>
+          <select className="govuk-select" id="ddl4" name="ddl4">
+          <option value="published">Please select</option>
+          </select>
+        </div>
+      </div>
+      <H2>
+        Activity
+      </H2>
       <div className="govuk-grid-row govuk-!-padding-bottom-9">
         <div className="govuk-grid-column-full">
           <Bar options={hBarOptions} data={hBarData} />
         </div>
       </div>
+      <H2>
+        Users
+      </H2>
       <div className="govuk-grid-row govuk-!-padding-bottom-9">
         <div className="govuk-grid-column-one-half">
           <Bar options={stackedOptions} data={stackedData} />
@@ -233,6 +268,9 @@ const Dashboard: NextPage = () => {
         <Line options={areaOptions} data={areaData} />
         </div>
       </div>
+      <H2>
+        Cases
+      </H2>
       <div className="govuk-grid-row govuk-!-padding-bottom-9">
         <div className="govuk-grid-column-one-quarter">
           <Doughnut data={DoughnutData1} />
