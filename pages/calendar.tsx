@@ -10,7 +10,7 @@ import eventData from '../data/calendar'
 const DnDCalendar = withDragAndDrop(Calendar)
 const mLocalizer = momentLocalizer(moment)
 
-const CalendarPage: NextPage = () => {
+const CalendarPage: NextPage = (props: any) => {
   const [events, setEvents] = useState<any>(eventData);
 
   const moveEvent = ({ event, start, end }: any) => {
@@ -21,6 +21,12 @@ const CalendarPage: NextPage = () => {
     nextEvents.splice(idx, 1, updatedEvent);
 
     setEvents(nextEvents);
+
+    props.addLogs([{
+      dateTime: new Date().toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
+      type: 'Event moved',
+      description: `Event '${event.title}' moved to start ${new Date(event.start).toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'})} and end ${new Date(event.end).toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'})}`,
+    }]);
   }
 
   const resizeEvent = ({ event, start, end }: any) => {
@@ -31,6 +37,12 @@ const CalendarPage: NextPage = () => {
     });
 
     setEvents(nextEvents);
+
+    props.addLogs([{
+      dateTime: new Date().toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
+      type: 'Event updated',
+      description: `Event '${event.title}' updated to start ${new Date(event.start).toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'})} and end ${new Date(event.end).toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'})}`,
+    }]);
   };
 
   return (
