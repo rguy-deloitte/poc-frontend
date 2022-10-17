@@ -5,11 +5,11 @@ import type { Provider } from '../types/provider';
 import Fuse from 'fuse.js';
 import data from '../data/search.json';
 
-const Search: NextPage = () => {
+const Search: NextPage = (props: any) => {
   const [tableData, setTableData] = useState<Provider[]>(data.providers);
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>(props.search);
   const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [filterFields, setFilterFields] = useState<string[]>([]);
+  const [filterFields, setFilterFields] = useState<string[]>(props.searchFilters);
 
   const fields: {fieldId: string, fieldName: string}[] = [
     {
@@ -31,7 +31,7 @@ const Search: NextPage = () => {
   ];
 
   useEffect(() => {
-    if (searchTerm.length > 0) {
+    if (searchTerm && searchTerm.length > 0) {
       const fuse = new Fuse(data.providers, {
         keys: filterFields.length > 0 ? filterFields : fields.map((item: {fieldId: string, fieldName: string}) => item.fieldId),
         threshold: 0.4,
@@ -48,8 +48,10 @@ const Search: NextPage = () => {
   const updateFilterField = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       setFilterFields([...filterFields, e.target.value]);
+      props.setSearchFilters([...filterFields, e.target.value]);
     } else {
       setFilterFields(filterFields.filter((item: string) => item !== e.target.value));
+      props.setSearchFilters(filterFields.filter((item: string) => item !== e.target.value));
     }
   };
 
@@ -103,7 +105,7 @@ const Search: NextPage = () => {
             Search for a provider
           </label>
         </h1>
-        <input className="govuk-input" id="searchTerm" name="searchTerm" onChange={(e) => setSearchTerm(e.target.value)} type="text" value={searchTerm} />
+        <input className="govuk-input" id="searchTerm" name="searchTerm" onChange={(e) => {setSearchTerm(e.target.value); props.setSearch(e.target.value)}} type="search" value={searchTerm} />
       </div>
       <H3>
         Providers

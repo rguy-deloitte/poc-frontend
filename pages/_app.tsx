@@ -10,6 +10,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [taskData, setTaskData] = useState<DecisionTask[]>([]);
   const [logs, setLogs] = useState<Log[]>([]);
+  const [search, setSearch] = useState<string>();
+  const [searchFilters, setSearchFilters] = useState<string[]>([]);
 
   useEffect(() => {
     fetch('/api/decision-tasks')
@@ -51,6 +53,10 @@ function MyApp({ Component, pageProps }: AppProps) {
             addLogs={addLogs}
             allocateTasks={allocateTasks}
             logs={logs}
+            search={search}
+            searchFilters={searchFilters}
+            setSearch={setSearch}
+            setSearchFilters={setSearchFilters}
             startTask={startTask}
             taskData={taskData} />
         }
