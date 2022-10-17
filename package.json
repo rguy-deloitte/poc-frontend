@@ -12,6 +12,7 @@
     "@jsonforms/core": "^3.0.0",
     "@jsonforms/material-renderers": "^3.0.0",
     "@jsonforms/react": "^3.0.0",
+    "chart.js": "^3.9.1",
     "fuse.js": "^6.6.2",
     "govuk-frontend": "^4.3.1",
     "govuk-react": "^0.10.3",
@@ -19,6 +20,7 @@
     "next": "12.3.1",
     "react": "18.2.0",
     "react-big-calendar": "^1.5.0",
+    "react-chartjs-2": "^4.3.1",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.5"
   },
