@@ -91,7 +91,7 @@ const TaskList: NextPage = (props: any) => {
     props.addLogs(selectedTasks.map((applicationId: number) => {return {
       dateTime: new Date().toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
       type: 'Task allocation',
-      description: `Application ID ${applicationId} allocated to ${allocateTo}`,
+      description: `Application ID ${applicationId} allocated to '${allocateTo}'`,
     }}));
 
     //reset selected

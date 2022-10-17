@@ -16,10 +16,10 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
           <PhaseBanner level="alpha">
             This is a new service – your <Link href="#">feedback</Link> will help us to improve it.
           </PhaseBanner>
-          {router.route === '/activity-log' &&
+          {router.route === '/audit-history' &&
             <Breadcrumbs>
               <Link href="/" passHref><a className="govuk-link">Home</a></Link>
-              Activity log
+              Audit history
             </Breadcrumbs>
           }
           {router.route === '/calendar' &&

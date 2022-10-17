@@ -36,7 +36,7 @@ const Home: NextPage = () => {
           <Link href="/calendar" passHref><a className="govuk-link">Calendar</a></Link>
         </li>
         <li>
-          <Link href="/activity-log" passHref><a className="govuk-link">Activity log</a></Link>
+          <Link href="/audit-history" passHref><a className="govuk-link">Audit history</a></Link>
         </li>
         <li>
           <Link href="/dashboard" passHref><a className="govuk-link">Dashboard</a></Link>
