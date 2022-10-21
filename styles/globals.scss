@@ -88,8 +88,11 @@ th {
   background-color: #d9d9d9;
   border: 1px solid black;
   margin-bottom: 32px;
-  max-width: 500px;
   padding: 16px;
+
+  &__list {
+    display: flex;
+  }
 }
 
 .filter .govuk-checkboxes--small .govuk-checkboxes__label:before {
@@ -168,5 +171,15 @@ th {
 }
 
 .govuk-pagination {
+  justify-content: space-between;
+}
+
+.right {
+  float: right;
+}
+
+.split {
+  align-items: baseline;
+  display: flex;
   justify-content: space-between;
 }

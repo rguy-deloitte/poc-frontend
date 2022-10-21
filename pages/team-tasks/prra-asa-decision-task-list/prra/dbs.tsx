@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Caption, GridCol, GridRow, H1, H2, H3, LeadParagraph, Link, Paragraph, Table, Tag } from 'govuk-react'
+import { Caption, GridCol, GridRow, H1, H2, LeadParagraph, Table, Tag } from 'govuk-react'
 
 const Dbs: NextPage = () => {
   return (

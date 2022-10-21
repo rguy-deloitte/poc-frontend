@@ -1,6 +1,8 @@
 import { Breadcrumbs, Footer, Page, PhaseBanner } from 'govuk-react'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import data from '../../data/search.json';
+import type { Provider } from '../../types/provider';
 
 interface DefaultLayoutProps {
   children: React.ReactNode,
@@ -8,6 +10,12 @@ interface DefaultLayoutProps {
 
 export default function PageLayout({ children }: DefaultLayoutProps) {
   const router = useRouter();
+  const { providerId } = router.query;
+  const provider: Provider | undefined = data.providers.find((providerItem: Provider) => {
+    if (providerItem.id === providerId) {
+      return providerItem;
+    }
+  });
 
   return (
     <>
@@ -16,6 +24,30 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
           <PhaseBanner level="alpha">
             This is a new service – your <Link href="#">feedback</Link> will help us to improve it.
           </PhaseBanner>
+          {(router.route.includes('/provider/') && !router.route.includes('/individual') && !router.route.includes('/dbs')) &&
+            <Breadcrumbs>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              <Link href="/search" passHref><a className="govuk-link">Search</a></Link>
+              {provider ? provider.providerName : 'Provider'}
+            </Breadcrumbs>
+          }
+          {router.route.includes('/individual') &&
+            <Breadcrumbs>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              <Link href="/search" passHref><a className="govuk-link">Search</a></Link>
+              <Link href={`/provider/${provider ? provider.id : ''}`} passHref><a className="govuk-link">{provider ? provider.providerName : 'Provider'}</a></Link>
+              Jane Thomas
+            </Breadcrumbs>
+          }
+          {(router.route.includes('/provider') && router.route.includes('/dbs')) &&
+            <Breadcrumbs>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              <Link href="/search" passHref><a className="govuk-link">Search</a></Link>
+              <Link href={`/provider/${provider ? provider.id : ''}`} passHref><a className="govuk-link">{provider ? provider.providerName : 'Provider'}</a></Link>
+              <Link href={`/provider/${provider ? provider.id : ''}/individual`} passHref><a className="govuk-link">Jane Thomas</a></Link>
+              DBS
+            </Breadcrumbs>
+          }
           {router.route === '/audit-history' &&
             <Breadcrumbs>
               <Link href="/" passHref><a className="govuk-link">Home</a></Link>
