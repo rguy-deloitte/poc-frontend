@@ -9,9 +9,7 @@ import Link from 'next/link';
 
 const Search: NextPage = (props: any) => {
   const [tableData, setTableData] = useState<Provider[]>(data.providers);
-  const [searchTerm, setSearchTerm] = useState<string>(props.search ? props.search : '');
-  const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [searchFields, setSearchFields] = useState<string[]>(props.searchFilters);
+  const [showFilter, setShowFilter] = useState<boolean>(props.searchFilters.length > 0);
 
   const fields: {fieldId: string, fieldName: string}[] = [
     {
@@ -33,38 +31,36 @@ const Search: NextPage = (props: any) => {
   ];
 
   useEffect(() => {
-    if (searchTerm && searchTerm.length > 0) {
+    if (props.searchTerm.length > 0) {
       const fuse = new Fuse(data.providers, {
-        keys: searchFields.length > 0 ? searchFields : fields.map((item: {fieldId: string, fieldName: string}) => item.fieldId),
-        threshold: 0.4,
+        keys: props.searchFilters.length > 0 ? props.searchFilters : fields.map((item: {fieldId: string, fieldName: string}) => item.fieldId),
+        threshold: 0.2,
       });
 
-      setTableData(data.providers.filter((item: Provider) => fuse.search(searchTerm).map((item) => item.item.id).includes(item.id)));
+      setTableData(data.providers.filter((item: Provider) => fuse.search(props.searchTerm).map((item) => item.item.id).includes(item.id)));
     } else {
-      setTableData(data.providers);
+      setTableData([]);
     }
-  }, [searchTerm, searchFields]);
+  }, [props.searchTerm, props.searchFilters]);
 
   const updateFilterField = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      setSearchFields([...searchFields, e.target.value]);
-      props.setSearchFilters([...searchFields, e.target.value]);
+      props.setSearchFilters([...props.searchFilters, e.target.value]);
     } else {
-      setSearchFields(searchFields.filter((item: string) => item !== e.target.value));
-      props.setSearchFilters(searchFields.filter((item: string) => item !== e.target.value));
+      props.setSearchFilters(props.searchFilters.filter((item: string) => item !== e.target.value));
     }
   };
 
   const saveSearch = () => {
     props.saveSearch({
-      searchTerm,
-      searchFields: (searchFields.length > 0 && searchFields.length < fields.length) ? searchFields : undefined,
+      searchTerm: props.searchTerm,
+      searchFields: (props.searchFilters.length > 0 && props.searchFilters.length < fields.length) ? props.searchFilters : undefined,
     });
   }
 
   const resumeSearch = (search: SavedSearch) => {
-    setSearchTerm(search.searchTerm);
-    setSearchFields(search.searchFields ? search.searchFields : []);
+    props.setSearchTerm(search.searchTerm);
+    props.setSearchFilters(search.searchFields ? search.searchFields : []);
   }
 
   const tableRows = tableData.map((provider: Provider, index: number) => {
@@ -88,8 +84,8 @@ const Search: NextPage = (props: any) => {
 
   const filters = fields.map((item: {fieldId: string, fieldName: string}, index: number) => {
     return (
-      <div className="govuk-checkboxes__item">
-        <input checked={searchFields.includes(item.fieldId)} className="govuk-checkboxes__input" id={`filterFieldCheckbox${index}`} key={index} onChange={updateFilterField} type="checkbox" value={item.fieldId} />
+      <div className="govuk-checkboxes__item" key={index}>
+        <input checked={props.searchFilters.includes(item.fieldId)} className="govuk-checkboxes__input" id={`filterFieldCheckbox${index}`} onChange={updateFilterField} type="checkbox" value={item.fieldId} />
         <label className="govuk-label govuk-checkboxes__label" htmlFor={`filterFieldCheckbox${index}`}>{item.fieldName}</label>
       </div>
     );
@@ -97,7 +93,7 @@ const Search: NextPage = (props: any) => {
 
   const savedSearchList = props.savedSearches.map((savedSearch: SavedSearch, index: number) => {
     return (
-      <p>
+      <p key={index}>
         <a href='#' id={`savedSearchLink${index}`} onClick={(e) => {
           e.preventDefault();
           resumeSearch({
@@ -132,18 +128,18 @@ const Search: NextPage = (props: any) => {
           </label>
         </h1>
         <input placeholder={`Enter text to search provider ${fields.filter((field) => {
-          if (searchFields.length > 0) {
-            if (searchFields.includes(field.fieldId)) {
+          if (props.searchFilters.length > 0) {
+            if (props.searchFilters.includes(field.fieldId)) {
               return field;
             } else {
               return null;
             }
           }
           return field;
-        }).map((field) => field.fieldName).join(', ').toLocaleLowerCase()}`} className="govuk-input" id="searchTerm" name="searchTerm" onChange={(e) => {setSearchTerm(e.target.value); props.setSearch(e.target.value)}} type="search" value={searchTerm} />
+        }).map((field) => field.fieldName).join(', ').toLocaleLowerCase()}`} className="govuk-input" id="searchTerm" name="searchTerm" onChange={(e) => {props.setSearchTerm(e.target.value)}} type="search" value={props.searchTerm} />
       </div>
       <button className='govuk-button govuk-button--secondary' onClick={() => {setShowFilter(!showFilter)}}>{showFilter ? 'Hide' : 'Show'} field filter</button>
-      {searchTerm && searchTerm.length > 0 &&
+      {props.searchTerm.length > 0 &&
         <Button className='right' onClick={saveSearch}>Save search</Button>
       }
       {showFilter &&
@@ -161,7 +157,7 @@ const Search: NextPage = (props: any) => {
           {savedSearchList}
         </Details>
       }
-      {searchTerm && searchTerm.length > 0 &&
+      {props.searchTerm.length > 0 &&
         <>
           <H3>
             Providers

@@ -6,8 +6,9 @@ import searchData from '../../../data/search.json';
 import { Fieldset, Table } from 'govuk-react';
 import type { Workflow as WorkflowType } from '../../../types/workflow';
 import workflowData from '../../../data/workflow.json'
+import Link from 'next/link';
 
-const Workflow: NextPage = () => {
+const Workflow: NextPage = (props: any) => {
   const router = useRouter();
   const { providerId } = router.query;
   const provider: Provider | undefined = searchData.providers.find((providerItem: Provider) => {
@@ -16,42 +17,41 @@ const Workflow: NextPage = () => {
     }
   });
   const [tableData, setTableData] = useState<WorkflowType[]>(workflowData);
-  const [sortField, setSortField] = useState<string>('dateOut');
-  const [sortDirection, setSortDirection] = useState<string>('dsc');
-  const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [filterType, setFilterType] = useState<string[]>([]);
+  const [showFilter, setShowFilter] = useState<boolean>(props.worflowFilterType.length > 0);
 
   const workflowTypes = [... new Set(workflowData.map(workflowItem => workflowItem.type))].sort();
 
   useEffect(() => {
     setTableData(workflowData.sort((a: any, b: any) => {
-      if (a[sortField] < b[sortField]) return sortDirection === 'asc' ? -1 : 1;
-      if (a[sortField] > b[sortField]) return sortDirection === 'asc' ? 1 : -1;
+      if (a[props.workflowSortField] < b[props.workflowSortField]) return props.workflowSortDirection === 'asc' ? -1 : 1;
+      if (a[props.workflowSortField] > b[props.workflowSortField]) return props.workflowSortDirection === 'asc' ? 1 : -1;
       return 0;
     })
     .filter((item: WorkflowType) => {
-      if (filterType.length === 0) {
+      if (props.worflowFilterType.length === 0) {
         return true;
       }
 
-      return filterType.includes(item.type);
+      return props.worflowFilterType.includes(item.type);
     }));
-  }, [filterType, sortField, sortDirection]);
+  }, [props.worflowFilterType, props.workflowSortField, props.workflowSortDirection]);
 
   const changeSort = (fieldId: string) => {
-    if (sortField === fieldId) {
-      setSortDirection(sortDirection === 'asc' ? 'dsc' : 'asc');
+    if (props.workflowSortField === fieldId) {
+      props.setWorkflowSortDirection(props.workflowSortDirection === 'asc' ? 'dsc' : 'asc');
     } else {
-      setSortField(fieldId);
-      setSortDirection('asc');
+      props.setWorkflowSortField(fieldId);
+      props.setWorkflowSortDirection('asc');
     }
   };
 
   const updateFilterType = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      setFilterType([...filterType, e.target.value]);
+      //setFilterType([...filterType, e.target.value]);
+      props.setWorflowFilterType([...props.worflowFilterType, e.target.value]);
     } else {
-      setFilterType(filterType.filter((item: string) => item !== e.target.value));
+      //setFilterType(filterType.filter((item: string) => item !== e.target.value));
+      props.setWorflowFilterType(props.worflowFilterType.filter((item: string) => item !== e.target.value));
     }
   };
 
@@ -61,7 +61,7 @@ const Workflow: NextPage = () => {
 
     return (
       <Table.Row key={index}>
-        <Table.Cell><a className='govuk-link' href='#'>[{workflowItem.name}]</a></Table.Cell>
+        <Table.Cell><Link href={`/provider/${providerId}/safeguard-notification`} passHref><a className='govuk-link'>[{workflowItem.name}]</a></Link></Table.Cell>
         <Table.Cell>{workflowItem.type}</Table.Cell>
         <Table.Cell>{dateIn.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'})}</Table.Cell>
         <Table.Cell>{dateOut.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'})}</Table.Cell>
@@ -74,7 +74,7 @@ const Workflow: NextPage = () => {
 
     return (
       <div className="govuk-checkboxes__item">
-        <input checked={filterType.includes(item)} className="govuk-checkboxes__input" disabled={matchCount === 0} id={`filterTypeCheckbox${index}`} key={index} onChange={updateFilterType} type="checkbox" value={item} />
+        <input checked={props.worflowFilterType.includes(item)} className="govuk-checkboxes__input" disabled={matchCount === 0} id={`filterTypeCheckbox${index}`} key={index} onChange={updateFilterType} type="checkbox" value={item} />
         <label className="govuk-label govuk-checkboxes__label" htmlFor={`filterTypeCheckbox${index}`}>{item} ({matchCount})</label>
       </div>
     );
@@ -88,7 +88,7 @@ const Workflow: NextPage = () => {
         <div className='filter'>
           <h3 className='govuk-heading-m'>Filter</h3>
           <Fieldset>
-            <Fieldset.Legend>Type</Fieldset.Legend>
+            <Fieldset.Legend>Step yype</Fieldset.Legend>
             <div className="govuk-checkboxes govuk-checkboxes--small">
               {filters}
             </div>
@@ -100,16 +100,16 @@ const Workflow: NextPage = () => {
         <Table head={
             <Table.Row>
               <Table.CellHeader>
-                <button className={`sortable ${sortField === 'name' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('name')}}>Name</button>
+                <button className={`sortable ${props.workflowSortField === 'name' ? `sortable--${props.workflowSortDirection}` : ''}`} onClick={() => {changeSort('name')}}>Name</button>
               </Table.CellHeader>
               <Table.CellHeader>
-                <button className={`sortable ${sortField === 'type' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('type')}}>Step type</button>
+                <button className={`sortable ${props.workflowSortField === 'type' ? `sortable--${props.workflowSortDirection}` : ''}`} onClick={() => {changeSort('type')}}>Step type</button>
               </Table.CellHeader>
               <Table.CellHeader>
-                <button className={`sortable ${sortField === 'dateIn' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dateIn')}}>Date in</button>
+                <button className={`sortable ${props.workflowSortField === 'dateIn' ? `sortable--${props.workflowSortDirection}` : ''}`} onClick={() => {changeSort('dateIn')}}>Date in</button>
               </Table.CellHeader>
               <Table.CellHeader>
-                <button className={`sortable ${sortField === 'dateOut' ? `sortable--${sortDirection}` : ''}`} onClick={() => {changeSort('dateOut')}}>Date out</button>
+                <button className={`sortable ${props.workflowSortField === 'dateOut' ? `sortable--${props.workflowSortDirection}` : ''}`} onClick={() => {changeSort('dateOut')}}>Date out</button>
               </Table.CellHeader>
             </Table.Row>
           }>

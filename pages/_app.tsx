@@ -12,8 +12,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [taskData, setTaskData] = useState<DecisionTask[]>([]);
   const [logs, setLogs] = useState<Log[]>([]);
   const [savedSearches, setSavedSearches] = useState<SavedSearch[]>([]);
-  const [search, setSearch] = useState<string>();
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchFilters, setSearchFilters] = useState<string[]>([]);
+  const [workflowSortField, setWorkflowSortField] = useState<string>('dateOut');
+  const [workflowSortDirection, setWorkflowSortDirection] = useState<string>('dsc');
+  const [worflowFilterType, setWorflowFilterType] = useState<string[]>([]);
+
 
   useEffect(() => {
     fetch('/api/decision-tasks')
@@ -56,17 +60,28 @@ function MyApp({ Component, pageProps }: AppProps) {
         {!loading &&
           <Component
             {...pageProps}
+            //logs
             addLogs={addLogs}
-            allocateTasks={allocateTasks}
             logs={logs}
+            //search
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
             saveSearch={saveSearch}
             savedSearches={savedSearches}
-            search={search}
             searchFilters={searchFilters}
-            setSearch={setSearch}
             setSearchFilters={setSearchFilters}
+            //tasks
+            allocateTasks={allocateTasks}
             startTask={startTask}
-            taskData={taskData} />
+            taskData={taskData}
+            //workflow
+            workflowSortField={workflowSortField}
+            setWorkflowSortField={setWorkflowSortField}
+            workflowSortDirection={workflowSortDirection}
+            setWorkflowSortDirection={setWorkflowSortDirection}
+            worflowFilterType={worflowFilterType}
+            setWorflowFilterType={setWorflowFilterType}
+          />
         }
       </LoadingBox>
     </PageLayout>
