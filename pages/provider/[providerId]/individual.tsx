@@ -13,7 +13,7 @@ const Individual: NextPage = () => {
 
   return (
     <>
-    <h1 className="govuk-heading-xl govuk-!-margin-bottom-2" id="ProviderDetails">Jane Thomas</h1>
+      <h1 className="govuk-heading-xl govuk-!-margin-bottom-2" id="ProviderDetails">Jane Thomas</h1>
       <LeadParagraph>
         <b>
           ID: [number]<br />

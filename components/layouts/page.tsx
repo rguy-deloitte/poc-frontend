@@ -24,7 +24,7 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
           <PhaseBanner level="alpha">
             This is a new service – your <Link href="#">feedback</Link> will help us to improve it.
           </PhaseBanner>
-          {(router.route.includes('/provider/') && !router.route.includes('/individual') && !router.route.includes('/dbs')) &&
+          {(router.route.includes('/provider/') && !router.route.includes('/individual') && !router.route.includes('/workflow') && !router.route.includes('/dbs')) &&
             <Breadcrumbs>
               <Link href="/" passHref><a className="govuk-link">Home</a></Link>
               <Link href="/search" passHref><a className="govuk-link">Search</a></Link>
@@ -37,6 +37,14 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
               <Link href="/search" passHref><a className="govuk-link">Search</a></Link>
               <Link href={`/provider/${provider ? provider.id : ''}`} passHref><a className="govuk-link">{provider ? provider.providerName : 'Provider'}</a></Link>
               Jane Thomas
+            </Breadcrumbs>
+          }
+          {router.route.includes('/workflow') &&
+            <Breadcrumbs>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              <Link href="/search" passHref><a className="govuk-link">Search</a></Link>
+              <Link href={`/provider/${provider ? provider.id : ''}`} passHref><a className="govuk-link">{provider ? provider.providerName : 'Provider'}</a></Link>
+              Workflow
             </Breadcrumbs>
           }
           {(router.route.includes('/provider') && router.route.includes('/dbs')) &&

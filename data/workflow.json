@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Wrokflow name",
+    "type": "Scheduling notification",
+    "dateIn": "2020-03-25",
+    "dateOut": "2020-05-22"
+  },
+  {
+    "name": "Wrokflow name",
+    "type": "Safeguard notification",
+    "dateIn": "2020-05-03",
+    "dateOut": "2020-07-14"
+  },
+  {
+    "name": "Wrokflow name",
+    "type": "Scheduling notification",
+    "dateIn": "2020-01-25",
+    "dateOut": "2020-03-03"
+  },
+  {
+    "name": "Wrokflow name",
+    "type": "Scheduling notification",
+    "dateIn": "2020-07-01",
+    "dateOut": "2020-07-15"
+  },
+  {
+    "name": "Wrokflow name",
+    "type": "Scheduling notification",
+    "dateIn": "2020-05-18",
+    "dateOut": "2020-06-17"
+  },
+  {
+    "name": "Wrokflow name",
+    "type": "Safeguard notification",
+    "dateIn": "2020-05-25",
+    "dateOut": "2020-07-29"
+  },
+  {
+    "name": "Wrokflow name",
+    "type": "Registration variation",
+    "dateIn": "2020-06-16",
+    "dateOut": "2020-07-22"
+  },
+  {
+    "name": "Wrokflow name",
+    "type": "Safeguard notification",
+    "dateIn": "2020-04-23",
+    "dateOut": "2020-05-08"
+  },
+  {
+    "name": "Wrokflow name",
+    "type": "Scheduling notification",
+    "dateIn": "2019-12-16",
+    "dateOut": "2020-02-03"
+  },
+  {
+    "name": "Wrokflow name",
+    "type": "Registration variation",
+    "dateIn": "2019-11-05",
+    "dateOut": "2020-01-12"
+  }
+]

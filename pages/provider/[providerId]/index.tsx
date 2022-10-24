@@ -47,6 +47,9 @@ const Provider: NextPage = () => {
         <li>
           <a className="govuk-link govuk-link--no-visited-state" href="#AssociatedIndividuals" onClick={(e) => {e.preventDefault(); scrollTo('AssociatedIndividuals');}}>Associated individuals</a>
         </li>
+        <li>
+          <a className="govuk-link govuk-link--no-visited-state" href="#WorkflowItems" onClick={(e) => {e.preventDefault(); scrollTo('WorkflowItems');}}>Workflow items</a>
+        </li>
       </ul>
       <SectionBreak level='LARGE' visible></SectionBreak>
       <h2 className="govuk-heading-l" id="ProviderDetails">Provider details</h2>
@@ -128,34 +131,36 @@ const Provider: NextPage = () => {
           <Table.Cell><a className='govuk-link' href='#'>[Email address]</a></Table.Cell>
         </Table.Row>
       </Table>
-      <h3 className="govuk-heading-m">Application in progress</h3>
-      <Table head={
-        <Table.Row>
-          <Table.CellHeader>Name</Table.CellHeader>
-          <Table.CellHeader>Role</Table.CellHeader>
-          <Table.CellHeader>Telephone</Table.CellHeader>
-          <Table.CellHeader>Email</Table.CellHeader>
-        </Table.Row>
-      }>
-        <Table.Row>
-          <Table.Cell><a className='govuk-link' href='#'>[Name]</a></Table.Cell>
-          <Table.Cell>[Role]</Table.Cell>
-          <Table.Cell>[Telephone number]</Table.Cell>
-          <Table.Cell><a className='govuk-link' href='#'>[Email address]</a></Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell><a className='govuk-link' href='#'>[Name]</a></Table.Cell>
-          <Table.Cell>[Role]</Table.Cell>
-          <Table.Cell>[Telephone number]</Table.Cell>
-          <Table.Cell><a className='govuk-link' href='#'>[Email address]</a></Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell><a className='govuk-link' href='#'>[Name]</a></Table.Cell>
-          <Table.Cell>[Role]</Table.Cell>
-          <Table.Cell>[Telephone number]</Table.Cell>
-          <Table.Cell><a className='govuk-link' href='#'>[Email address]</a></Table.Cell>
-        </Table.Row>
-      </Table>
+      <h3 className="govuk-heading-m">Applications in progress</h3>
+      <Details summary="View applications in progress">
+        <Table head={
+          <Table.Row>
+            <Table.CellHeader>Name</Table.CellHeader>
+            <Table.CellHeader>Role</Table.CellHeader>
+            <Table.CellHeader>Telephone</Table.CellHeader>
+            <Table.CellHeader>Email</Table.CellHeader>
+          </Table.Row>
+        }>
+          <Table.Row>
+            <Table.Cell><a className='govuk-link' href='#'>[Name]</a></Table.Cell>
+            <Table.Cell>[Role]</Table.Cell>
+            <Table.Cell>[Telephone number]</Table.Cell>
+            <Table.Cell><a className='govuk-link' href='#'>[Email address]</a></Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell><a className='govuk-link' href='#'>[Name]</a></Table.Cell>
+            <Table.Cell>[Role]</Table.Cell>
+            <Table.Cell>[Telephone number]</Table.Cell>
+            <Table.Cell><a className='govuk-link' href='#'>[Email address]</a></Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell><a className='govuk-link' href='#'>[Name]</a></Table.Cell>
+            <Table.Cell>[Role]</Table.Cell>
+            <Table.Cell>[Telephone number]</Table.Cell>
+            <Table.Cell><a className='govuk-link' href='#'>[Email address]</a></Table.Cell>
+          </Table.Row>
+        </Table>
+      </Details>
       <h3 className="govuk-heading-m">Withdrawn</h3>
       <Details summary="View withdrawn associated individuals">
         <Table head={
@@ -216,6 +221,36 @@ const Provider: NextPage = () => {
           </Table.Row>
         </Table>
       </Details>
+      <h2 className="govuk-heading-l" id="WorkflowItems">Workflow items</h2>
+      <h3 className="govuk-heading-m">Latest workflow items</h3>
+      <Table head={
+          <Table.Row>
+            <Table.CellHeader>Name</Table.CellHeader>
+            <Table.CellHeader>Step type</Table.CellHeader>
+            <Table.CellHeader>Step name</Table.CellHeader>
+            <Table.CellHeader>Workdesk user</Table.CellHeader>
+          </Table.Row>
+        }>
+          <Table.Row>
+            <Table.Cell><a className='govuk-link' href='#'>[Workflow item name]</a></Table.Cell>
+            <Table.Cell>[Step type]</Table.Cell>
+            <Table.Cell>[Step name]</Table.Cell>
+            <Table.Cell><a className='govuk-link' href='#'>[Workdesk user name]</a></Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell><a className='govuk-link' href='#'>[Workflow item name]</a></Table.Cell>
+            <Table.Cell>[Step type]</Table.Cell>
+            <Table.Cell>[Step name]</Table.Cell>
+            <Table.Cell><a className='govuk-link' href='#'>[Workdesk user name]</a></Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell><a className='govuk-link' href='#'>[Workflow item name]</a></Table.Cell>
+            <Table.Cell>[Step type]</Table.Cell>
+            <Table.Cell>[Step name]</Table.Cell>
+            <Table.Cell><a className='govuk-link' href='#'>[Workdesk user name]</a></Table.Cell>
+          </Table.Row>
+        </Table>
+        <Link href={`/provider/${providerId}/workflow`} passHref><a className='govuk-link govuk-!-font-size-19'>View all workflow items</a></Link>
     </>
   )
 }

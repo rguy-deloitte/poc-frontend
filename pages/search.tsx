@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 const Search: NextPage = (props: any) => {
   const [tableData, setTableData] = useState<Provider[]>(data.providers);
-  const [searchTerm, setSearchTerm] = useState<string>(props.search);
+  const [searchTerm, setSearchTerm] = useState<string>(props.search ? props.search : '');
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [searchFields, setSearchFields] = useState<string[]>(props.searchFilters);
 
@@ -71,7 +71,7 @@ const Search: NextPage = (props: any) => {
     return (
       <Table.Row key={index}>
         <Table.Cell>
-          {provider.providerNumber}
+          <Link className='govuk-link' href={`/provider/${encodeURIComponent(provider.id)}`}>{provider.providerNumber}</Link>
         </Table.Cell>
         <Table.Cell>
           {provider.providerName}
@@ -81,9 +81,6 @@ const Search: NextPage = (props: any) => {
         </Table.Cell>
         <Table.Cell>
           {provider.region}
-        </Table.Cell>
-        <Table.Cell>
-          <Link className='govuk-link' href={`/provider/${encodeURIComponent(provider.id)}`}>View</Link>
         </Table.Cell>
       </Table.Row>
     )
@@ -187,7 +184,6 @@ const Search: NextPage = (props: any) => {
                 <Table.CellHeader>
                   Region
                 </Table.CellHeader>
-                <Table.CellHeader></Table.CellHeader>
               </Table.Row>
             }>
               {tableRows}
