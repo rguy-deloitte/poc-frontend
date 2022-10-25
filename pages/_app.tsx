@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [searchFilters, setSearchFilters] = useState<string[]>([]);
   const [workflowSortField, setWorkflowSortField] = useState<string>('dateOut');
   const [workflowSortDirection, setWorkflowSortDirection] = useState<string>('dsc');
-  const [worflowFilterType, setWorflowFilterType] = useState<string[]>([]);
+  const [workflowFilterType, setWorkflowFilterType] = useState<string[]>([]);
 
 
   useEffect(() => {
@@ -79,8 +79,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             setWorkflowSortField={setWorkflowSortField}
             workflowSortDirection={workflowSortDirection}
             setWorkflowSortDirection={setWorkflowSortDirection}
-            worflowFilterType={worflowFilterType}
-            setWorflowFilterType={setWorflowFilterType}
+            workflowFilterType={workflowFilterType}
+            setWorkflowFilterType={setWorkflowFilterType}
           />
         }
       </LoadingBox>

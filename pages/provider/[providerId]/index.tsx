@@ -52,45 +52,81 @@ const Provider: NextPage = () => {
         </li>
       </ul>
       <SectionBreak level='LARGE' visible></SectionBreak>
-      <h2 className="govuk-heading-l" id="ProviderDetails">Provider details</h2>
-      <Table>
-        <Table.Row>
-          <Table.CellHeader>Organisation</Table.CellHeader>
-          <Table.Cell>[Organisation name]</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.CellHeader>ID</Table.CellHeader>
-          <Table.Cell>{provider.providerNumber}</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.CellHeader>Provider address</Table.CellHeader>
-          <Table.Cell>[Address line 1],<br />[Address line 2],<br />[City] [Postcode]</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.CellHeader>Region</Table.CellHeader>
-          <Table.Cell>{provider.region}</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.CellHeader>Local authority</Table.CellHeader>
-          <Table.Cell>[Local authority]</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.CellHeader>Register</Table.CellHeader>
-          <Table.Cell>[EYR/CCR/VCR]</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.CellHeader>Provider type</Table.CellHeader>
-          <Table.Cell>{provider.providerType}</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.CellHeader>Telephone</Table.CellHeader>
-          <Table.Cell>{provider.mainPhone}</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.CellHeader>Email</Table.CellHeader>
-          <Table.Cell><a className='govuk-link' href='#'>[Email address]</a></Table.Cell>
-        </Table.Row>
-      </Table>
+      <div className="govuk-grid-row">
+        <div className="govuk-grid-column-two-thirds">
+          <h2 className="govuk-heading-l" id="ProviderDetails">Provider details</h2>
+          <Table>
+            <Table.Row>
+              <Table.CellHeader>Organisation</Table.CellHeader>
+              <Table.Cell>[Organisation name]</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.CellHeader>ID</Table.CellHeader>
+              <Table.Cell>{provider.providerNumber}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.CellHeader>Provider address</Table.CellHeader>
+              <Table.Cell>[Address line 1],<br />[Address line 2],<br />[City] [Postcode]</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.CellHeader>Region</Table.CellHeader>
+              <Table.Cell>{provider.region}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.CellHeader>Local authority</Table.CellHeader>
+              <Table.Cell>[Local authority]</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.CellHeader>Register</Table.CellHeader>
+              <Table.Cell>[EYR/CCR/VCR]</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.CellHeader>Provider type</Table.CellHeader>
+              <Table.Cell>{provider.providerType}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.CellHeader>Telephone</Table.CellHeader>
+              <Table.Cell>{provider.mainPhone}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.CellHeader>Email</Table.CellHeader>
+              <Table.Cell><a className='govuk-link' href='#'>[Email address]</a></Table.Cell>
+            </Table.Row>
+          </Table>
+        </div>
+        <div className="govuk-grid-column-one-third">
+          <h2 className="govuk-heading-m govuk-!-margin-top-2" id="PreviousDetails">Links</h2>
+          <ul className="govuk-list">
+            <li>
+              <Link href={`/provider/${providerId}/chronology`} passHref><a className="govuk-link" href="#">Chronology</a></Link>
+            </li>
+            <li>
+              <a className='govuk-link' href="#">Provider chain</a>
+            </li>
+            <li>
+              <a className="govuk-link" href="#">Key lines</a>
+            </li>
+            <li>
+              <a className="govuk-link" href="#">Improvment activity tracking</a>
+            </li>
+            <li>
+              <a className="govuk-link" href="#">Registration summary</a>
+            </li>
+            <li>
+              <a className="govuk-link" href="#">Documents</a>
+            </li>
+            <li>
+              <a className="govuk-link" href="#">Events</a>
+            </li>
+            <li>
+              <a className="govuk-link" href="#">Notifications</a>
+            </li>
+            <li>
+              <a className="govuk-link" href="#">Logistical information</a>
+            </li>
+          </ul>
+        </div>
+      </div>
       <h2 className="govuk-heading-l" id="InspectorDetails">Inspector details</h2>
       <Table>
         <Table.Row>

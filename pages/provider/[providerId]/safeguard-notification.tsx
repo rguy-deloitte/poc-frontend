@@ -77,13 +77,13 @@ const WorkflowItem: NextPage = () => {
       }>
         <Table.Row>
           <Table.Cell>[Document name]</Table.Cell>
-          <Table.Cell><a className='govuk-link' href='#'>[Forename Surname]</a></Table.Cell>
+          <Table.Cell><a className='govuk-link' href='#'>[Name]</a></Table.Cell>
           <Table.Cell>[Date]</Table.Cell>
           <Table.Cell><a className='govuk-link' href='/dummy.pdf' target="_blank">Open</a> | <a className='govuk-link' href='/dummy.pdf' download>Download</a></Table.Cell>
         </Table.Row>
         <Table.Row>
           <Table.Cell>[Document name]</Table.Cell>
-          <Table.Cell><a className='govuk-link' href='#'>[Forename Surname]</a></Table.Cell>
+          <Table.Cell><a className='govuk-link' href='#'>[Name]</a></Table.Cell>
           <Table.Cell>[Date]</Table.Cell>
           <Table.Cell><a className='govuk-link' href='/dummy.pdf' target="_blank">Open</a> | <a className='govuk-link' href='/dummy.pdf' download>Download</a></Table.Cell>
         </Table.Row>

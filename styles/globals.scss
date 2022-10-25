@@ -40,6 +40,10 @@ th {
   white-space: pre-line;
 }
 
+.no-table-border td {
+  border: 0 !important;
+}
+
 .tag-wrapper {
   margin-left: 10px;
 }
@@ -50,7 +54,7 @@ th {
   color: #005ea5;
   font-size: 19px;
   font-weight: 700;
-  padding-right: 15px;
+  padding: 0 15px 0 0;
   position: relative;
   white-space: nowrap;
 }

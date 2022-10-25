@@ -159,9 +159,10 @@ const Search: NextPage = (props: any) => {
       }
       {props.searchTerm.length > 0 &&
         <>
-          <H3>
-            Providers
-          </H3>
+          <div className='split'>
+            <h2 className='govuk-heading-m'>Providers</h2>
+            <span className='govuk-caption-m govuk-!-font-size-16'>Showing {tableRows.length} results</span>
+          </div>
           {tableRows.length === 0 &&
             <Paragraph>No providers match your search</Paragraph>
           }

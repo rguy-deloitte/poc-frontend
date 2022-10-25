@@ -17,7 +17,7 @@ const Workflow: NextPage = (props: any) => {
     }
   });
   const [tableData, setTableData] = useState<WorkflowType[]>(workflowData);
-  const [showFilter, setShowFilter] = useState<boolean>(props.worflowFilterType.length > 0);
+  const [showFilter, setShowFilter] = useState<boolean>(props.workflowFilterType.length > 0);
 
   const workflowTypes = [... new Set(workflowData.map(workflowItem => workflowItem.type))].sort();
 
@@ -28,13 +28,13 @@ const Workflow: NextPage = (props: any) => {
       return 0;
     })
     .filter((item: WorkflowType) => {
-      if (props.worflowFilterType.length === 0) {
+      if (props.workflowFilterType.length === 0) {
         return true;
       }
 
-      return props.worflowFilterType.includes(item.type);
+      return props.workflowFilterType.includes(item.type);
     }));
-  }, [props.worflowFilterType, props.workflowSortField, props.workflowSortDirection]);
+  }, [props.workflowFilterType, props.workflowSortField, props.workflowSortDirection]);
 
   const changeSort = (fieldId: string) => {
     if (props.workflowSortField === fieldId) {
@@ -48,10 +48,10 @@ const Workflow: NextPage = (props: any) => {
   const updateFilterType = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       //setFilterType([...filterType, e.target.value]);
-      props.setWorflowFilterType([...props.worflowFilterType, e.target.value]);
+      props.setWorkflowFilterType([...props.workflowFilterType, e.target.value]);
     } else {
       //setFilterType(filterType.filter((item: string) => item !== e.target.value));
-      props.setWorflowFilterType(props.worflowFilterType.filter((item: string) => item !== e.target.value));
+      props.setWorkflowFilterType(props.workflowFilterType.filter((item: string) => item !== e.target.value));
     }
   };
 
@@ -74,7 +74,7 @@ const Workflow: NextPage = (props: any) => {
 
     return (
       <div className="govuk-checkboxes__item">
-        <input checked={props.worflowFilterType.includes(item)} className="govuk-checkboxes__input" disabled={matchCount === 0} id={`filterTypeCheckbox${index}`} key={index} onChange={updateFilterType} type="checkbox" value={item} />
+        <input checked={props.workflowFilterType.includes(item)} className="govuk-checkboxes__input" disabled={matchCount === 0} id={`filterTypeCheckbox${index}`} key={index} onChange={updateFilterType} type="checkbox" value={item} />
         <label className="govuk-label govuk-checkboxes__label" htmlFor={`filterTypeCheckbox${index}`}>{item} ({matchCount})</label>
       </div>
     );
@@ -86,16 +86,18 @@ const Workflow: NextPage = (props: any) => {
       <button className='govuk-button govuk-button--secondary' onClick={() => {setShowFilter(!showFilter)}}>{showFilter ? 'Hide' : 'Show'} filter</button>
       {showFilter &&
         <div className='filter'>
-          <h3 className='govuk-heading-m'>Filter</h3>
+          <h3 className='govuk-heading-m'>Filter by step type</h3>
           <Fieldset>
-            <Fieldset.Legend>Step yype</Fieldset.Legend>
             <div className="govuk-checkboxes govuk-checkboxes--small">
               {filters}
             </div>
           </Fieldset>
         </div>
       }
-      <h2 className='govuk-heading-s govuk-!-margin-bottom-2'>Workflow items for {provider?.providerName}</h2>
+      <div className='split'>
+        <h2 className='govuk-heading-s'>Workflow items for {provider?.providerName}</h2>
+        <span className='govuk-caption-m govuk-!-font-size-16'>Showing 28 results</span>
+      </div>
       {tableRows.length > 0 &&
         <Table head={
             <Table.Row>
