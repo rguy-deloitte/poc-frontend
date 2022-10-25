@@ -58,7 +58,7 @@ const Provider: NextPage = () => {
           <Table>
             <Table.Row>
               <Table.CellHeader>Organisation</Table.CellHeader>
-              <Table.Cell>[Organisation name]</Table.Cell>
+              <Table.Cell><Link href={`/provider/${providerId}/organisation`} passHref><a className='govuk-link'>[Organisation name]</a></Link></Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.CellHeader>ID</Table.CellHeader>
@@ -98,10 +98,7 @@ const Provider: NextPage = () => {
           <h2 className="govuk-heading-m govuk-!-margin-top-2" id="PreviousDetails">Links</h2>
           <ul className="govuk-list">
             <li>
-              <Link href={`/provider/${providerId}/chronology`} passHref><a className="govuk-link" href="#">Chronology</a></Link>
-            </li>
-            <li>
-              <a className='govuk-link' href="#">Provider chain</a>
+              <Link href={`/provider/${providerId}/chronology`} passHref><a className="govuk-link">Chronology</a></Link>
             </li>
             <li>
               <a className="govuk-link" href="#">Key lines</a>
