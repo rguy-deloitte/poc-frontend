@@ -31,7 +31,8 @@ const Chronology: NextPage = (props: any) => {
     if (searchTerm.length > 0) {
       const fuse = new Fuse(chronologyData, {
         keys: ['detail'],
-        threshold: 0.8,
+        threshold: 0.1,
+        ignoreLocation: true,
       });
 
       dataForTable = fuse.search(searchTerm).map(result => result.item);

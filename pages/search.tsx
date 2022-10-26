@@ -34,10 +34,10 @@ const Search: NextPage = (props: any) => {
     if (props.searchTerm.length > 0) {
       const fuse = new Fuse(data.providers, {
         keys: props.searchFilters.length > 0 ? props.searchFilters : fields.map((item: {fieldId: string, fieldName: string}) => item.fieldId),
-        threshold: 0.2,
+        threshold: 0.6,
       });
 
-      setTableData(data.providers.filter((item: Provider) => fuse.search(props.searchTerm).map((item) => item.item.id).includes(item.id)));
+      setTableData(fuse.search(props.searchTerm).map(fuseItem => fuseItem.item));
     } else {
       setTableData([]);
     }
