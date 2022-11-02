@@ -41,6 +41,9 @@ const Home: NextPage = () => {
         <li>
           <Link href="/dashboard" passHref><a className="govuk-link">Dashboard</a></Link>
         </li>
+        <li>
+          <Link href="/tasks" passHref><a className="govuk-link">Workflow tasks</a></Link>
+        </li>
       </ul>
     </>
   )

@@ -105,6 +105,12 @@ export default function PageLayout({ children }: DefaultLayoutProps) {
               Dashboard
             </Breadcrumbs>
           }
+          {router.route === '/tasks' &&
+            <Breadcrumbs>
+              <Link href="/" passHref><a className="govuk-link">Home</a></Link>
+              Workflow tasks
+            </Breadcrumbs>
+          }
           {router.route === '/personal-tasks' &&
             <Breadcrumbs>
               <Link href="/" passHref><a className="govuk-link">Home</a></Link>
