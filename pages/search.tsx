@@ -93,8 +93,8 @@ const Search: NextPage = (props: any) => {
 
   const savedSearchList = props.savedSearches.map((savedSearch: SavedSearch, index: number) => {
     return (
-      <p key={index}>
-        <a href='#' id={`savedSearchLink${index}`} onClick={(e) => {
+      <p className='govuk-body split' key={index}>
+        <a className='govuk-link' href='#' id={`savedSearchLink${index}`} onClick={(e) => {
           e.preventDefault();
           resumeSearch({
             searchTerm: savedSearch.searchTerm,
@@ -113,6 +113,10 @@ const Search: NextPage = (props: any) => {
             </>
           }
         </a>
+        <a className='govuk-link govuk-!-font-size-16' href='#' onClick={(e) => {
+          e.preventDefault();
+          props.removeSearch(index);
+        }}>Remove</a>
       </p>
     )
   });

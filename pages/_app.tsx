@@ -39,7 +39,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const saveSearch = (search: SavedSearch) => {
     setSavedSearches([search, ...savedSearches]);
-  }
+  };
+
+  const removeSearch = (itemIndex: number) => {
+    setSavedSearches(savedSearches.filter((item: SavedSearch, index: number) => index !== itemIndex));
+  };
 
   const startTask = (applicationId: number) => {
     setTaskData(taskData.map((decisionTask: DecisionTask) => {
@@ -70,6 +74,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             savedSearches={savedSearches}
             searchFilters={searchFilters}
             setSearchFilters={setSearchFilters}
+            removeSearch={removeSearch}
             //tasks
             allocateTasks={allocateTasks}
             startTask={startTask}
