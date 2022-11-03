@@ -1,5 +1,6 @@
+import React, { useState } from 'react';
 import type { NextPage } from 'next'
-import { H1, H2 } from 'govuk-react'
+import { H1, H2, Tabs } from 'govuk-react'
 import {
   ArcElement,
   BarElement,
@@ -215,6 +216,8 @@ const DoughnutData4 = {
 };
 
 const Dashboard: NextPage = () => {
+  const [activeTab, setActiveTab] = useState<string>('Graph');
+
   return (
     <>
       <H1>
@@ -254,7 +257,33 @@ const Dashboard: NextPage = () => {
       </H2>
       <div className="govuk-grid-row govuk-!-padding-bottom-9">
         <div className="govuk-grid-column-full">
-          <Bar options={hBarOptions} data={hBarData} />
+          <Tabs>
+            <Tabs.List>
+              <Tabs.Tab href="#Graph" onClick={(e) => {e.preventDefault(); setActiveTab('Graph');}} selected={activeTab === 'Graph'}>Graph</Tabs.Tab>
+              <Tabs.Tab href="#Table" onClick={(e) => {e.preventDefault(); setActiveTab('Table');}} selected={activeTab === 'Table'}>Table</Tabs.Tab>
+            </Tabs.List>
+            <Tabs.Panel id="Graph" selected={activeTab === 'Graph'}>
+              <Bar options={hBarOptions} data={hBarData} />
+            </Tabs.Panel>
+            <Tabs.Panel id="Table" selected={activeTab === 'Table'}>
+              <table className="govuk-table">
+                <thead className="govuk-table__head">
+                  <tr className="govuk-table__row">
+                    <th scope="col" className="govuk-table__header">Month</th>
+                    <th scope="col" className="govuk-table__header">Dataset 1</th>
+                    <th scope="col" className="govuk-table__header">Dataset 2</th>
+                  </tr>
+                </thead>
+                <tbody className="govuk-table__body">
+                  {hBarLabels.map((label, index) => <tr className="govuk-table__row">
+                    <th scope="row" className="govuk-table__header">{label}</th>
+                    <td className="govuk-table__cell">{hBarData.datasets[0].data[index]}</td>
+                    <td className="govuk-table__cell">{hBarData.datasets[1].data[index]}</td>
+                  </tr>)}
+                </tbody>
+              </table>
+            </Tabs.Panel>
+          </Tabs>
         </div>
       </div>
       <H2>
@@ -274,15 +303,75 @@ const Dashboard: NextPage = () => {
       <div className="govuk-grid-row govuk-!-padding-bottom-9">
         <div className="govuk-grid-column-one-quarter">
           <Doughnut data={DoughnutData1} />
+          <table className="govuk-table govuk-!-margin-top-6">
+            <caption className="govuk-table__caption govuk-table__caption--m">Case 1</caption>
+            <thead className="govuk-table__head">
+              <tr className="govuk-table__row">
+                <th scope="col" className="govuk-table__header">Red</th>
+                <th scope="col" className="govuk-table__header">Blue</th>
+              </tr>
+            </thead>
+            <tbody className="govuk-table__body">
+              <tr className="govuk-table__row">
+              <td className="govuk-table__cell">12</td>
+                <td className="govuk-table__cell">19</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div className="govuk-grid-column-one-quarter">
           <Doughnut data={DoughnutData2} />
+          <table className="govuk-table govuk-!-margin-top-6">
+            <caption className="govuk-table__caption govuk-table__caption--m">Case 2</caption>
+            <thead className="govuk-table__head">
+              <tr className="govuk-table__row">
+                <th scope="col" className="govuk-table__header">Blue</th>
+                <th scope="col" className="govuk-table__header">Yellow</th>
+              </tr>
+            </thead>
+            <tbody className="govuk-table__body">
+              <tr className="govuk-table__row">
+              <td className="govuk-table__cell">19</td>
+                <td className="govuk-table__cell">3</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div className="govuk-grid-column-one-quarter">
           <Doughnut data={DoughnutData3} />
+          <table className="govuk-table govuk-!-margin-top-6">
+            <caption className="govuk-table__caption govuk-table__caption--m">Case 3</caption>
+            <thead className="govuk-table__head">
+              <tr className="govuk-table__row">
+                <th scope="col" className="govuk-table__header">Yellow</th>
+                <th scope="col" className="govuk-table__header">Green</th>
+              </tr>
+            </thead>
+            <tbody className="govuk-table__body">
+              <tr className="govuk-table__row">
+              <td className="govuk-table__cell">3</td>
+                <td className="govuk-table__cell">5</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div className="govuk-grid-column-one-quarter">
           <Doughnut data={DoughnutData4} />
+          <table className="govuk-table govuk-!-margin-top-6">
+            <caption className="govuk-table__caption govuk-table__caption--m">Case 4</caption>
+            <thead className="govuk-table__head">
+              <tr className="govuk-table__row">
+                <th scope="col" className="govuk-table__header">Green</th>
+                <th scope="col" className="govuk-table__header">Purple</th>
+              </tr>
+            </thead>
+            <tbody className="govuk-table__body">
+              <tr className="govuk-table__row">
+              <td className="govuk-table__cell">5</td>
+                <td className="govuk-table__cell">2</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </>
