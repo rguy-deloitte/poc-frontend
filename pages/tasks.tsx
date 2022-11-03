@@ -5,6 +5,7 @@ import { Button, Tag } from 'govuk-react'
 const Tasks: NextPage = (props: any) => {
   const [workflowItems, setWorkflowItems] = useState<any[]>([]);
   const [connectionError, setConnectionError] = useState<boolean>(false);
+  const [parentClicked, setParentClicked] = useState<boolean>(false);
 
   useEffect(() => {
     getWorkflows();
@@ -18,6 +19,7 @@ const Tasks: NextPage = (props: any) => {
 
   const getWorkflows = () => {
     setConnectionError(false);
+    setParentClicked(false);
 
     fetch('http://localhost:13000/v1/workflow-instances')
       .then((response) => response.json())
@@ -25,14 +27,28 @@ const Tasks: NextPage = (props: any) => {
       .catch((error) => setConnectionError(true));
   }
 
-  const completeTask = (taskID: string, id: string) => {
+  const completeTask = (id: string) => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ workflowInstanceId: id })
     };
-    fetch(`http://localhost:13000/v1/signals/resume-${taskID}/execute`, requestOptions)
+    fetch(`http://localhost:13000/v1/signals/resume/execute`, requestOptions)
       .then(() => getWorkflows())
+      .catch((error) => setConnectionError(true));
+  }
+
+  const completeParent = (id: string) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ workflowInstanceId: id })
+    };
+    fetch(`http://localhost:13000/v1/signals/complete/execute`, requestOptions)
+      .then(() => {
+        getWorkflows();
+        setParentClicked(true);
+      })
       .catch((error) => setConnectionError(true));
   }
 
@@ -60,16 +76,27 @@ const Tasks: NextPage = (props: any) => {
 
           {workflowItems.length > 0 &&
             <>
+              {parentClicked && workflowItems[0].workflowStatus === 'Suspended' &&
+                <div className="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" data-module="govuk-error-summary">
+                  <h2 className="govuk-error-summary__title" id="error-summary-title">
+                    There is a problem
+                  </h2>
+                  <div className="govuk-error-summary__body">
+                    You cannot complete the parent workflow task until all of the child tasks are completed.
+                  </div>
+                </div>
+              }
               <div className='split'>
                 <h2 className='govuk-heading-l'>Parent workflow</h2>
                 <Tag tint={workflowItems[0].workflowStatus === 'Finished' ? 'GREEN' : 'SOLID'}>{workflowItems[0].workflowStatus}</Tag>
+                <button className='govuk-button' onClick={() => completeParent(workflowItems[0].id)}>Complete</button>
               </div>
               <table className="govuk-table">
                 <thead className="govuk-table__head">
                   <tr className="govuk-table__row">
                     <th scope="col" className="govuk-table__header">Task name</th>
                     <th scope="col" className="govuk-table__header">Status</th>
-                    <th scope="col" className="govuk-table__header">Action</th>
+                    <th scope="col" className="govuk-table__header">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="govuk-table__body">
@@ -81,8 +108,10 @@ const Tasks: NextPage = (props: any) => {
                     return (
                       <tr className="govuk-table__row" key={index}>
                         <td className="govuk-table__cell">Child task {index}</td>
-                        <td className="govuk-table__cell"><Tag tint={workflowItem.workflowStatus === 'Suspended' ? 'BLUE' : 'GREEN'}>{workflowItem.workflowStatus}</Tag></td>
-                        <td className="govuk-table__cell"><Button disabled={workflowItem.workflowStatus !== 'Suspended'} onClick={() => completeTask(index.toString(), workflowItem.id)}>Complete</Button></td>
+                        <td className="govuk-table__cell"><Tag tint={workflowItem.workflowStatus === 'Suspended' ? 'BLUE' : 'GREEN'}>{workflowItem.workflowStatus === 'Running' ? 'Finished' : workflowItem.workflowStatus}</Tag></td>
+                        <td className="govuk-table__cell">
+                          <button className='govuk-button' disabled={workflowItem.workflowStatus !== 'Suspended'} onClick={() => completeTask(workflowItem.id)}>Complete</button>
+                        </td>
                       </tr>
                     )
                   })}
