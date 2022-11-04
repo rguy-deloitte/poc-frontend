@@ -30,7 +30,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 You'll need Elsa running on port 13000 to run the Workflow Tasks page as it needs to connect to Elsa to initiate and update workflow tasks.
 
-Config files can be found in the 'elsa-config' folder. For this web app, import 'child.json' and 'parent.json' configs into Elsa.
+Config files can be found in the '_elsa' folder. For this web app, import 'child.json' and 'parent.json' configs into Elsa.
 
 Additional configs for enforcement/inspection can also be found in this directory. Use the 'Ofsted ELSA.postman_collection.json' file to configure Postman (https://www.postman.com/) to run these tasks. Note that enforcement/inspection is not part of this PoC and are here for reference only.
 
