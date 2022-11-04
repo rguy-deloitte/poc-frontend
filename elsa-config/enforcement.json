@@ -1,0 +1,243 @@
+{
+  "$id": "1",
+  "definitionId": "8bb6ec6e634145edb3417cd616b03efc",
+  "versionId": "22ec7b25ecfb4393b645276e9d3f0839",
+  "name": "Enforcement",
+  "version": 2,
+  "variables": {
+    "$id": "2",
+    "data": {}
+  },
+  "customAttributes": {
+    "$id": "3",
+    "data": {}
+  },
+  "isSingleton": false,
+  "persistenceBehavior": "WorkflowBurst",
+  "deleteCompletedInstances": false,
+  "isPublished": true,
+  "isLatest": true,
+  "createdAt": "2022-11-03T13:55:38.7011646Z",
+  "activities": [
+    {
+      "$id": "4",
+      "activityId": "82536a7c-bb19-44ac-b2bf-4c0da42df0d8",
+      "type": "HttpEndpoint",
+      "displayName": "HTTP Endpoint",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "5",
+          "name": "Path",
+          "expressions": {
+            "$id": "6",
+            "Literal": "/enforcement"
+          }
+        },
+        {
+          "$id": "7",
+          "name": "Methods",
+          "expressions": {
+            "$id": "8",
+            "Json": "[\"GET\"]"
+          }
+        },
+        {
+          "$id": "9",
+          "name": "ReadContent",
+          "expressions": {
+            "$id": "10"
+          }
+        },
+        {
+          "$id": "11",
+          "name": "TargetType",
+          "expressions": {
+            "$id": "12"
+          }
+        },
+        {
+          "$id": "13",
+          "name": "Schema",
+          "syntax": "Literal",
+          "expressions": {
+            "$id": "14",
+            "Literal": ""
+          }
+        },
+        {
+          "$id": "15",
+          "name": "Authorize",
+          "expressions": {
+            "$id": "16"
+          }
+        },
+        {
+          "$id": "17",
+          "name": "Policy",
+          "expressions": {
+            "$id": "18"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "19"
+      }
+    },
+    {
+      "$id": "20",
+      "activityId": "01152858-11f3-48b7-aec1-c2fc5233ddd1",
+      "type": "RunWorkflow",
+      "displayName": "Run Workflow",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "21",
+          "name": "WorkflowDefinitionId",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "22",
+            "Literal": "{{ \"Inspection\" | workflow_definition_id: \"name\" }}",
+            "Liquid": "{{ \"Inspection\" | workflow_definition_id: \"name\" }}"
+          }
+        },
+        {
+          "$id": "23",
+          "name": "Input",
+          "expressions": {
+            "$id": "24"
+          }
+        },
+        {
+          "$id": "25",
+          "name": "PossibleOutcomes",
+          "expressions": {
+            "$id": "26"
+          }
+        },
+        {
+          "$id": "27",
+          "name": "Mode",
+          "expressions": {
+            "$id": "28",
+            "Literal": "Blocking"
+          }
+        },
+        {
+          "$id": "29",
+          "name": "TenantId",
+          "expressions": {
+            "$id": "30"
+          }
+        },
+        {
+          "$id": "31",
+          "name": "CorrelationId",
+          "expressions": {
+            "$id": "32"
+          }
+        },
+        {
+          "$id": "33",
+          "name": "ContextId",
+          "expressions": {
+            "$id": "34"
+          }
+        },
+        {
+          "$id": "35",
+          "name": "CustomAttributes",
+          "expressions": {
+            "$id": "36"
+          }
+        },
+        {
+          "$id": "37",
+          "name": "RetryFailedActivities",
+          "expressions": {
+            "$id": "38"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "39"
+      }
+    },
+    {
+      "$id": "40",
+      "activityId": "39623bc9-ea80-4d4b-8ed0-5f6ced1876e3",
+      "type": "WriteLine",
+      "displayName": "Write Line",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "41",
+          "name": "Text",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "42",
+            "Liquid": "Enforcement workflow instance ID: {{ WorkflowInstanceId }}"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "43"
+      }
+    },
+    {
+      "$id": "44",
+      "activityId": "911fd3eb-8537-4267-a538-fab879f1edfb",
+      "type": "Finish",
+      "displayName": "Finish",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "45",
+          "name": "ActivityOutput",
+          "expressions": {
+            "$id": "46"
+          }
+        },
+        {
+          "$id": "47",
+          "name": "OutcomeNames",
+          "expressions": {
+            "$id": "48"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "49"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "$id": "50",
+      "sourceActivityId": "82536a7c-bb19-44ac-b2bf-4c0da42df0d8",
+      "targetActivityId": "39623bc9-ea80-4d4b-8ed0-5f6ced1876e3",
+      "outcome": "Done"
+    },
+    {
+      "$id": "51",
+      "sourceActivityId": "39623bc9-ea80-4d4b-8ed0-5f6ced1876e3",
+      "targetActivityId": "01152858-11f3-48b7-aec1-c2fc5233ddd1",
+      "outcome": "Done"
+    },
+    {
+      "$id": "52",
+      "sourceActivityId": "01152858-11f3-48b7-aec1-c2fc5233ddd1",
+      "targetActivityId": "911fd3eb-8537-4267-a538-fab879f1edfb",
+      "outcome": "Done"
+    }
+  ],
+  "id": "22ec7b25ecfb4393b645276e9d3f0839"
+}

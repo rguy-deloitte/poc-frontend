@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "cdaff74f-4e6c-4490-961e-154e15e069b9",
+		"name": "Ofsted ELSA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Trigger Doccument Approval",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Id\": \"3\",\n    \"Author\": {\n        \"Name\": \"Richard\",\n        \"Email\": \"redguyrichard@gmail.com\"\n    },\n    \"Body\": \"This is sample document.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:13000/workflows/v2/documents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "13000",
+					"path": [
+						"workflows",
+						"v2",
+						"documents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trigger Suitability Check",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:13000/workflows/suitabilitycheck",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "13000",
+					"path": [
+						"workflows",
+						"suitabilitycheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trigger Parent Workflow",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:13000/workflows/parent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "13000",
+					"path": [
+						"workflows",
+						"parent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trigger Enforcement Workflow",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:13000/workflows/enforcement",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "13000",
+					"path": [
+						"workflows",
+						"enforcement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resume Child Workflow",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workflowInstanceId\": \"dbd253bee5274f118f627beef92475e7\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:13000/v1/signals/resume/execute",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "13000",
+					"path": [
+						"v1",
+						"signals",
+						"resume",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Run Child",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workflowInstanceId\": \"916de043f5af44d78cff7b9dbd40316c\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:13000/v1/signals/continue/execute",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "13000",
+					"path": [
+						"v1",
+						"signals",
+						"continue",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Run Cancellation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workflowInstanceId\": \"0dcfb1e3bac5405491aed643db770e97\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:13000/v1/signals/runcancellation/execute",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "13000",
+					"path": [
+						"v1",
+						"signals",
+						"runcancellation",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Close Inspection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workflowInstanceId\": \"215bc226cc7d474785eb934ebe22c583\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:13000/v1/signals/continue/execute",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "13000",
+					"path": [
+						"v1",
+						"signals",
+						"continue",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
