@@ -2,7 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+# or
+yarn
+```
+
+Second, run the development server:
 
 ```bash
 npm run dev
@@ -17,6 +25,30 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+## Elsa Workflows
+
+You'll need Elsa running on port 13000 to run the Workflow Tasks page as it needs to connect to Elsa to initiate and update workflow tasks.
+
+## Finding your way around
+
+The bulk of the pages are in the 'pages' folder; the directories match the routing. Any static data (not coming from APIs) is stored within the 'data' folder.
+
+There are some layouts stored in 'components/layouts'. Here you'll find the global page layout as well as different form group layouts.
+
+For the forms themselves, the form used in the PRRA/ASA example is found at 'components/forms/prra'. Within this folder you'll find the form component as well as the data schema and the UI schema. The form inputs can be found in 'components/inputs' with a folder for each input type. An input component consists of a controller, the input component as well as a tester. The tester scores the input component's suitability for use depending on the configuration of the schemas (i.e. text and multiline would score the textarea component higher than the text input).
+
+## Plugins
+
+GOVUK Frontend and GOVUK React have been installed to give access to a library of ready-to-use GDS components as well as access to the full set of styles and scripts.
+
+The forms engine uses JSON Forms (https://jsonforms.io/)
+
+FuseJS (https://fusejs.io/) is used for the fuzzy search found on the Search and Chronology pages.
+
+ChartJS (https://www.chartjs.org/) is used for the graphs found on the Dashboard page.
+
+React Big Calendar (https://github.com/jquense/react-big-calendar) is used on the Calendar page.
 
 ## Learn More
 
